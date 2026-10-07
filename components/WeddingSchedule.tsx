@@ -136,7 +136,7 @@ export default function WeddingSchedule() {
                 CHAPTER I · CHRISTIAN CEREMONY
               </span>
               <h3 className="font-cinzel text-2xl sm:text-3xl text-[#F8F4ED] font-normal">
-                Ring Exchange &amp; Gala Dinner
+                Christian Nuptials &amp; Gala Dinner
               </h3>
               <p className="font-cormorant italic text-lg text-[#F5E5C0] mt-1">
                 Jenneys Residency, Avinashi Road, Peelamedu, Coimbatore
@@ -186,12 +186,12 @@ export default function WeddingSchedule() {
               <button
                 onClick={() =>
                   downloadIcs(
-                    'Rishma & Malli · Christian Ring Exchange',
-                    'Christian Ring Exchange and Gala Dinner of Rishma John & Malli Sumandhar.',
+                    'Rishma & Malli · Christian Nuptials',
+                    'Christian Nuptials and Gala Dinner of Rishma John & Malli Sumandhar.',
                     'Jenneys Residency, Avinashi Road, Coimbatore',
                     '2026-11-18T12:30:00.000Z',
                     '2026-11-18T16:30:00.000Z',
-                    'Rishma_Malli_Ring_Exchange'
+                    'Rishma_Malli_Christian_Nuptials'
                   )
                 }
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-[#B08D57]/20 to-[#D95C80]/20 hover:from-[#B08D57]/30 hover:to-[#D95C80]/30 border border-[#B08D57]/50 text-[#F5E5C0] font-sans text-xs uppercase tracking-[0.2em] transition-all duration-300 cursor-pointer"

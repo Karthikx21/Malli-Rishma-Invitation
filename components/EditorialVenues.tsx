@@ -36,10 +36,30 @@ export default function EditorialVenues() {
   return (
     <section
       id="venues"
-      className="relative w-full bg-[#1A050D] text-[#FAF6EE] py-20 sm:py-28 px-6 sm:px-12 border-b border-[#C5A059]/30 overflow-hidden"
+      className="relative w-full bg-[#140F1D] text-[#FAF6EE] py-24 sm:py-32 px-6 sm:px-12 border-y border-[#3D2C52]/50 overflow-hidden"
+      style={{
+        background:
+          'radial-gradient(ellipse 90% 70% at 50% 30%, #251838 0%, #171122 55%, #110C18 100%)',
+      }}
       aria-label="Wedding Venues Location and Maps"
     >
-      <div className="max-w-5xl mx-auto text-center">
+      {/* Ambient Radial Glow */}
+      <div
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[480px] sm:w-[680px] h-[360px] sm:h-[480px] rounded-full pointer-events-none blur-[120px] sm:blur-[160px] opacity-30"
+        style={{
+          background:
+            'radial-gradient(circle, rgba(230,202,133,0.25) 0%, rgba(141,118,168,0.4) 55%, transparent 70%)',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Subtle Atmospheric Mist */}
+      <div
+        className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(141,118,168,0.1)_0%,transparent_50%)] pointer-events-none"
+        aria-hidden="true"
+      />
+
+      <div className="relative z-10 max-w-5xl mx-auto text-center">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 26, filter: 'blur(5px)' }}
@@ -47,13 +67,13 @@ export default function EditorialVenues() {
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
         >
-          <p className="font-functional text-[10px] sm:text-xs text-[#C5A059] font-medium mb-2">
+          <p className="font-functional text-[10px] sm:text-xs text-[#E6CA85] font-semibold mb-2 tracking-[0.25em]">
             LOCATION &amp; DIRECTIONS
           </p>
           <h2 className="font-serif-title text-4xl sm:text-6xl text-[#FAF6EE] font-light tracking-tight mb-2">
             Find Us Here
           </h2>
-          <p className="font-functional text-xs text-[#FAF6EE]/60 tracking-[0.2em] mt-1">
+          <p className="font-functional text-xs text-[#D8CEE5]/75 tracking-[0.2em] mt-1">
             SCAN, CLICK, AND COME BE A PART OF OUR BIG DAY
           </p>
           <motion.div
@@ -61,34 +81,35 @@ export default function EditorialVenues() {
             whileInView={{ scaleX: 1, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="w-16 h-px bg-gradient-to-r from-transparent via-[#C5A059]/50 to-transparent mx-auto mt-4 mb-16"
+            className="w-16 h-px bg-gradient-to-r from-transparent via-[#E6CA85]/60 to-transparent mx-auto mt-4 mb-16"
           />
         </motion.div>
 
-        {/* 3 Venues: Open Typographic Columns Separated by Delicate Gold Hairlines */}
+        {/* 3 Venues: Open Typographic Columns Separated by Delicate Gold/Lavender Hairlines */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 text-left">
           {venues.map((v, i) => (
             <motion.div
               key={v.name}
               initial={{ opacity: 0, y: 30, filter: 'blur(5px)' }}
               whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              whileHover={{ y: -6 }}
               viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 1.2, delay: 0.1 + i * 0.14, ease: [0.22, 1, 0.36, 1] }}
-              className={`flex flex-col justify-between pt-6 border-t border-[#C5A059]/30 ${
-                i > 0 ? 'md:border-t-0 md:border-l md:border-[#C5A059]/20 md:pl-8' : ''
+              transition={{ duration: 0.5, delay: 0.1 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+              className={`flex flex-col justify-between pt-6 border-t border-[#3D2C52]/70 group ${
+                i > 0 ? 'md:border-t-0 md:border-l md:border-[#3D2C52]/70 md:pl-8' : ''
               }`}
             >
               <div className="space-y-3">
-                <div className="flex items-center justify-between font-functional text-[10px] text-[#C5A059] tracking-[0.25em]">
+                <div className="flex items-center justify-between font-functional text-[10px] text-[#E6CA85] tracking-[0.25em] font-semibold">
                   <span>{v.day}</span>
-                  <span>{v.title}</span>
+                  <span className="text-[#D8CEE5]/80">{v.title}</span>
                 </div>
 
-                <h3 className="font-serif-title text-2xl sm:text-3xl text-[#FAF6EE] font-light mt-1">
+                <h3 className="font-serif-title text-2xl sm:text-3xl text-[#FAF6EE] font-light mt-1 group-hover:text-[#E6CA85] transition-colors duration-300">
                   {v.name}
                 </h3>
 
-                <p className="font-functional text-xs text-[#E6CA85] tracking-[0.1em]">
+                <p className="font-functional text-xs text-[#E6CA85] tracking-[0.1em] font-medium">
                   {v.time}
                 </p>
 
@@ -99,14 +120,17 @@ export default function EditorialVenues() {
 
               {/* Text link with gold drawing underline */}
               <div className="pt-6">
-                <a
+                <motion.a
+                  whileHover={{ x: 5 }}
+                  whileTap={{ scale: 0.96 }}
+                  transition={{ duration: 0.2, ease: 'easeOut' }}
                   href={v.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="gold-link"
+                  className="gold-link text-xs tracking-[0.28em] inline-flex items-center"
                 >
                   VIEW ON GOOGLE MAPS ↗
-                </a>
+                </motion.a>
               </div>
             </motion.div>
           ))}

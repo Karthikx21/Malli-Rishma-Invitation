@@ -45,7 +45,7 @@ export default function EditorialCountdown() {
   return (
     <section
       id="countdown"
-      className="relative w-full bg-[#FAF6EE] text-[#1A0A0F] py-20 sm:py-28 px-6 sm:px-12 border-b border-[#C5A059]/30 overflow-hidden"
+      className="relative w-full bg-[#FAF8FC] text-[#2D2338] py-20 sm:py-28 px-6 sm:px-12 border-b border-[#E5DCF0] overflow-hidden"
       aria-label="Wedding Countdown"
     >
       <div className="max-w-4xl mx-auto text-center">
@@ -56,10 +56,10 @@ export default function EditorialCountdown() {
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
         >
-          <p className="font-functional text-[10px] sm:text-xs text-[#9B702A] font-semibold mb-2">
-            COUNTING DOWN THE MOMENTS
+          <p className="font-functional text-[10px] sm:text-xs text-[#8D76A8] font-semibold mb-2 tracking-[0.25em]">
+            COUNTING THE DAYS
           </p>
-          <h2 className="font-serif-title text-4xl sm:text-6xl text-[#3D0B1B] font-light tracking-tight mb-2">
+          <h2 className="font-serif-title text-4xl sm:text-6xl text-[#2D2338] font-light tracking-tight mb-2">
             Until We Say Forever
           </h2>
           <motion.div
@@ -67,51 +67,55 @@ export default function EditorialCountdown() {
             whileInView={{ scaleX: 1, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="w-16 h-px bg-gradient-to-r from-transparent via-[#C5A059]/50 to-transparent mx-auto mt-3 mb-10"
+            className="w-16 h-px bg-gradient-to-r from-transparent via-[#8D76A8]/50 to-transparent mx-auto mt-3 mb-10"
           />
         </motion.div>
 
         {/* Date Selector: Text links only (NO PILL/BOXED TABS) */}
         <div className="flex items-center justify-center gap-6 sm:gap-10 mb-14 select-none">
-          <button
+          <motion.button
             type="button"
             onClick={() => setTargetDate('18')}
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.96 }}
             className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-all duration-300 pb-1 relative cursor-pointer ${
               targetDate === '18'
-                ? 'text-[#3D0B1B] font-semibold'
-                : 'text-[#1A0A0F]/40 hover:text-[#1A0A0F]/80'
+                ? 'text-[#8D76A8] font-semibold'
+                : 'text-[#2D2338]/40 hover:text-[#2D2338]/80'
             }`}
           >
-            18 NOV · RING EXCHANGE
+            18 NOV · CHRISTIAN NUPTIALS
             {targetDate === '18' && (
               <motion.span
                 layoutId="countdownTabLine"
-                className="absolute bottom-0 left-0 right-0 h-px bg-[#9B702A]"
+                className="absolute bottom-0 left-0 right-0 h-px bg-[#8D76A8]"
                 transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               />
             )}
-          </button>
+          </motion.button>
 
-          <span className="text-[#C5A059]/40 text-xs">/</span>
+          <span className="text-[#8D76A8]/40 text-xs">/</span>
 
-          <button
+          <motion.button
             type="button"
             onClick={() => setTargetDate('20')}
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.96 }}
             className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-all duration-300 pb-1 relative cursor-pointer ${
               targetDate === '20'
-                ? 'text-[#3D0B1B] font-semibold'
-                : 'text-[#1A0A0F]/40 hover:text-[#1A0A0F]/80'
+                ? 'text-[#8D76A8] font-semibold'
+                : 'text-[#2D2338]/40 hover:text-[#2D2338]/80'
             }`}
           >
             20 NOV · HINDU WEDDING
             {targetDate === '20' && (
               <motion.span
                 layoutId="countdownTabLine"
-                className="absolute bottom-0 left-0 right-0 h-px bg-[#9B702A]"
+                className="absolute bottom-0 left-0 right-0 h-px bg-[#8D76A8]"
                 transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               />
             )}
-          </button>
+          </motion.button>
         </div>
 
         {/* 4 Counter Columns with AnimatePresence date transition */}
@@ -122,20 +126,27 @@ export default function EditorialCountdown() {
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             exit={{ opacity: 0, y: -10, filter: 'blur(4px)' }}
             transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-            className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 max-w-3xl mx-auto divide-y-0 sm:divide-x sm:divide-[#C5A059]/30"
+            className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 max-w-3xl mx-auto divide-y-0 sm:divide-x sm:divide-[#E5DCF0]"
           >
             {timeUnits.map((item, idx) => (
               <motion.div
                 key={item.label}
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                className="flex flex-col items-center justify-center py-4 px-2"
+                whileHover={{ y: -4, scale: 1.03 }}
+                transition={{ duration: 0.4, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                className="flex flex-col items-center justify-center py-4 px-2 cursor-default select-none"
               >
-                <span className="font-serif-title text-5xl sm:text-7xl md:text-8xl text-[#3D0B1B] font-light tracking-tight leading-none">
+                <motion.span
+                  key={item.val}
+                  initial={{ opacity: 0.8, y: -2 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.25, ease: 'easeOut' }}
+                  className="font-serif-title text-5xl sm:text-7xl md:text-8xl text-[#2D2338] font-light tracking-tight leading-none"
+                >
                   {String(item.val).padStart(2, '0')}
-                </span>
-                <span className="mt-2.5 font-functional text-[10px] sm:text-xs text-[#9B702A] tracking-[0.25em]">
+                </motion.span>
+                <span className="mt-2.5 font-functional text-[10px] sm:text-xs text-[#8D76A8] tracking-[0.25em]">
                   {item.label}
                 </span>
               </motion.div>

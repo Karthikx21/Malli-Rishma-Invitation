@@ -110,7 +110,7 @@ export default function CountdownTimer() {
 
       <p className="mt-6 text-center font-cormorant italic text-base text-[#BFAEA0]">
         {selectedEvent === 'ring'
-          ? 'Until the Christian Ring Exchange & Gala Dinner at Jenneys Residency'
+          ? 'Until the Christian Nuptials & Gala Dinner at Jenneys Residency'
           : 'Until the sacred Hindu Muhurtham at Kumaran Kundra Temple'}
       </p>
     </div>

@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     'Malli Sumandhar',
     'Pavazha Malli',
     'Coimbatore Wedding',
-    'Christian Ring Exchange',
+    'Christian Nuptials',
     'Hindu Wedding',
   ],
   openGraph: {
@@ -95,7 +95,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   colorScheme: 'light',
-  themeColor: '#F4ECDD',
+  themeColor: '#FAF8FC',
 }
 
 export default function RootLayout({
@@ -106,9 +106,16 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${cinzel.variable} ${greatVibes.variable} ${montserrat.variable} ${notoTamil.variable} scroll-smooth`}
+      className={`${cormorant.variable} ${cinzel.variable} ${greatVibes.variable} ${montserrat.variable} ${notoTamil.variable}`}
     >
-      <body className="antialiased bg-[#F4ECDD] text-[#1A0A0F] selection:bg-[#4A0F20] selection:text-[#F4ECDD]">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if('scrollRestoration' in history){history.scrollRestoration='manual';}window.scrollTo(0,0);}catch(e){}`,
+          }}
+        />
+      </head>
+      <body className="antialiased bg-[#FAF8FC] text-[#2D2338] selection:bg-[#E6CA85] selection:text-[#2D2338]">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

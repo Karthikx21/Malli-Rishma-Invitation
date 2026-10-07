@@ -1,16 +1,22 @@
 'use client'
 
+import { motion } from 'framer-motion'
+
 export default function EditorialMarquee() {
   const tickerText =
     'TWO DAYS · TWO CULTURES · ONE CELEBRATION OF LOVE · #RISHMAFOUNDHERPAVAZHAMALLI · 18 & 20 NOVEMBER 2026 · COIMBATORE · '
 
   return (
-    <div
-      className="relative w-full bg-[#160309] text-[#E6CA85] border-y border-[#C5A059]/25 py-3 overflow-hidden select-none"
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+      className="relative w-full bg-[#FAF8FC] text-[#8D76A8] border-y border-[#D8CEE5]/60 py-3 overflow-hidden select-none cursor-default"
       aria-hidden="true"
     >
       <div className="flex whitespace-nowrap animate-marquee">
-        <span className="font-functional text-[10px] sm:text-xs tracking-[0.3em] font-light px-4">
+        <span className="font-functional text-[10px] sm:text-xs tracking-[0.3em] font-medium px-4 text-[#8D76A8]">
           {tickerText}
         </span>
         <span className="font-functional text-[10px] sm:text-xs tracking-[0.3em] font-light px-4">
@@ -34,12 +40,15 @@ export default function EditorialMarquee() {
           display: inline-flex;
           animation: marquee 40s linear infinite;
         }
+        .animate-marquee:hover {
+          animation-play-state: paused;
+        }
         @media (prefers-reduced-motion: reduce) {
           .animate-marquee {
             animation: none;
           }
         }
       `}</style>
-    </div>
+    </motion.div>
   )
 }

@@ -3,40 +3,40 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-type ActiveSide = 'him' | 'her'
+type ActiveSide = 'rishma' | 'malli'
 
 const TRACKS = {
-  him: {
+  rishma: {
     side: 'SIDE A',
-    person: 'MALLI',
-    vibe: 'HIS VIBE',
-    title: 'The song on loop in his head on his wedding day',
-    src: '/audio/him.mp3',
-    fallbackDuration: '0:35',
-  },
-  her: {
-    side: 'SIDE B',
     person: 'RISHMA',
     vibe: 'HER VIBE',
     title: 'The song that will loop in her head on her big day',
     src: '/audio/her.mp3',
     fallbackDuration: '0:35',
   },
+  malli: {
+    side: 'SIDE B',
+    person: 'MALLI',
+    vibe: 'HIS VIBE',
+    title: 'The song on loop in his head on his wedding day',
+    src: '/audio/him.mp3',
+    fallbackDuration: '0:27',
+  },
 }
 
 export default function EditorialOkKanmani() {
-  const [activeSide, setActiveSide] = useState<ActiveSide>('him')
+  const [activeSide, setActiveSide] = useState<ActiveSide>('rishma')
   const [isPlaying, setIsPlaying] = useState(false)
   const [progress, setProgress] = useState(0)
   const [currentTime, setCurrentTime] = useState('0:00')
   const [duration, setDuration] = useState('0:35')
   const [audioError, setAudioError] = useState(false)
 
-  const audioHimRef = useRef<HTMLAudioElement | null>(null)
-  const audioHerRef = useRef<HTMLAudioElement | null>(null)
+  const audioRishmaRef = useRef<HTMLAudioElement | null>(null)
+  const audioMalliRef = useRef<HTMLAudioElement | null>(null)
 
   const activeTrack = TRACKS[activeSide]
-  const currentAudioRef = activeSide === 'him' ? audioHimRef : audioHerRef
+  const currentAudioRef = activeSide === 'rishma' ? audioRishmaRef : audioMalliRef
 
   const formatTime = (secs: number) => {
     if (isNaN(secs) || secs < 0) return '0:00'
@@ -63,6 +63,13 @@ export default function EditorialOkKanmani() {
     setIsPlaying(false)
     setProgress(0)
     setCurrentTime('0:00')
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(
+        new CustomEvent('wedding-secondary-audio-stop', {
+          detail: { id: `ok-kanmani-${activeSide}` },
+        })
+      )
+    }
   }
 
   const pauseAllOtherAudio = () => {
@@ -80,8 +87,22 @@ export default function EditorialOkKanmani() {
     if (isPlaying) {
       audio.pause()
       setIsPlaying(false)
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(
+          new CustomEvent('wedding-secondary-audio-stop', {
+            detail: { id: `ok-kanmani-${activeSide}` },
+          })
+        )
+      }
     } else {
       pauseAllOtherAudio()
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(
+          new CustomEvent('wedding-secondary-audio-start', {
+            detail: { id: `ok-kanmani-${activeSide}` },
+          })
+        )
+      }
       audio
         .play()
         .then(() => setIsPlaying(true))
@@ -106,19 +127,33 @@ export default function EditorialOkKanmani() {
 
     // Prepare next audio
     setTimeout(() => {
-      const nextAudio = side === 'him' ? audioHimRef.current : audioHerRef.current
+      const nextAudio = side === 'rishma' ? audioRishmaRef.current : audioMalliRef.current
       if (nextAudio && !isNaN(nextAudio.duration)) {
         setDuration(formatTime(nextAudio.duration))
       }
 
       if (wasPlaying && nextAudio) {
         pauseAllOtherAudio()
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(
+            new CustomEvent('wedding-secondary-audio-start', {
+              detail: { id: `ok-kanmani-${side}` },
+            })
+          )
+        }
         nextAudio
           .play()
           .then(() => setIsPlaying(true))
           .catch(() => setIsPlaying(false))
       } else {
         setIsPlaying(false)
+        if (wasPlaying && typeof window !== 'undefined') {
+          window.dispatchEvent(
+            new CustomEvent('wedding-secondary-audio-stop', {
+              detail: { id: `ok-kanmani-${side}` },
+            })
+          )
+        }
       }
     }, 50)
   }
@@ -130,30 +165,50 @@ export default function EditorialOkKanmani() {
   return (
     <section
       id="songs"
-      className="relative w-full bg-[#1A050D] text-[#FAF6EE] py-20 sm:py-28 px-5 sm:px-10 border-b border-[#C5A059]/25 overflow-hidden"
+      className="relative w-full bg-[#140F1D] text-[#FAF6EE] py-24 sm:py-32 px-5 sm:px-10 border-y border-[#3D2C52]/50 overflow-hidden"
+      style={{
+        background:
+          'radial-gradient(ellipse 90% 80% at 75% 45%, #251838 0%, #171122 50%, #110C18 100%)',
+      }}
       aria-label="Songs on Loop"
     >
+      {/* Ambient Turntable Glow behind Vinyl */}
+      <div
+        className="absolute top-1/2 right-0 md:right-16 -translate-y-1/2 w-[380px] sm:w-[540px] h-[380px] sm:h-[540px] rounded-full pointer-events-none blur-[100px] sm:blur-[140px] opacity-35"
+        style={{
+          background:
+            'radial-gradient(circle, rgba(230,202,133,0.3) 0%, rgba(141,118,168,0.45) 50%, transparent 70%)',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Subtle Atmospheric Mist */}
+      <div
+        className="absolute inset-0 bg-[radial-gradient(circle_at_15%_25%,rgba(141,118,168,0.12)_0%,transparent_50%)] pointer-events-none"
+        aria-hidden="true"
+      />
+
       {/* Hidden Audio Elements */}
       <audio
-        ref={audioHimRef}
-        src={TRACKS.him.src}
+        ref={audioRishmaRef}
+        src={TRACKS.rishma.src}
         preload="metadata"
-        onTimeUpdate={(e) => activeSide === 'him' && handleTimeUpdate(e.currentTarget)}
-        onLoadedMetadata={(e) => activeSide === 'him' && handleLoadedMetadata(e.currentTarget)}
+        onTimeUpdate={(e) => activeSide === 'rishma' && handleTimeUpdate(e.currentTarget)}
+        onLoadedMetadata={(e) => activeSide === 'rishma' && handleLoadedMetadata(e.currentTarget)}
         onEnded={handleEnded}
         onError={() => setAudioError(true)}
       />
       <audio
-        ref={audioHerRef}
-        src={TRACKS.her.src}
+        ref={audioMalliRef}
+        src={TRACKS.malli.src}
         preload="metadata"
-        onTimeUpdate={(e) => activeSide === 'her' && handleTimeUpdate(e.currentTarget)}
-        onLoadedMetadata={(e) => activeSide === 'her' && handleLoadedMetadata(e.currentTarget)}
+        onTimeUpdate={(e) => activeSide === 'malli' && handleTimeUpdate(e.currentTarget)}
+        onLoadedMetadata={(e) => activeSide === 'malli' && handleLoadedMetadata(e.currentTarget)}
         onEnded={handleEnded}
         onError={() => setAudioError(true)}
       />
 
-      <div className="max-w-5xl mx-auto">
+      <div className="relative z-10 max-w-5xl mx-auto">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 26, filter: 'blur(5px)' }}
@@ -162,7 +217,7 @@ export default function EditorialOkKanmani() {
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-12 sm:mb-16"
         >
-          <p className="font-functional text-[10px] sm:text-xs text-[#C5A059] font-medium mb-2">
+          <p className="font-functional text-[10px] sm:text-xs text-[#E6CA85] font-semibold mb-2 tracking-[0.25em]">
             THE WEDDING PLAYLIST
           </p>
           <h2 className="font-serif-title text-4xl sm:text-6xl text-[#FAF6EE] font-light tracking-tight">
@@ -173,51 +228,55 @@ export default function EditorialOkKanmani() {
             whileInView={{ scaleX: 1, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="w-16 h-px bg-gradient-to-r from-transparent via-[#C5A059]/60 to-transparent mx-auto mt-4"
+            className="w-16 h-px bg-gradient-to-r from-transparent via-[#E6CA85]/60 to-transparent mx-auto mt-4"
           />
         </motion.div>
 
-        {/* Text-Only Toggle: SIDE A · MALLI / SIDE B · RISHMA */}
+        {/* Text-Only Toggle: SIDE A · RISHMA / SIDE B · MALLI */}
         <div className="flex items-center justify-center gap-6 sm:gap-10 mb-12 select-none">
-          <button
+          <motion.button
             type="button"
-            onClick={() => switchSide('him')}
+            onClick={() => switchSide('rishma')}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-all duration-300 pb-1 relative cursor-pointer ${
-              activeSide === 'him'
+              activeSide === 'rishma'
                 ? 'text-[#E6CA85] font-semibold'
                 : 'text-[#FAF6EE]/45 hover:text-[#FAF6EE]/80'
             }`}
           >
-            SIDE A · MALLI
-            {activeSide === 'him' && (
+            SIDE A · RISHMA
+            {activeSide === 'rishma' && (
               <motion.span
                 layoutId="vinylToggleActive"
-                className="absolute bottom-0 left-0 right-0 h-px bg-[#E6CA85]"
+                className="absolute bottom-0 left-0 right-0 h-px bg-[#E6CA85] shadow-[0_0_8px_rgba(230,202,133,0.5)]"
                 transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               />
             )}
-          </button>
+          </motion.button>
 
-          <span className="text-[#C5A059]/40 text-xs">/</span>
+          <span className="text-[#E6CA85]/40 text-xs">/</span>
 
-          <button
+          <motion.button
             type="button"
-            onClick={() => switchSide('her')}
+            onClick={() => switchSide('malli')}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-all duration-300 pb-1 relative cursor-pointer ${
-              activeSide === 'her'
+              activeSide === 'malli'
                 ? 'text-[#E6CA85] font-semibold'
                 : 'text-[#FAF6EE]/45 hover:text-[#FAF6EE]/80'
             }`}
           >
-            SIDE B · RISHMA
-            {activeSide === 'her' && (
+            SIDE B · MALLI
+            {activeSide === 'malli' && (
               <motion.span
                 layoutId="vinylToggleActive"
-                className="absolute bottom-0 left-0 right-0 h-px bg-[#E6CA85]"
+                className="absolute bottom-0 left-0 right-0 h-px bg-[#E6CA85] shadow-[0_0_8px_rgba(230,202,133,0.5)]"
                 transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               />
             )}
-          </button>
+          </motion.button>
         </div>
 
         {/* Vinyl Player Stage: Disc partly cropped off right edge */}
@@ -240,52 +299,59 @@ export default function EditorialOkKanmani() {
                 className="space-y-4"
               >
                 <div className="flex items-center gap-2">
-                  <span className="font-functional text-[10px] text-[#C5A059] tracking-[0.3em]">
+                  <span className="font-functional text-[10px] text-[#E6CA85] tracking-[0.3em] font-semibold">
                     {activeTrack.side} · {activeTrack.vibe}
                   </span>
-                  <div className="w-8 h-px bg-[#C5A059]/30" />
+                  <div className="w-8 h-px bg-[#E6CA85]/40" />
                 </div>
 
-                <h3 className="font-serif-title italic text-2xl sm:text-3xl md:text-4xl text-[#FAF6EE] font-light leading-snug">
+                <h3 className="font-serif-title italic text-2xl sm:text-3xl md:text-4xl text-[#FAF6EE] font-light leading-snug drop-shadow-sm">
                   &ldquo;{activeTrack.title}&rdquo;
                 </h3>
 
                 {/* Time display in tiny Montserrat functional type */}
                 <div className="flex items-center gap-4 font-functional text-[11px] text-[#FAF6EE]/60 pt-2">
-                  <span className="text-[#E6CA85] font-medium">{currentTime}</span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]/40" />
-                  <span>{duration}</span>
+                  <span className="text-[#E6CA85] font-semibold tracking-wider">{currentTime}</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#E6CA85]/50" />
+                  <span className="tracking-wider">{duration}</span>
                 </div>
               </motion.div>
             </AnimatePresence>
 
             {/* Play/Pause Text Link */}
-            <div className="pt-3">
+            <motion.div
+              whileHover={{ scale: 1.05, x: 2 }}
+              whileTap={{ scale: 0.95 }}
+              className="pt-3 inline-block"
+            >
               <button
                 type="button"
                 onClick={togglePlay}
-                className="gold-link text-xs tracking-[0.3em]"
+                className="gold-link text-xs tracking-[0.3em] cursor-pointer"
               >
                 {isPlaying ? 'PAUSE TRACK ■' : 'PLAY TRACK ▶'}
               </button>
-            </div>
+            </motion.div>
           </div>
 
           {/* Right: Large Vinyl Record, partly cropped off right edge */}
           <div className="w-full md:w-1/2 flex justify-center md:justify-end overflow-visible relative py-4">
-            <div
+            <motion.div
               onClick={togglePlay}
+              whileHover={{ scale: 1.025 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
               className="relative w-[280px] h-[280px] xs:w-[320px] xs:h-[320px] sm:w-[380px] sm:h-[380px] md:w-[420px] md:h-[420px] md:-mr-24 cursor-pointer select-none group"
               title={isPlaying ? 'Click to Pause' : 'Click to Play'}
             >
-              {/* Spinning Disc Body */}
+              {/* Spinning Disc Body with Deep Royal Lavender-Charcoal Grooves */}
               <div
-                className={`w-full h-full rounded-full transition-transform duration-700 ease-out shadow-[0_20px_60px_rgba(0,0,0,0.85)] ${
+                className={`w-full h-full rounded-full transition-transform duration-700 ease-out shadow-[0_25px_60px_rgba(0,0,0,0.65),0_0_50px_rgba(141,118,168,0.22)] ring-1 ring-white/10 ${
                   isPlaying ? 'animate-vinyl-spin' : ''
                 }`}
                 style={{
                   background: `
-                    radial-gradient(circle at center, #2A0510 0%, #2A0510 26%, #121216 27%, #09090c 35%, #18181f 40%, #0a0a0d 48%, #16161c 55%, #08080b 65%, #141419 75%, #050508 88%, #020204 100%)
+                    radial-gradient(circle at center, #2D2338 0%, #251D30 26%, #1F1728 27%, #171120 35%, #251C32 40%, #15101C 48%, #20182B 55%, #130E19 65%, #1C1526 75%, #0F0B14 88%, #0A070E 100%)
                   `,
                 }}
               >
@@ -307,9 +373,9 @@ export default function EditorialOkKanmani() {
                   }}
                 />
 
-                {/* Center Record Label: Deep Wine with Antique Gold Ornament */}
-                <div className="absolute inset-0 m-auto w-[110px] h-[110px] xs:w-[130px] xs:h-[130px] sm:w-[150px] sm:h-[150px] rounded-full bg-[#3A0817] border border-[#C5A059]/60 flex flex-col items-center justify-center text-center shadow-inner">
-                  <span className="font-functional text-[8px] sm:text-[9px] tracking-[0.25em] text-[#C5A059] opacity-90">
+                {/* Center Record Label: Deep Royal Amethyst Lavender with Antique Gold Ornament */}
+                <div className="absolute inset-0 m-auto w-[110px] h-[110px] xs:w-[130px] xs:h-[130px] sm:w-[150px] sm:h-[150px] rounded-full bg-[#2A1E38] border border-[#E6CA85]/80 flex flex-col items-center justify-center text-center shadow-inner">
+                  <span className="font-functional text-[8px] sm:text-[9px] tracking-[0.25em] text-[#E6CA85] opacity-95">
                     {activeTrack.side}
                   </span>
                   <div className="my-1 text-[#E6CA85]">
@@ -317,12 +383,12 @@ export default function EditorialOkKanmani() {
                       <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
                     </svg>
                   </div>
-                  <span className="font-functional text-[7px] sm:text-[8px] tracking-[0.2em] text-[#FAF6EE]/75">
+                  <span className="font-functional text-[7px] sm:text-[8px] tracking-[0.2em] text-[#FAF8FC]/90">
                     {activeTrack.person}
                   </span>
 
                   {/* Tiny Spindle Hole */}
-                  <div className="absolute inset-0 m-auto w-3 h-3 rounded-full bg-[#120207] border border-[#C5A059]/80 shadow-md" />
+                  <div className="absolute inset-0 m-auto w-3 h-3 rounded-full bg-[#120D1A] border border-[#E6CA85] shadow-md" />
                 </div>
               </div>
 
@@ -337,7 +403,7 @@ export default function EditorialOkKanmani() {
                   cy="50"
                   r="48.5"
                   fill="none"
-                  stroke="rgba(197, 160, 89, 0.2)"
+                  stroke="rgba(230, 202, 133, 0.2)"
                   strokeWidth="0.8"
                 />
                 {/* Active Progress Stroke */}
@@ -356,46 +422,52 @@ export default function EditorialOkKanmani() {
               </svg>
 
               {/* Center Play/Pause Indicator Icon on Hover or Active */}
-              <div className="absolute inset-0 m-auto w-10 h-10 rounded-full bg-[#1A050D]/80 backdrop-blur-sm border border-[#C5A059] flex items-center justify-center text-[#E6CA85] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+              <div className="absolute inset-0 m-auto w-10 h-10 rounded-full bg-[#140F1D]/90 backdrop-blur-sm border border-[#E6CA85] flex items-center justify-center text-[#E6CA85] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-[0_0_15px_rgba(230,202,133,0.3)]">
                 {isPlaying ? (
                   <span className="text-xs">❚❚</span>
                 ) : (
                   <span className="text-xs ml-0.5">▶</span>
                 )}
               </div>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
 
-        {/* OK Kanmani Editorial Pull-Quote: NO BOXED PANEL, Pure Typography & Gold Hairlines */}
+        {/* OK Kanmani Editorial Pull-Quote: Pure Typography & Lavender Hairlines */}
         <motion.div
           initial={{ opacity: 0, y: 30, filter: 'blur(5px)' }}
           whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-20 sm:mt-28 max-w-3xl mx-auto text-center"
+          className="mt-20 sm:mt-28 max-w-3xl mx-auto text-center relative"
         >
+          {/* Subtle warm glow behind quote */}
+          <div
+            className="absolute -top-10 left-1/2 -translate-x-1/2 w-72 h-32 bg-[#8D76A8]/10 blur-3xl pointer-events-none"
+            aria-hidden="true"
+          />
+
           <motion.div
             initial={{ scaleX: 0, opacity: 0 }}
             whileInView={{ scaleX: 1, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.3, ease: [0.22, 1, 0.36, 1] }}
-            className="w-16 h-px bg-gradient-to-r from-transparent via-[#C5A059]/40 to-transparent mx-auto mb-8"
+            className="w-16 h-px bg-gradient-to-r from-transparent via-[#E6CA85]/50 to-transparent mx-auto mb-8"
           />
 
           <blockquote className="font-serif-title italic text-2xl sm:text-3xl md:text-4xl text-[#FAF6EE] font-light leading-relaxed px-4">
             &ldquo;Rishma might be Malli&apos;s{' '}
-            <span className="font-normal text-[#E6CA85] not-italic tracking-wide">
+            <span className="font-semibold text-[#E6CA85] not-italic tracking-wide">
               TARA
             </span>
             , but Malli has always been Rishma&apos;s{' '}
-            <span className="font-normal text-[#E6CA85] not-italic tracking-wide">
+            <span className="font-semibold text-[#E6CA85] not-italic tracking-wide">
               GANAPATHY
             </span>
             .&rdquo;
           </blockquote>
 
-          <p className="mt-5 font-functional text-[10px] sm:text-xs text-[#C5A059] tracking-[0.3em]">
+          <p className="mt-5 font-functional text-[10px] sm:text-xs text-[#D8CEE5] tracking-[0.3em] font-medium opacity-85">
             AN OK KANMANI REFERENCE
           </p>
 
@@ -404,7 +476,7 @@ export default function EditorialOkKanmani() {
             whileInView={{ scaleX: 1, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.3, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="w-16 h-px bg-gradient-to-r from-transparent via-[#C5A059]/40 to-transparent mx-auto mt-8"
+            className="w-16 h-px bg-gradient-to-r from-transparent via-[#E6CA85]/50 to-transparent mx-auto mt-8"
           />
         </motion.div>
       </div>

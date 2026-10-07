@@ -20,8 +20,8 @@ export default function EditorialIntro({ onStartTransition, onComplete }: Editor
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const hasTriggeredRef = useRef(false)
 
-  // Speed up video playback slightly (1.25x) as requested
-  const PLAYBACK_SPEED = 1.25
+  // Natural cinematic playback pace
+  const PLAYBACK_SPEED = 1.0
 
   const applySpeed = useCallback(() => {
     if (videoRef.current) {
@@ -42,30 +42,39 @@ export default function EditorialIntro({ onStartTransition, onComplete }: Editor
     }
   }, [applySpeed])
 
-  // Trigger the transition in sync with the smoke
+  // Trigger the transition directly to Hero
   const triggerTransition = useCallback(() => {
+    // Unmute & play floating background soundtrack immediately on interaction
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('wedding-play-music'))
+    }
+
     if (hasTriggeredRef.current) return
     hasTriggeredRef.current = true
 
-    // 1. Notify parent immediately so hero elements begin gliding in through the smoke
+    // 1. Immediately pin scroll position strictly to Hero before starting any fade
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior })
+      document.getElementById('hero')?.scrollIntoView({ behavior: 'instant', block: 'start' })
+    }
+
+    // 2. Notify parent immediately so hero elements begin gliding into view
     onStartTransition?.()
 
-    // 2. Start the smooth visual dissolve
+    // 3. Start smooth cinematic cross-dissolve
     setIsFading(true)
 
-    // 3. After the 800ms dissolve completes, fully unmount the intro
+    // 4. After the 1000ms cross-dissolve completes, cleanly unmount the intro
     setTimeout(() => {
       onComplete()
-    }, 800)
+    }, 1000)
   }, [onStartTransition, onComplete])
 
-  // Precise smoke detection:
-  // In intro.mp4, the seal cracks and white smoke begins billowing outward at ~6.30s - 6.40s.
-  // Starting the dissolve at 6.35s guarantees the video dissolves WHILE the smoke is actively filling the screen.
+  // Smooth detection: trigger dissolve when envelope opens and smoke plumes billow (>= 6.8s) or on ended
   const handleTimeUpdate = () => {
     if (hasTriggeredRef.current) return
     const video = videoRef.current
-    if (video && video.currentTime >= 6.35) {
+    if (video && (video.currentTime >= 6.8 || video.ended)) {
       triggerTransition()
     }
   }
@@ -73,13 +82,14 @@ export default function EditorialIntro({ onStartTransition, onComplete }: Editor
   return (
     <div
       onClick={triggerTransition}
-      className={`fixed inset-0 z-50 bg-[#1A050D] flex items-center justify-center cursor-pointer select-none transition-all duration-800 ease-out ${
-        isFading ? 'opacity-0 scale-[1.04] blur-sm pointer-events-none' : 'opacity-100 scale-100 blur-0'
-      }`}
-      style={{
-        transitionDuration: '800ms',
-        transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)',
+      onPointerDown={() => {
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('wedding-play-music'))
+        }
       }}
+      className={`fixed inset-0 z-50 bg-[#181324] flex items-center justify-center cursor-pointer select-none transition-opacity duration-1000 ease-in-out ${
+        isFading ? 'opacity-0 pointer-events-none' : 'opacity-100'
+      }`}
       role="region"
       aria-label="Opening Wedding Envelope Video"
     >

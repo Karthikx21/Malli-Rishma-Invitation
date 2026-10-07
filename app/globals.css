@@ -3,29 +3,30 @@
 
 @layer base {
   :root {
-    /* Palette Tokens */
-    --color-wine-deep: #2A0510;
-    --color-wine: #3D0B1B;
-    --color-wine-rich: #4A0F20;
-    --color-ivory-warm: #FAF6EE;
-    --color-ivory: #F4ECDD;
-    --color-ivory-soft: #FDFBF7;
+    /* Palette Tokens: Christian Lavender & Settled White Palette (Matching Hero Video) */
+    --color-lavender-deep: #2D2338;
+    --color-lavender-primary: #8D76A8;
+    --color-lavender-dusty: #B8A9C9;
+    --color-lavender-soft: #D8CEE5;
+    --color-lavender-frost: #EFEAF5;
+    --color-lavender-mist: #F7F4FA;
+    --color-white-settle: #FAF8FC;
+    --color-white-pure: #FFFFFF;
     --color-gold-antique: #C5A059;
     --color-gold-bright: #E6CA85;
     --color-gold-pure: #D4AF37;
     --color-gold-deep: #9B702A;
 
-    /* Chapter Theming */
-    --christian-navy: #080E1E;
-    --christian-navy-mid: #101A33;
+    /* Chapter 02: Hindu Wedding Theming (Preserved Untouched) */
     --hindu-saffron: #C2671A;
     --hindu-saffron-light: #F59E0B;
     --hindu-green-muted: #2D4739;
+    --hindu-temple-ivory: #FAF5EB;
 
     /* Theme Mappings */
-    --bg-page: var(--color-ivory);
-    --text-main: #1A0A0F;
-    --text-light: var(--color-ivory-warm);
+    --bg-page: var(--color-white-settle);
+    --text-main: var(--color-lavender-deep);
+    --text-light: #FAF8FC;
 
     /* Typography Variables (mapped to next/font) */
     --font-serif-var: var(--font-cormorant, 'Cormorant Garamond', Georgia, serif);
@@ -46,13 +47,13 @@
 
   html {
     scroll-behavior: smooth;
-    background-color: var(--color-wine-deep);
+    background-color: var(--color-white-settle);
     color: var(--text-main);
   }
 
   body {
     margin: 0;
-    background-color: var(--color-wine-deep);
+    background-color: var(--color-white-settle);
     color: var(--text-main);
     font-family: var(--font-sans-var);
     font-size: 15px;
@@ -176,7 +177,7 @@
 
 .gold-link-dark:hover,
 .gold-link-dark:focus-visible {
-  color: #4A0F20;
+  color: var(--color-lavender-primary);
 }
 
 .gold-link-dark:hover::after,
@@ -210,7 +211,7 @@
 .editorial-input {
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(184, 137, 62, 0.4);
+  border-bottom: 1px solid rgba(141, 118, 168, 0.35);
   color: var(--text-main);
   outline: none;
   transition: border-color 0.3s ease;
@@ -218,7 +219,7 @@
 }
 
 .editorial-input:focus {
-  border-bottom-color: #4A0F20;
+  border-bottom-color: var(--color-lavender-primary);
 }
 
 /* Arch mask for temple photography */
@@ -255,10 +256,10 @@
   width: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #1A050D;
+  background: var(--color-white-settle);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(197, 160, 89, 0.35);
+  background: rgba(141, 118, 168, 0.35);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
