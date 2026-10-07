@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 import confetti from 'canvas-confetti'
+import { motion } from 'framer-motion'
+import EditorialCardReveal from './EditorialCardReveal'
 
 export default function EditorialRsvp() {
   const [name, setName] = useState('')
@@ -28,7 +30,7 @@ export default function EditorialRsvp() {
           colors: ['#B8893E', '#F2DFB5', '#4A0F20'],
         })
       } catch {
-        // Safe fallback if confetti canvas fails
+        // Safe fallback
       }
     }, 600)
   }
@@ -45,12 +47,12 @@ export default function EditorialRsvp() {
   return (
     <section
       id="rsvp"
-      className="relative w-full bg-[#F4ECDD] text-[#1A0A0F] py-20 px-4 sm:px-8 border-b border-[#B8893E]/30"
+      className="relative w-full bg-[#F4ECDD] text-[#1A0A0F] py-20 px-4 sm:px-8 border-b border-[#B8893E]/30 overflow-hidden"
       aria-label="Wedding RSVP Section"
     >
       <div className="max-w-xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-12">
+        <EditorialCardReveal direction="up" className="text-center mb-12">
           <p className="text-[10px] uppercase tracking-[0.35em] text-[#B8893E] font-medium font-sans mb-2">
             வருவீர்களா?
           </p>
@@ -60,156 +62,166 @@ export default function EditorialRsvp() {
           <p className="font-headline text-lg text-[#1A0A0F]/80 uppercase tracking-widest">
             RSVP
           </p>
-          <div className="w-16 h-px bg-[#B8893E]/50 mx-auto mt-4" />
-        </div>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="w-16 h-px bg-[#B8893E]/50 mx-auto mt-4"
+          />
+        </EditorialCardReveal>
 
         {isSubmitted ? (
-          <div className="bg-white/90 border border-[#B8893E]/50 rounded-sm p-8 sm:p-10 text-center shadow-lg space-y-6">
-            <div className="w-16 h-16 rounded-full border border-[#B8893E] bg-[#4A0F20] text-[#F2DFB5] mx-auto flex items-center justify-center font-names text-2xl shadow-md">
-              RM
-            </div>
-            <h3 className="font-headline text-2xl text-[#4A0F20]">
-              Thank you, {name}!
-            </h3>
-            <p className="text-sm sm:text-base text-[#1A0A0F]/80 font-sans leading-relaxed">
-              We cannot wait to celebrate with you in Coimbatore. Your RSVP has been recorded.
-            </p>
+          <EditorialCardReveal scale>
+            <div className="bg-white/90 border border-[#B8893E]/50 rounded-sm p-8 sm:p-10 text-center shadow-lg space-y-6">
+              <div className="w-16 h-16 rounded-full border border-[#B8893E] bg-[#4A0F20] text-[#F2DFB5] mx-auto flex items-center justify-center font-names text-2xl shadow-md">
+                RM
+              </div>
+              <h3 className="font-headline text-2xl text-[#4A0F20]">
+                Thank you, {name}!
+              </h3>
+              <p className="text-sm sm:text-base text-[#1A0A0F]/80 font-sans leading-relaxed">
+                We cannot wait to celebrate with you in Coimbatore. Your RSVP has been recorded.
+              </p>
 
-            <div className="pt-4 border-t border-[#B8893E]/30 space-y-3">
-              <a
-                href={`https://wa.me/?text=${getWhatsAppMessage()}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-3 px-6 bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs uppercase tracking-[0.2em] font-sans font-medium rounded-sm inline-flex items-center justify-center gap-2 shadow-md transition-all"
-              >
-                Send Confirmation via WhatsApp →
-              </a>
-              <button
-                type="button"
-                onClick={() => setIsSubmitted(false)}
-                className="text-xs uppercase tracking-[0.2em] text-[#B8893E] underline font-sans block mx-auto pt-2"
-              >
-                Edit RSVP details
-              </button>
+              <div className="pt-4 border-t border-[#B8893E]/30 space-y-3">
+                <a
+                  href={`https://wa.me/?text=${getWhatsAppMessage()}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-3 px-6 bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs uppercase tracking-[0.2em] font-sans font-medium rounded-sm inline-flex items-center justify-center gap-2 shadow-md transition-all"
+                >
+                  Send Confirmation via WhatsApp →
+                </a>
+                <button
+                  type="button"
+                  onClick={() => setIsSubmitted(false)}
+                  className="text-xs uppercase tracking-[0.2em] text-[#B8893E] underline font-sans block mx-auto pt-2 cursor-pointer"
+                >
+                  Edit RSVP details
+                </button>
+              </div>
             </div>
-          </div>
+          </EditorialCardReveal>
         ) : (
-          <form
-            onSubmit={handleSubmit}
-            className="bg-white/80 border border-[#B8893E]/40 rounded-sm p-6 sm:p-10 shadow-md space-y-8"
-          >
-            {/* Guest Name */}
-            <div>
-              <label
-                htmlFor="guest-name"
-                className="block text-xs uppercase tracking-[0.2em] text-[#B8893E] font-medium font-sans mb-2"
-              >
-                Your name *
-              </label>
-              <input
-                id="guest-name"
-                type="text"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Full Name"
-                className="w-full editorial-input py-2.5 text-base sm:text-lg font-headline text-[#1A0A0F] placeholder:text-[#1A0A0F]/30"
-              />
-            </div>
+          <EditorialCardReveal direction="up" delay={0.15} scale>
+            <form
+              onSubmit={handleSubmit}
+              className="bg-white/80 border border-[#B8893E]/40 rounded-sm p-6 sm:p-10 shadow-md space-y-8"
+            >
+              {/* Guest Name */}
+              <div>
+                <label
+                  htmlFor="guest-name"
+                  className="block text-xs uppercase tracking-[0.2em] text-[#B8893E] font-medium font-sans mb-2"
+                >
+                  Your name *
+                </label>
+                <input
+                  id="guest-name"
+                  type="text"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Full Name"
+                  className="w-full editorial-input py-2.5 text-base sm:text-lg font-headline text-[#1A0A0F] placeholder:text-[#1A0A0F]/30"
+                />
+              </div>
 
-            {/* Guest Stepper */}
-            <div>
-              <label className="block text-xs uppercase tracking-[0.2em] text-[#B8893E] font-medium font-sans mb-3">
-                How many of you?
-              </label>
-              <div className="flex items-center justify-between border-b border-[#B8893E]/40 pb-3">
-                <span className="font-headline text-lg sm:text-xl text-[#1A0A0F]">
-                  {guestCount} {guestCount === 1 ? 'guest' : 'guests'}
-                </span>
-                <div className="flex items-center gap-3">
-                  <button
-                    type="button"
-                    onClick={() => setGuestCount(Math.max(1, guestCount - 1))}
-                    className="w-9 h-9 rounded-full border border-[#B8893E]/60 text-[#4A0F20] hover:bg-[#4A0F20] hover:text-[#F4ECDD] flex items-center justify-center font-bold transition-colors cursor-pointer"
-                    aria-label="Decrease guest count"
-                  >
-                    -
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setGuestCount(Math.min(10, guestCount + 1))}
-                    className="w-9 h-9 rounded-full border border-[#B8893E]/60 text-[#4A0F20] hover:bg-[#4A0F20] hover:text-[#F4ECDD] flex items-center justify-center font-bold transition-colors cursor-pointer"
-                    aria-label="Increase guest count"
-                  >
-                    +
-                  </button>
+              {/* Guest Stepper */}
+              <div>
+                <label className="block text-xs uppercase tracking-[0.2em] text-[#B8893E] font-medium font-sans mb-3">
+                  How many of you?
+                </label>
+                <div className="flex items-center justify-between border-b border-[#B8893E]/40 pb-3">
+                  <span className="font-headline text-lg sm:text-xl text-[#1A0A0F]">
+                    {guestCount} {guestCount === 1 ? 'guest' : 'guests'}
+                  </span>
+                  <div className="flex items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setGuestCount(Math.max(1, guestCount - 1))}
+                      className="w-9 h-9 rounded-full border border-[#B8893E]/60 text-[#4A0F20] hover:bg-[#4A0F20] hover:text-[#F4ECDD] flex items-center justify-center font-bold transition-colors cursor-pointer"
+                      aria-label="Decrease guest count"
+                    >
+                      -
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setGuestCount(Math.min(10, guestCount + 1))}
+                      className="w-9 h-9 rounded-full border border-[#B8893E]/60 text-[#4A0F20] hover:bg-[#4A0F20] hover:text-[#F4ECDD] flex items-center justify-center font-bold transition-colors cursor-pointer"
+                      aria-label="Increase guest count"
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Joining Us For Checkboxes */}
-            <div>
-              <label className="block text-xs uppercase tracking-[0.2em] text-[#B8893E] font-medium font-sans mb-3">
-                Joining us for
-              </label>
-              <div className="space-y-3 font-sans text-sm">
-                <label className="flex items-center gap-3 cursor-pointer select-none">
-                  <input
-                    type="checkbox"
-                    checked={attending18}
-                    onChange={(e) => setAttending18(e.target.checked)}
-                    className="w-4 h-4 accent-[#4A0F20] rounded cursor-pointer"
-                  />
-                  <span className="text-[#1A0A0F]">
-                    18 Nov · Ring exchange ceremony
-                  </span>
+              {/* Joining Us For Checkboxes */}
+              <div>
+                <label className="block text-xs uppercase tracking-[0.2em] text-[#B8893E] font-medium font-sans mb-3">
+                  Joining us for
                 </label>
-                <label className="flex items-center gap-3 cursor-pointer select-none">
-                  <input
-                    type="checkbox"
-                    checked={attending20}
-                    onChange={(e) => setAttending20(e.target.checked)}
-                    className="w-4 h-4 accent-[#4A0F20] rounded cursor-pointer"
-                  />
-                  <span className="text-[#1A0A0F]">
-                    20 Nov · Hindu wedding and reception
-                  </span>
-                </label>
+                <div className="space-y-3 font-sans text-sm">
+                  <label className="flex items-center gap-3 cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      checked={attending18}
+                      onChange={(e) => setAttending18(e.target.checked)}
+                      className="w-4 h-4 accent-[#4A0F20] rounded cursor-pointer"
+                    />
+                    <span className="text-[#1A0A0F]">
+                      18 Nov · Ring exchange ceremony
+                    </span>
+                  </label>
+                  <label className="flex items-center gap-3 cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      checked={attending20}
+                      onChange={(e) => setAttending20(e.target.checked)}
+                      className="w-4 h-4 accent-[#4A0F20] rounded cursor-pointer"
+                    />
+                    <span className="text-[#1A0A0F]">
+                      20 Nov · Hindu wedding and reception
+                    </span>
+                  </label>
+                </div>
               </div>
-            </div>
 
-            {/* A note for the couple */}
-            <div>
-              <label
-                htmlFor="guest-note"
-                className="block text-xs uppercase tracking-[0.2em] text-[#B8893E] font-medium font-sans mb-2"
-              >
-                A note for the couple
-              </label>
-              <textarea
-                id="guest-note"
-                rows={3}
-                value={note}
-                onChange={(e) => setNote(e.target.value)}
-                placeholder="Warm wishes, blessings, or dietary notes..."
-                className="w-full editorial-input py-2.5 text-sm sm:text-base font-sans text-[#1A0A0F] placeholder:text-[#1A0A0F]/30 resize-none"
-              />
-            </div>
+              {/* A note for the couple */}
+              <div>
+                <label
+                  htmlFor="guest-note"
+                  className="block text-xs uppercase tracking-[0.2em] text-[#B8893E] font-medium font-sans mb-2"
+                >
+                  A note for the couple
+                </label>
+                <textarea
+                  id="guest-note"
+                  rows={3}
+                  value={note}
+                  onChange={(e) => setNote(e.target.value)}
+                  placeholder="Warm wishes, blessings, or dietary notes..."
+                  className="w-full editorial-input py-2.5 text-sm sm:text-base font-sans text-[#1A0A0F] placeholder:text-[#1A0A0F]/30 resize-none"
+                />
+              </div>
 
-            {/* Submit Button */}
-            <div className="pt-2 text-center">
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full py-3.5 px-8 border border-[#B8893E] bg-[#4A0F20] hover:bg-[#380B17] text-[#F4ECDD] text-xs uppercase tracking-[0.25em] font-sans transition-all duration-300 shadow-md cursor-pointer disabled:opacity-50"
-              >
-                {isSubmitting ? 'Recording...' : 'Send RSVP'}
-              </button>
-              <p className="mt-4 text-[11px] uppercase tracking-[0.25em] text-[#B8893E] font-sans">
-                Kindly reply by 10 November
-              </p>
-            </div>
-          </form>
+              {/* Submit Button */}
+              <div className="pt-2 text-center">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full py-3.5 px-8 border border-[#B8893E] bg-[#4A0F20] hover:bg-[#380B17] text-[#F4ECDD] text-xs uppercase tracking-[0.25em] font-sans transition-all duration-300 shadow-md cursor-pointer disabled:opacity-50"
+                >
+                  {isSubmitting ? 'Recording...' : 'Send RSVP'}
+                </button>
+                <p className="mt-4 text-[11px] uppercase tracking-[0.25em] text-[#B8893E] font-sans">
+                  Kindly reply by 10 November
+                </p>
+              </div>
+            </form>
+          </EditorialCardReveal>
         )}
       </div>
     </section>
