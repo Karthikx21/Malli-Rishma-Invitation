@@ -1,0 +1,135 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@layer base {
+  :root {
+    /* Luxury Fashion-Magazine Editorial Palette (Sampled from Intro Video) */
+    --color-ivory: #F4ECDD;
+    --color-burgundy: #4A0F20;
+    --color-burgundy-dark: #320713;
+    --color-ink: #1A0A0F;
+    --color-gold: #B8893E;
+    --color-gold-bright: #D4A359;
+    --color-champagne: #F2DFB5;
+
+    /* Theme Mappings */
+    --bg-page: var(--color-ivory);
+    --bg-band: var(--color-burgundy);
+    --text-main: var(--color-ink);
+    --text-light: var(--color-ivory);
+    --border-gold-hairline: rgba(184, 137, 62, 0.35);
+
+    /* Typography Variables (mapped to next/font) */
+    --font-bodoni-var: var(--font-bodoni, 'Bodoni Moda', Georgia, serif);
+    --font-pinyon-var: var(--font-pinyon, 'Pinyon Script', cursive);
+    --font-jost-var: var(--font-jost, 'Jost', sans-serif);
+    --font-tamil-var: var(--font-tamil, 'Noto Serif Tamil', serif);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--color-ivory);
+    color: var(--color-ink);
+    /* Allow natural overscroll without locking */
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-jost-var);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Typography Utility Classes */
+.font-headline {
+  font-family: var(--font-bodoni-var);
+  letter-spacing: -0.02em;
+}
+
+.font-names {
+  font-family: var(--font-pinyon-var);
+  font-weight: 400;
+}
+
+.font-body {
+  font-family: var(--font-jost-var);
+}
+
+.font-tamil {
+  font-family: var(--font-tamil-var);
+  line-height: 1.7;
+}
+
+/* Editorial Gold Hairline Rules */
+.gold-hairline {
+  border-color: rgba(184, 137, 62, 0.35);
+}
+
+.gold-hairline-b {
+  border-bottom: 1px solid rgba(184, 137, 62, 0.35);
+}
+
+.gold-hairline-t {
+  border-top: 1px solid rgba(184, 137, 62, 0.35);
+}
+
+/* Editorial Dark Panel with >= 70% Opacity for WCAG AA */
+.editorial-dark-panel {
+  background-color: rgba(26, 10, 15, 0.82);
+  border: 1px solid rgba(184, 137, 62, 0.4);
+  color: var(--color-ivory);
+}
+
+.editorial-burgundy-panel {
+  background-color: rgba(74, 15, 32, 0.88);
+  border: 1px solid rgba(184, 137, 62, 0.45);
+  color: var(--color-ivory);
+}
+
+/* Editorial Underline-Only Inputs */
+.editorial-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(184, 137, 62, 0.5);
+  color: var(--color-ink);
+  outline: none;
+  transition: border-color 0.25s ease;
+  font-family: var(--font-bodoni-var);
+}
+
+.editorial-input:focus {
+  border-bottom-color: var(--color-burgundy);
+}
+
+/* Smooth Editorial Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ivory);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(74, 15, 32, 0.35);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-burgundy);
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
