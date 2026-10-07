@@ -17,4 +17,5 @@ out/
 .DS_Store
 Thumbs.db
 *.log
+*.tsbuildinfo
 Malli_Rishma_Invitation.html

@@ -6,10 +6,15 @@
  * Now replaced with a subtle, non-intrusive ambient atmospheric gradient overlay,
  * ensuring no video artifact loops over the content.
  */
-export default function EditorialSmokeLayer() {
+interface EditorialSmokeLayerProps {
+  opacity?: number
+}
+
+export default function EditorialSmokeLayer({ opacity }: EditorialSmokeLayerProps = {}) {
   return (
     <div
       className="fixed inset-0 pointer-events-none z-0 bg-[radial-gradient(ellipse_at_top,rgba(184,137,62,0.06)_0%,transparent_70%)]"
+      style={opacity !== undefined ? { opacity } : undefined}
       aria-hidden="true"
     />
   )

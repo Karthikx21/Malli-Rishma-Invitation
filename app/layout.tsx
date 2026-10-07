@@ -1,31 +1,48 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Bodoni_Moda, Pinyon_Script, Jost, Noto_Serif_Tamil } from 'next/font/google'
+import {
+  Cormorant_Garamond,
+  Cinzel,
+  Great_Vibes,
+  Montserrat,
+  Noto_Serif_Tamil,
+} from 'next/font/google'
 import './globals.css'
 
-const bodoni = Bodoni_Moda({
+const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-bodoni',
+  variable: '--font-cormorant',
+  weight: ['300', '400', '500', '600', '700'],
+  style: ['normal', 'italic'],
 })
 
-const pinyon = Pinyon_Script({
+const cinzel = Cinzel({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-cinzel',
+  weight: ['400', '500', '600', '700', '800'],
+})
+
+const greatVibes = Great_Vibes({
   weight: '400',
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-pinyon',
+  variable: '--font-great-vibes',
 })
 
-const jost = Jost({
+const montserrat = Montserrat({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-jost',
+  variable: '--font-montserrat',
+  weight: ['300', '400', '500', '600', '700'],
 })
 
 const notoTamil = Noto_Serif_Tamil({
   subsets: ['tamil'],
   display: 'swap',
   variable: '--font-tamil',
+  weight: ['300', '400', '500', '600', '700'],
 })
 
 export const metadata: Metadata = {
@@ -60,6 +77,18 @@ export const metadata: Metadata = {
         url: '/icon.svg',
         type: 'image/svg+xml',
       },
+      {
+        url: '/icon.png',
+        sizes: '32x32',
+        type: 'image/png',
+      },
+    ],
+    apple: [
+      {
+        url: '/apple-icon.png',
+        sizes: '180x180',
+        type: 'image/png',
+      },
     ],
   },
 }
@@ -77,7 +106,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bodoni.variable} ${pinyon.variable} ${jost.variable} ${notoTamil.variable} scroll-smooth`}
+      className={`${cormorant.variable} ${cinzel.variable} ${greatVibes.variable} ${montserrat.variable} ${notoTamil.variable} scroll-smooth`}
     >
       <body className="antialiased bg-[#F4ECDD] text-[#1A0A0F] selection:bg-[#4A0F20] selection:text-[#F4ECDD]">
         {children}

@@ -41,8 +41,8 @@ export default function Navigation({ onReplayVideo }: NavigationProps) {
           href="#invitation"
           className="flex items-center gap-2.5 text-[#F8F4ED]"
         >
-          <div className="w-8 h-8 rounded-xl bg-white/[0.05] border border-[#B08D57]/40 flex items-center justify-center font-cinzel text-xs text-[#F5E5C0]">
-            RM
+          <div className="w-8 h-8 rounded-full bg-white/[0.05] border border-[#B08D57]/40 flex items-center justify-center font-cinzel text-xs text-[#F5E5C0]">
+            ✦
           </div>
           <span className="font-cinzel text-xs tracking-[0.2em] uppercase text-[#F8F4ED]">
             Rishma &amp; Malli

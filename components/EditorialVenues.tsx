@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import EditorialCardReveal from './EditorialCardReveal'
 
 export default function EditorialVenues() {
   const venues = [
@@ -37,79 +36,79 @@ export default function EditorialVenues() {
   return (
     <section
       id="venues"
-      className="relative w-full bg-[#1A0A0F] text-[#F4ECDD] py-20 px-4 sm:px-8 border-b border-[#B8893E]/40 overflow-hidden"
+      className="relative w-full bg-[#1A050D] text-[#FAF6EE] py-20 sm:py-28 px-6 sm:px-12 border-b border-[#C5A059]/30 overflow-hidden"
       aria-label="Wedding Venues Location and Maps"
     >
       <div className="max-w-5xl mx-auto text-center">
         {/* Section Header */}
-        <EditorialCardReveal direction="up">
-          <p className="text-[10px] uppercase tracking-[0.35em] text-[#B8893E] font-medium font-sans mb-3">
-            Location &amp; Directions
+        <motion.div
+          initial={{ opacity: 0, y: 26, filter: 'blur(5px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <p className="font-functional text-[10px] sm:text-xs text-[#C5A059] font-medium mb-2">
+            LOCATION &amp; DIRECTIONS
           </p>
-          <h2 className="font-names text-4xl sm:text-5xl md:text-6xl text-[#F2DFB5] leading-none mb-3">
-            Find us here
+          <h2 className="font-serif-title text-4xl sm:text-6xl text-[#FAF6EE] font-light tracking-tight mb-2">
+            Find Us Here
           </h2>
-          <p className="text-sm sm:text-base text-[#F4ECDD]/80 font-sans tracking-wide">
-            Scan, click, and come be a part of our big day!
+          <p className="font-functional text-xs text-[#FAF6EE]/60 tracking-[0.2em] mt-1">
+            SCAN, CLICK, AND COME BE A PART OF OUR BIG DAY
           </p>
           <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
+            initial={{ scaleX: 0, opacity: 0 }}
+            whileInView={{ scaleX: 1, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="w-16 h-px bg-[#B8893E]/50 mx-auto mt-6 mb-14"
+            transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="w-16 h-px bg-gradient-to-r from-transparent via-[#C5A059]/50 to-transparent mx-auto mt-4 mb-16"
           />
-        </EditorialCardReveal>
+        </motion.div>
 
-        {/* 3 Venue Cards Grid - Sequential Staggered Entrance */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 text-left">
+        {/* 3 Venues: Open Typographic Columns Separated by Delicate Gold Hairlines */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 text-left">
           {venues.map((v, i) => (
-            <EditorialCardReveal
+            <motion.div
               key={v.name}
-              direction="up"
-              delay={0.1 + i * 0.15}
-              scale
-              className="h-full"
+              initial={{ opacity: 0, y: 30, filter: 'blur(5px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 1.2, delay: 0.1 + i * 0.14, ease: [0.22, 1, 0.36, 1] }}
+              className={`flex flex-col justify-between pt-6 border-t border-[#C5A059]/30 ${
+                i > 0 ? 'md:border-t-0 md:border-l md:border-[#C5A059]/20 md:pl-8' : ''
+              }`}
             >
-              <motion.div
-                whileHover={{ y: -6, transition: { duration: 0.25 } }}
-                className="editorial-dark-panel rounded-sm p-6 sm:p-7 flex flex-col justify-between shadow-xl h-full transition-all duration-300 hover:border-[#B8893E] hover:shadow-[0_15px_35px_rgba(0,0,0,0.7)]"
-              >
-                <div>
-                  <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.25em] text-[#B8893E] font-sans mb-3">
-                    <span>{v.day}</span>
-                    <span>{v.title}</span>
-                  </div>
-
-                  <h3 className="font-headline text-xl text-[#F4ECDD] mb-2 font-normal">
-                    {v.name}
-                  </h3>
-
-                  <p className="text-xs text-[#F2DFB5]/80 font-sans mb-3">
-                    {v.time}
-                  </p>
-
-                  <p className="text-xs text-[#F4ECDD]/70 font-sans leading-relaxed">
-                    {v.address}
-                  </p>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between font-functional text-[10px] text-[#C5A059] tracking-[0.25em]">
+                  <span>{v.day}</span>
+                  <span>{v.title}</span>
                 </div>
 
-                {/* Google Maps Button */}
-                <div className="mt-6 pt-4 border-t border-[#B8893E]/30">
-                  <a
-                    href={v.mapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full py-2.5 px-4 border border-[#B8893E] bg-[#4A0F20]/60 hover:bg-[#B8893E] hover:text-[#1A0A0F] text-[#F4ECDD] text-xs uppercase tracking-[0.2em] font-sans transition-all duration-300 flex items-center justify-center gap-2"
-                  >
-                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-                    </svg>
-                    View on Google Maps
-                  </a>
-                </div>
-              </motion.div>
-            </EditorialCardReveal>
+                <h3 className="font-serif-title text-2xl sm:text-3xl text-[#FAF6EE] font-light mt-1">
+                  {v.name}
+                </h3>
+
+                <p className="font-functional text-xs text-[#E6CA85] tracking-[0.1em]">
+                  {v.time}
+                </p>
+
+                <p className="font-serif-title text-sm sm:text-base text-[#FAF6EE]/75 font-light leading-relaxed">
+                  {v.address}
+                </p>
+              </div>
+
+              {/* Text link with gold drawing underline */}
+              <div className="pt-6">
+                <a
+                  href={v.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="gold-link"
+                >
+                  VIEW ON GOOGLE MAPS ↗
+                </a>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>

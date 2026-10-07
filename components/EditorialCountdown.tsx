@@ -1,8 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import EditorialCardReveal from './EditorialCardReveal'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export default function EditorialCountdown() {
   const [targetDate, setTargetDate] = useState<'18' | '20'>('18')
@@ -36,7 +35,7 @@ export default function EditorialCountdown() {
     return () => clearInterval(interval)
   }, [targetDate])
 
-  const timeCards = [
+  const timeUnits = [
     { label: 'Days', val: timeLeft.days },
     { label: 'Hours', val: timeLeft.hours },
     { label: 'Minutes', val: timeLeft.minutes },
@@ -46,68 +45,103 @@ export default function EditorialCountdown() {
   return (
     <section
       id="countdown"
-      className="relative w-full bg-[#F4ECDD] text-[#1A0A0F] py-20 px-4 sm:px-8 border-b border-[#B8893E]/30 overflow-hidden"
+      className="relative w-full bg-[#FAF6EE] text-[#1A0A0F] py-20 sm:py-28 px-6 sm:px-12 border-b border-[#C5A059]/30 overflow-hidden"
       aria-label="Wedding Countdown"
     >
       <div className="max-w-4xl mx-auto text-center">
-        <EditorialCardReveal direction="up">
-          <p className="text-[10px] uppercase tracking-[0.35em] text-[#B8893E] font-medium font-sans mb-3">
-            Counting Down The Moments
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 26, filter: 'blur(5px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <p className="font-functional text-[10px] sm:text-xs text-[#9B702A] font-semibold mb-2">
+            COUNTING DOWN THE MOMENTS
           </p>
-          <h2 className="font-names text-4xl sm:text-5xl md:text-6xl text-[#4A0F20] leading-none mb-6">
+          <h2 className="font-serif-title text-4xl sm:text-6xl text-[#3D0B1B] font-light tracking-tight mb-2">
             Until We Say Forever
           </h2>
+          <motion.div
+            initial={{ scaleX: 0, opacity: 0 }}
+            whileInView={{ scaleX: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="w-16 h-px bg-gradient-to-r from-transparent via-[#C5A059]/50 to-transparent mx-auto mt-3 mb-10"
+          />
+        </motion.div>
 
-          {/* Date Selector Tabs */}
-          <div className="inline-flex p-1 bg-[#4A0F20]/10 border border-[#B8893E]/40 rounded-sm mb-12">
-            <button
-              type="button"
-              onClick={() => setTargetDate('18')}
-              className={`px-5 py-2 text-xs uppercase tracking-[0.2em] font-sans transition-all duration-300 cursor-pointer ${
-                targetDate === '18'
-                  ? 'bg-[#4A0F20] text-[#F4ECDD] shadow-md'
-                  : 'text-[#1A0A0F]/70 hover:text-[#1A0A0F]'
-              }`}
-            >
-              18 Nov · Ring Exchange
-            </button>
-            <button
-              type="button"
-              onClick={() => setTargetDate('20')}
-              className={`px-5 py-2 text-xs uppercase tracking-[0.2em] font-sans transition-all duration-300 cursor-pointer ${
-                targetDate === '20'
-                  ? 'bg-[#4A0F20] text-[#F4ECDD] shadow-md'
-                  : 'text-[#1A0A0F]/70 hover:text-[#1A0A0F]'
-              }`}
-            >
-              20 Nov · Hindu Wedding
-            </button>
-          </div>
-        </EditorialCardReveal>
+        {/* Date Selector: Text links only (NO PILL/BOXED TABS) */}
+        <div className="flex items-center justify-center gap-6 sm:gap-10 mb-14 select-none">
+          <button
+            type="button"
+            onClick={() => setTargetDate('18')}
+            className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-all duration-300 pb-1 relative cursor-pointer ${
+              targetDate === '18'
+                ? 'text-[#3D0B1B] font-semibold'
+                : 'text-[#1A0A0F]/40 hover:text-[#1A0A0F]/80'
+            }`}
+          >
+            18 NOV · RING EXCHANGE
+            {targetDate === '18' && (
+              <motion.span
+                layoutId="countdownTabLine"
+                className="absolute bottom-0 left-0 right-0 h-px bg-[#9B702A]"
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              />
+            )}
+          </button>
 
-        {/* 4 Counter Cards - Sequential Stagger */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-2xl mx-auto">
-          {timeCards.map((item, i) => (
-            <EditorialCardReveal
-              key={item.label}
-              direction="up"
-              delay={0.1 + i * 0.08}
-              scale
-            >
+          <span className="text-[#C5A059]/40 text-xs">/</span>
+
+          <button
+            type="button"
+            onClick={() => setTargetDate('20')}
+            className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-all duration-300 pb-1 relative cursor-pointer ${
+              targetDate === '20'
+                ? 'text-[#3D0B1B] font-semibold'
+                : 'text-[#1A0A0F]/40 hover:text-[#1A0A0F]/80'
+            }`}
+          >
+            20 NOV · HINDU WEDDING
+            {targetDate === '20' && (
+              <motion.span
+                layoutId="countdownTabLine"
+                className="absolute bottom-0 left-0 right-0 h-px bg-[#9B702A]"
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              />
+            )}
+          </button>
+        </div>
+
+        {/* 4 Counter Columns with AnimatePresence date transition */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={targetDate}
+            initial={{ opacity: 0, y: 16, filter: 'blur(4px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, y: -10, filter: 'blur(4px)' }}
+            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 max-w-3xl mx-auto divide-y-0 sm:divide-x sm:divide-[#C5A059]/30"
+          >
+            {timeUnits.map((item, idx) => (
               <motion.div
-                whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                className="bg-white/80 border border-[#B8893E]/40 rounded-sm p-5 sm:p-6 shadow-sm flex flex-col items-center justify-center hover:shadow-md transition-shadow"
+                key={item.label}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                className="flex flex-col items-center justify-center py-4 px-2"
               >
-                <span className="font-headline text-3xl sm:text-5xl text-[#4A0F20] font-normal tracking-tight">
+                <span className="font-serif-title text-5xl sm:text-7xl md:text-8xl text-[#3D0B1B] font-light tracking-tight leading-none">
                   {String(item.val).padStart(2, '0')}
                 </span>
-                <span className="mt-2 text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#B8893E] font-sans">
+                <span className="mt-2.5 font-functional text-[10px] sm:text-xs text-[#9B702A] tracking-[0.25em]">
                   {item.label}
                 </span>
               </motion.div>
-            </EditorialCardReveal>
-          ))}
-        </div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   )
