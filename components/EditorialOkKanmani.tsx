@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { playExclusive } from '@/lib/audioCoordinator'
 
 type ActiveSide = 'rishma' | 'malli'
 
@@ -72,14 +73,6 @@ export default function EditorialOkKanmani() {
     }
   }
 
-  const pauseAllOtherAudio = () => {
-    document.querySelectorAll('audio').forEach((el) => {
-      if (el !== currentAudioRef.current) {
-        el.pause()
-      }
-    })
-  }
-
   const togglePlay = () => {
     const audio = currentAudioRef.current
     if (!audio) return
@@ -95,7 +88,6 @@ export default function EditorialOkKanmani() {
         )
       }
     } else {
-      pauseAllOtherAudio()
       if (typeof window !== 'undefined') {
         window.dispatchEvent(
           new CustomEvent('wedding-secondary-audio-start', {
@@ -103,8 +95,7 @@ export default function EditorialOkKanmani() {
           })
         )
       }
-      audio
-        .play()
+      playExclusive(audio)
         .then(() => setIsPlaying(true))
         .catch(() => setAudioError(true))
     }
@@ -133,7 +124,6 @@ export default function EditorialOkKanmani() {
       }
 
       if (wasPlaying && nextAudio) {
-        pauseAllOtherAudio()
         if (typeof window !== 'undefined') {
           window.dispatchEvent(
             new CustomEvent('wedding-secondary-audio-start', {
@@ -141,8 +131,7 @@ export default function EditorialOkKanmani() {
             })
           )
         }
-        nextAudio
-          .play()
+        playExclusive(nextAudio)
           .then(() => setIsPlaying(true))
           .catch(() => setIsPlaying(false))
       } else {
@@ -193,6 +182,8 @@ export default function EditorialOkKanmani() {
         ref={audioRishmaRef}
         src={TRACKS.rishma.src}
         preload="metadata"
+        onPlay={() => activeSide === 'rishma' && setIsPlaying(true)}
+        onPause={() => activeSide === 'rishma' && setIsPlaying(false)}
         onTimeUpdate={(e) => activeSide === 'rishma' && handleTimeUpdate(e.currentTarget)}
         onLoadedMetadata={(e) => activeSide === 'rishma' && handleLoadedMetadata(e.currentTarget)}
         onEnded={handleEnded}
@@ -202,6 +193,8 @@ export default function EditorialOkKanmani() {
         ref={audioMalliRef}
         src={TRACKS.malli.src}
         preload="metadata"
+        onPlay={() => activeSide === 'malli' && setIsPlaying(true)}
+        onPause={() => activeSide === 'malli' && setIsPlaying(false)}
         onTimeUpdate={(e) => activeSide === 'malli' && handleTimeUpdate(e.currentTarget)}
         onLoadedMetadata={(e) => activeSide === 'malli' && handleLoadedMetadata(e.currentTarget)}
         onEnded={handleEnded}

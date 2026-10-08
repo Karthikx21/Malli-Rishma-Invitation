@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { playExclusive, isAnyOtherAudioPlaying } from '@/lib/audioCoordinator'
 
 /**
  * FloatingMusicPlayer:
@@ -24,29 +25,23 @@ export default function FloatingMusicPlayer() {
   const attemptPlay = useCallback(() => {
     const audio = audioRef.current
     if (!audio) return
+    if (userMutedRef.current) return
+    // Never clash if any other audio is already playing
+    if (isAnyOtherAudioPlaying(audio)) return
 
     audio.muted = false
     audio.volume = 0.8
 
-    // Pause other audio elements across the page
-    document.querySelectorAll('audio').forEach((el) => {
-      if (el !== audio) el.pause()
-    })
-
-    const playPromise = audio.play()
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => {
-          setIsPlaying(true)
-        })
-        .catch(() => {
-          // Browser autoplay blocked until user gesture
-          setIsPlaying(false)
-        })
-    }
+    playExclusive(audio)
+      .then(() => {
+        setIsPlaying(true)
+      })
+      .catch(() => {
+        setIsPlaying(false)
+      })
   }, [])
 
-  // 1. Immediate Autoplay on Mount with Robust Global Interaction Unlocking
+  // 1. Immediate Autoplay on Mount with Clean One-Shot Interaction Unlock
   useEffect(() => {
     const audio = audioRef.current
     if (!audio) return
@@ -57,36 +52,53 @@ export default function FloatingMusicPlayer() {
     // Attempt immediately on mount
     attemptPlay()
 
-    // Global listener for tap/click anywhere to immediately unlock and play audio
-    const handleGesture = () => {
+    // Global listener for the FIRST user gesture to unlock browser autoplay policy.
+    // Removes itself immediately once unlocked to NEVER clash with clicks on other media!
+    let unlocked = false
+    const events = ['click', 'touchstart', 'touchend', 'pointerdown', 'mousedown', 'keydown']
+
+    const removeGestureListeners = () => {
+      events.forEach((evt) => {
+        window.removeEventListener(evt, handleFirstGesture)
+      })
+      window.removeEventListener('wedding-play-music', handleFirstGesture)
+    }
+
+    const handleFirstGesture = (e?: Event) => {
+      // If the user tapped on a media control for another audio element, don't hijack it!
+      const target = e?.target as HTMLElement | undefined
+      if (target && target.closest('#songs, [data-audio-control]')) {
+        return
+      }
+
       setHasInteracted(true)
       const currentAudio = audioRef.current
-      if (currentAudio && !userMutedRef.current) {
+
+      if (currentAudio && !userMutedRef.current && !isAnyOtherAudioPlaying(currentAudio)) {
         currentAudio.muted = false
         currentAudio.volume = 0.8
-        const promise = currentAudio.play()
-        if (promise !== undefined) {
-          promise
-            .then(() => {
-              setIsPlaying(true)
-            })
-            .catch(() => {})
-        }
+        currentAudio
+          .play()
+          .then(() => {
+            setIsPlaying(true)
+            unlocked = true
+            removeGestureListeners()
+          })
+          .catch(() => {})
+      } else {
+        unlocked = true
+        removeGestureListeners()
       }
     }
 
-    const events = ['click', 'touchstart', 'touchend', 'pointerdown', 'mousedown', 'keydown']
     events.forEach((evt) => {
-      window.addEventListener(evt, handleGesture, { passive: true })
+      window.addEventListener(evt, handleFirstGesture, { passive: true })
     })
 
-    window.addEventListener('wedding-play-music', handleGesture)
+    window.addEventListener('wedding-play-music', handleFirstGesture)
 
     return () => {
-      events.forEach((evt) => {
-        window.removeEventListener(evt, handleGesture)
-      })
-      window.removeEventListener('wedding-play-music', handleGesture)
+      removeGestureListeners()
     }
   }, [attemptPlay])
 
