@@ -130,66 +130,72 @@ export default function EditorialChapters() {
             </h3>
           </div>
 
-          {/* Time & Venue: Separated by Delicate Gold Hairlines */}
-          <div className="mt-10 pt-8 border-t border-[#C5A059]/30 space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 font-functional text-xs text-[#FAF6EE]/90">
-              <motion.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
-                <span className="text-[#C5A059] block text-[10px] tracking-[0.3em] mb-1">
-                  TIME
-                </span>
-                <span className="text-sm sm:text-base tracking-[0.1em] font-light">
-                  6:00 PM TO 10:00 PM
-                </span>
+          {/* Time & Venue: Separated by Delicate Gold Hairlines (Plain Editorial - No Boxes) */}
+          <div className="mt-10 pt-8 border-t border-[#C5A059]/30 space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 font-functional text-xs text-[#FAF6EE]/90">
+              {/* Col 1: TIME & RING EXCHANGE HIGHLIGHT */}
+              <motion.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }} className="space-y-3">
+                <div>
+                  <span className="text-[#C5A059] block text-[10px] tracking-[0.3em] mb-1">
+                    TIME
+                  </span>
+                  <span className="text-sm sm:text-base tracking-[0.1em] font-light">
+                    6:00 PM TO 10:00 PM
+                  </span>
+                </div>
+
+                {/* Plain, Highly Highlighted Ring Exchange Time (NO BOX) */}
+                <div className="flex items-center gap-2.5 pt-2 border-t border-[#C5A059]/20">
+                  <svg
+                    className="w-4 h-4 text-[#E6CA85] shrink-0"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="8.5" cy="13.5" r="4.5" />
+                    <circle cx="15.5" cy="13.5" r="4.5" />
+                    <path d="M8.5 6l1.2 2h-2.4L8.5 6z" fill="currentColor" stroke="none" />
+                    <path d="M8.5 3.5v1.5" />
+                  </svg>
+                  <div>
+                    <span className="font-functional text-[10px] tracking-[0.25em] text-[#C5A059] uppercase block font-medium">
+                      RING EXCHANGE
+                    </span>
+                    <span className="font-functional text-sm sm:text-base tracking-[0.12em] text-[#E6CA85] font-semibold">
+                      6:00 PM SHARP
+                    </span>
+                  </div>
+                </div>
               </motion.div>
 
+              {/* Col 2: VENUE */}
               <motion.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
                 <span className="text-[#C5A059] block text-[10px] tracking-[0.3em] mb-1">
                   VENUE
                 </span>
-                <span className="text-sm sm:text-base tracking-[0.1em] font-light">
+                <span className="text-sm sm:text-base tracking-[0.1em] font-light leading-relaxed block">
                   Jenneys Residency, Avinashi Road, Coimbatore
                 </span>
               </motion.div>
             </div>
 
-            {/* Catchy Ring Exchange Timing Callout */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
+            {/* Lovely Catchy Note (Pure Typographic Editorial - NO BOX) */}
+            <motion.p
+              initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.15 }}
-              className="p-3 sm:px-4 sm:py-3 rounded-xl bg-gradient-to-r from-[#E6CA85]/15 via-[#E6CA85]/10 to-transparent border border-[#E6CA85]/35 backdrop-blur-md flex items-center gap-3"
+              transition={{ duration: 0.8 }}
+              className="font-serif-title italic text-sm sm:text-base text-[#FAF6EE]/90 leading-relaxed pt-3 border-t border-[#C5A059]/20"
             >
-              <span className="shrink-0 w-8 h-8 rounded-full bg-[#E6CA85]/15 border border-[#E6CA85]/40 flex items-center justify-center text-[#E6CA85]" aria-hidden="true">
-                <svg
-                  className="w-4 h-4 text-[#E6CA85]"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <circle cx="8.5" cy="13.5" r="4.5" />
-                  <circle cx="15.5" cy="13.5" r="4.5" />
-                  <path d="M8.5 6l1.2 2h-2.4L8.5 6z" fill="currentColor" stroke="none" />
-                  <path d="M8.5 3.5v1.5" />
-                  <path d="M10.8 4.7l-.7.7" />
-                  <path d="M6.2 4.7l.7.7" />
-                </svg>
-              </span>
-              <p className="font-functional text-xs sm:text-sm text-[#FAF6EE] tracking-[0.03em] leading-snug">
-                <span className="font-semibold text-[#E6CA85]">
-                  Dinner can wait, but the rings won’t!
-                </span>{' '}
-                <span className="text-[#FAF6EE]/90 font-light">
-                  Ring exchange is at 6:00 PM sharp — no rewinds!
-                </span>
-              </p>
-            </motion.div>
+              &ldquo;Please be in your seats by 6:00 PM sharp for the Ring Exchange — the sweetest moment of our night happens first, and forever officially begins!&rdquo;
+            </motion.p>
 
             {/* Action Links: Text Links with Left-to-Right Drawing Gold Underline */}
-            <div className="pt-4 flex flex-wrap items-center gap-6 sm:gap-10">
+            <div className="pt-2 flex flex-wrap items-center gap-6 sm:gap-10">
               <motion.a
                 whileHover={{ x: 4 }}
                 transition={{ duration: 0.2 }}
