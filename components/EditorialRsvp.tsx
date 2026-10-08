@@ -178,7 +178,13 @@ export default function EditorialRsvp() {
                     href={getEmailUrl()}
                     className="gold-link-dark text-[10px] tracking-[0.2em] opacity-80 hover:opacity-100 inline-block"
                   >
-                    OR SEND VIA EMAIL ✉️
+                    <span className="inline-flex items-center gap-1.5">
+                      <span>OR SEND VIA EMAIL</span>
+                      <svg className="w-3 h-3 text-current inline-block opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <rect width="20" height="16" x="2" y="4" rx="2" />
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                      </svg>
+                    </span>
                   </motion.a>
                 </div>
 

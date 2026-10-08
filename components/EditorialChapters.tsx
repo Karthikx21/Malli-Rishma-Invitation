@@ -158,10 +158,25 @@ export default function EditorialChapters() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.15 }}
-              className="p-3 sm:px-4 sm:py-3 rounded-xl bg-gradient-to-r from-[#E6CA85]/15 via-[#E6CA85]/10 to-transparent border border-[#E6CA85]/35 backdrop-blur-md flex items-center gap-2.5 sm:gap-3"
+              className="p-3 sm:px-4 sm:py-3 rounded-xl bg-gradient-to-r from-[#E6CA85]/15 via-[#E6CA85]/10 to-transparent border border-[#E6CA85]/35 backdrop-blur-md flex items-center gap-3"
             >
-              <span className="text-base sm:text-lg shrink-0" aria-hidden="true">
-                💍
+              <span className="shrink-0 w-8 h-8 rounded-full bg-[#E6CA85]/15 border border-[#E6CA85]/40 flex items-center justify-center text-[#E6CA85]" aria-hidden="true">
+                <svg
+                  className="w-4 h-4 text-[#E6CA85]"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="8.5" cy="13.5" r="4.5" />
+                  <circle cx="15.5" cy="13.5" r="4.5" />
+                  <path d="M8.5 6l1.2 2h-2.4L8.5 6z" fill="currentColor" stroke="none" />
+                  <path d="M8.5 3.5v1.5" />
+                  <path d="M10.8 4.7l-.7.7" />
+                  <path d="M6.2 4.7l.7.7" />
+                </svg>
               </span>
               <p className="font-functional text-xs sm:text-sm text-[#FAF6EE] tracking-[0.03em] leading-snug">
                 <span className="font-semibold text-[#E6CA85]">

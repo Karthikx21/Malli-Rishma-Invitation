@@ -32,7 +32,7 @@ export default function RsvpSection() {
 
   const handleShareWhatsApp = () => {
     const text = encodeURIComponent(
-      `💍 Wedding Invitation: Malli Sumandhar & Rishma John (#RishmaFoundHerPavazhaMalli) are getting married on 18 & 20 November 2026 in Coimbatore! Check the details and celebrate with us: ${window.location.href}`
+      `Wedding Invitation: Malli Sumandhar & Rishma John (#RishmaFoundHerPavazhaMalli) are getting married on 18 & 20 November 2026 in Coimbatore! Check the details and celebrate with us: ${window.location.href}`
     )
     window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank')
   }
