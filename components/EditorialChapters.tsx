@@ -172,9 +172,9 @@ export default function EditorialChapters() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="font-serif-title italic text-sm sm:text-base text-[#FAF6EE]/90 leading-relaxed pt-3 border-t border-[#C5A059]/20"
+              className="font-serif-title italic text-base sm:text-lg md:text-xl text-[#FAF6EE] leading-relaxed pt-4 border-t border-[#C5A059]/20"
             >
-              &ldquo;Our forever begins with the Ring Exchange at 6:00 PM sharp — we want our favorite people right in front of us as we say yes for a lifetime.&rdquo;
+              &ldquo;Our forever begins with the Ring Exchange at 6:00 PM sharp. We want our favorite people right in front of us as we say yes for a lifetime.&rdquo;
             </motion.p>
 
             {/* Action Links: Text Links with Left-to-Right Drawing Gold Underline */}
