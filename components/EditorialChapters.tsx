@@ -144,31 +144,14 @@ export default function EditorialChapters() {
                   </span>
                 </div>
 
-                {/* Plain, Highly Highlighted Ring Exchange Time (NO BOX) */}
-                <div className="flex items-center gap-2.5 pt-2 border-t border-[#C5A059]/20">
-                  <svg
-                    className="w-4 h-4 text-[#E6CA85] shrink-0"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <circle cx="8.5" cy="13.5" r="4.5" />
-                    <circle cx="15.5" cy="13.5" r="4.5" />
-                    <path d="M8.5 6l1.2 2h-2.4L8.5 6z" fill="currentColor" stroke="none" />
-                    <path d="M8.5 3.5v1.5" />
-                  </svg>
-                  <div>
-                    <span className="font-functional text-[10px] tracking-[0.25em] text-[#C5A059] uppercase block font-medium">
-                      RING EXCHANGE
-                    </span>
-                    <span className="font-functional text-sm sm:text-base tracking-[0.12em] text-[#E6CA85] font-semibold">
-                      6:00 PM SHARP
-                    </span>
-                  </div>
+                {/* Plain, Highly Highlighted Ring Exchange Time (Pure Typography - No Icon, No Box) */}
+                <div className="pt-2 border-t border-[#C5A059]/20">
+                  <span className="font-functional text-[10px] tracking-[0.25em] text-[#C5A059] uppercase block font-medium">
+                    RING EXCHANGE
+                  </span>
+                  <span className="font-functional text-sm sm:text-base tracking-[0.12em] text-[#E6CA85] font-semibold">
+                    6:00 PM SHARP
+                  </span>
                 </div>
               </motion.div>
 
@@ -191,7 +174,7 @@ export default function EditorialChapters() {
               transition={{ duration: 0.8 }}
               className="font-serif-title italic text-sm sm:text-base text-[#FAF6EE]/90 leading-relaxed pt-3 border-t border-[#C5A059]/20"
             >
-              &ldquo;Please be in your seats by 6:00 PM sharp for the Ring Exchange — the sweetest moment of our night happens first, and forever officially begins!&rdquo;
+              &ldquo;Our forever begins with the Ring Exchange at 6:00 PM sharp — we want our favorite people right in front of us as we say yes for a lifetime.&rdquo;
             </motion.p>
 
             {/* Action Links: Text Links with Left-to-Right Drawing Gold Underline */}
