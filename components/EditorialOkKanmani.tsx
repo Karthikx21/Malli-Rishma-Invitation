@@ -11,30 +11,30 @@ import {
 type ActiveSide = 'rishma' | 'malli'
 
 const TRACKS = {
-  malli: {
-    side: 'SIDE A',
-    person: 'MALLI',
-    vibe: 'HIS VIBE',
-    title: 'The song on loop in his head on his wedding day',
-    src: '/side%20a.mpeg',
-    fallbackDuration: '1:34',
-  },
   rishma: {
-    side: 'SIDE B',
+    side: 'SIDE A',
     person: 'RISHMA',
     vibe: 'HER VIBE',
     title: 'The song that will loop in her head on her big day',
     src: '/audio/her.mp3',
     fallbackDuration: '0:35',
   },
+  malli: {
+    side: 'SIDE B',
+    person: 'MALLI',
+    vibe: 'HIS VIBE',
+    title: 'The song on loop in his head on his wedding day',
+    src: '/side%20a.mpeg',
+    fallbackDuration: '1:34',
+  },
 }
 
 export default function EditorialOkKanmani() {
-  const [activeSide, setActiveSide] = useState<ActiveSide>('malli')
+  const [activeSide, setActiveSide] = useState<ActiveSide>('rishma')
   const [isPlaying, setIsPlaying] = useState(false)
   const [progress, setProgress] = useState(0)
   const [currentTime, setCurrentTime] = useState('0:00')
-  const [duration, setDuration] = useState('1:34')
+  const [duration, setDuration] = useState('0:35')
   const [audioError, setAudioError] = useState(false)
 
   const sectionRef = useRef<HTMLElement | null>(null)
@@ -268,6 +268,8 @@ export default function EditorialOkKanmani() {
         onError={() => setAudioError(true)}
       >
         <source src="/audio/her.mp3" type="audio/mpeg" />
+        <source src="/audio/side-b.mp3" type="audio/mpeg" />
+        <source src="/side%20b.mpeg" type="audio/mpeg" />
       </audio>
       <audio
         ref={audioMalliRef}
@@ -315,32 +317,8 @@ export default function EditorialOkKanmani() {
           />
         </motion.div>
 
-        {/* Text-Only Toggle: SIDE A · MALLI / SIDE B · RISHMA */}
+        {/* Text-Only Toggle: SIDE A · RISHMA / SIDE B · MALLI */}
         <div className="flex items-center justify-center gap-6 sm:gap-10 mb-12 select-none">
-          <motion.button
-            type="button"
-            onClick={() => switchSide('malli')}
-            whileHover={{ scale: 1.05, y: -1 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-colors duration-300 pb-1 relative cursor-pointer ${
-              activeSide === 'malli'
-                ? 'text-[#E6CA85] font-semibold'
-                : 'text-[#FAF6EE]/45 hover:text-[#FAF6EE]/80'
-            }`}
-          >
-            SIDE A · MALLI
-            {activeSide === 'malli' && (
-              <motion.span
-                layoutId="vinylToggleActive"
-                className="absolute bottom-0 left-0 right-0 h-px bg-[#E6CA85] shadow-[0_0_10px_rgba(230,202,133,0.6)]"
-                transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-              />
-            )}
-          </motion.button>
-
-          <span className="text-[#E6CA85]/40 text-xs select-none">/</span>
-
           <motion.button
             type="button"
             onClick={() => switchSide('rishma')}
@@ -353,8 +331,32 @@ export default function EditorialOkKanmani() {
                 : 'text-[#FAF6EE]/45 hover:text-[#FAF6EE]/80'
             }`}
           >
-            SIDE B · RISHMA
+            SIDE A · RISHMA
             {activeSide === 'rishma' && (
+              <motion.span
+                layoutId="vinylToggleActive"
+                className="absolute bottom-0 left-0 right-0 h-px bg-[#E6CA85] shadow-[0_0_10px_rgba(230,202,133,0.6)]"
+                transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+              />
+            )}
+          </motion.button>
+
+          <span className="text-[#E6CA85]/40 text-xs select-none">/</span>
+
+          <motion.button
+            type="button"
+            onClick={() => switchSide('malli')}
+            whileHover={{ scale: 1.05, y: -1 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-colors duration-300 pb-1 relative cursor-pointer ${
+              activeSide === 'malli'
+                ? 'text-[#E6CA85] font-semibold'
+                : 'text-[#FAF6EE]/45 hover:text-[#FAF6EE]/80'
+            }`}
+          >
+            SIDE B · MALLI
+            {activeSide === 'malli' && (
               <motion.span
                 layoutId="vinylToggleActive"
                 className="absolute bottom-0 left-0 right-0 h-px bg-[#E6CA85] shadow-[0_0_10px_rgba(230,202,133,0.6)]"

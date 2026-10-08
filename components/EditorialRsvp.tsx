@@ -172,7 +172,7 @@ export default function EditorialRsvp() {
                     rel="noopener noreferrer"
                     className="gold-link-dark text-xs tracking-[0.25em] inline-block font-semibold"
                   >
-                    SEND VIA WHATSAPP (+91 98940 63444) →
+                    SEND VIA WHATSAPP →
                   </motion.a>
                 </div>
 
@@ -185,7 +185,7 @@ export default function EditorialRsvp() {
                     className="gold-link-dark text-[10px] tracking-[0.2em] opacity-80 hover:opacity-100 inline-block"
                   >
                     <span className="inline-flex items-center gap-1.5">
-                      <span>OR SEND VIA EMAIL (malliwedsrishma@gmail.com)</span>
+                      <span>OR SEND VIA EMAIL</span>
                       <svg className="w-3 h-3 text-current inline-block opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                         <rect width="20" height="16" x="2" y="4" rx="2" />
                         <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
@@ -382,44 +382,18 @@ export default function EditorialRsvp() {
                 />
               </div>
 
-              {/* Submit Actions */}
-              <div className="pt-4 text-center space-y-3">
-                <div>
-                  <motion.button
-                    type="submit"
-                    disabled={isSubmitting}
-                    whileHover={{ scale: 1.03, x: 2 }}
-                    whileTap={{ scale: 0.97 }}
-                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                    className="gold-link-dark text-xs tracking-[0.3em] font-semibold cursor-pointer"
-                  >
-                    {isSubmitting ? 'SENDING RSVP... ' : 'SUBMIT RSVP VIA WHATSAPP →'}
-                  </motion.button>
-                </div>
-
-                <div>
-                  <motion.a
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
-                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                    href={getEmailUrl()}
-                    onClick={(e) => {
-                      if (!name.trim()) {
-                        e.preventDefault()
-                        document.getElementById('guest-name')?.focus()
-                      }
-                    }}
-                    className="gold-link-dark text-[10px] tracking-[0.2em] opacity-75 hover:opacity-100 inline-block cursor-pointer"
-                  >
-                    <span className="inline-flex items-center gap-1.5">
-                      <span>OR RSVP VIA EMAIL (malliwedsrishma@gmail.com)</span>
-                      <svg className="w-3 h-3 text-current inline-block opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                        <rect width="20" height="16" x="2" y="4" rx="2" />
-                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                      </svg>
-                    </span>
-                  </motion.a>
-                </div>
+              {/* Submit Action */}
+              <div className="pt-4 text-center">
+                <motion.button
+                  type="submit"
+                  disabled={isSubmitting}
+                  whileHover={{ scale: 1.03, x: 2 }}
+                  whileTap={{ scale: 0.97 }}
+                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  className="gold-link-dark text-xs tracking-[0.3em] font-semibold cursor-pointer"
+                >
+                  {isSubmitting ? 'SENDING RSVP... ' : 'SUBMIT RSVP VIA WHATSAPP →'}
+                </motion.button>
               </div>
             </motion.form>
           )}
