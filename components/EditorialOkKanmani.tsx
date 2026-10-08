@@ -6,26 +6,26 @@ import { motion, AnimatePresence } from 'framer-motion'
 type ActiveSide = 'rishma' | 'malli'
 
 const TRACKS = {
-  rishma: {
-    side: 'SIDE A',
-    person: 'RISHMA',
-    vibe: 'HER VIBE',
-    title: 'The song that will loop in her head on her big day',
-    src: '/audio/her.mp3',
-    fallbackDuration: '0:35',
-  },
   malli: {
-    side: 'SIDE B',
+    side: 'SIDE A',
     person: 'MALLI',
     vibe: 'HIS VIBE',
     title: 'The song on loop in his head on his wedding day',
     src: '/audio/him.mp3',
     fallbackDuration: '0:27',
   },
+  rishma: {
+    side: 'SIDE B',
+    person: 'RISHMA',
+    vibe: 'HER VIBE',
+    title: 'The song that will loop in her head on her big day',
+    src: '/audio/her.mp3',
+    fallbackDuration: '0:35',
+  },
 }
 
 export default function EditorialOkKanmani() {
-  const [activeSide, setActiveSide] = useState<ActiveSide>('rishma')
+  const [activeSide, setActiveSide] = useState<ActiveSide>('malli')
   const [isPlaying, setIsPlaying] = useState(false)
   const [progress, setProgress] = useState(0)
   const [currentTime, setCurrentTime] = useState('0:00')
@@ -232,21 +232,21 @@ export default function EditorialOkKanmani() {
           />
         </motion.div>
 
-        {/* Text-Only Toggle: SIDE A · RISHMA / SIDE B · MALLI */}
+        {/* Text-Only Toggle: SIDE A · MALLI / SIDE B · RISHMA */}
         <div className="flex items-center justify-center gap-6 sm:gap-10 mb-12 select-none">
           <motion.button
             type="button"
-            onClick={() => switchSide('rishma')}
+            onClick={() => switchSide('malli')}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-all duration-300 pb-1 relative cursor-pointer ${
-              activeSide === 'rishma'
+              activeSide === 'malli'
                 ? 'text-[#E6CA85] font-semibold'
                 : 'text-[#FAF6EE]/45 hover:text-[#FAF6EE]/80'
             }`}
           >
-            SIDE A · RISHMA
-            {activeSide === 'rishma' && (
+            SIDE A · MALLI
+            {activeSide === 'malli' && (
               <motion.span
                 layoutId="vinylToggleActive"
                 className="absolute bottom-0 left-0 right-0 h-px bg-[#E6CA85] shadow-[0_0_8px_rgba(230,202,133,0.5)]"
@@ -259,17 +259,17 @@ export default function EditorialOkKanmani() {
 
           <motion.button
             type="button"
-            onClick={() => switchSide('malli')}
+            onClick={() => switchSide('rishma')}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-all duration-300 pb-1 relative cursor-pointer ${
-              activeSide === 'malli'
+              activeSide === 'rishma'
                 ? 'text-[#E6CA85] font-semibold'
                 : 'text-[#FAF6EE]/45 hover:text-[#FAF6EE]/80'
             }`}
           >
-            SIDE B · MALLI
-            {activeSide === 'malli' && (
+            SIDE B · RISHMA
+            {activeSide === 'rishma' && (
               <motion.span
                 layoutId="vinylToggleActive"
                 className="absolute bottom-0 left-0 right-0 h-px bg-[#E6CA85] shadow-[0_0_8px_rgba(230,202,133,0.5)]"
@@ -433,52 +433,235 @@ export default function EditorialOkKanmani() {
           </div>
         </motion.div>
 
-        {/* OK Kanmani Editorial Pull-Quote: Pure Typography & Lavender Hairlines */}
-        <motion.div
-          initial={{ opacity: 0, y: 30, filter: 'blur(5px)' }}
-          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-20 sm:mt-28 max-w-3xl mx-auto text-center relative"
-        >
-          {/* Subtle warm glow behind quote */}
+        {/* OK Kanmani Editorial Pavilion: Diptych Gallery & Cinematic Quote */}
+        <div className="mt-20 sm:mt-28 max-w-6xl mx-auto relative px-2 sm:px-4">
+          {/* Subtle Ambient Glows framing the pavilion */}
           <div
-            className="absolute -top-10 left-1/2 -translate-x-1/2 w-72 h-32 bg-[#8D76A8]/10 blur-3xl pointer-events-none"
+            className="absolute top-1/2 left-4 -translate-y-1/2 w-72 h-72 rounded-full bg-[#8D76A8]/15 blur-3xl pointer-events-none"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute top-1/2 right-4 -translate-y-1/2 w-72 h-72 rounded-full bg-[#E6CA85]/12 blur-3xl pointer-events-none"
             aria-hidden="true"
           />
 
-          <motion.div
-            initial={{ scaleX: 0, opacity: 0 }}
-            whileInView={{ scaleX: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.3, ease: [0.22, 1, 0.36, 1] }}
-            className="w-16 h-px bg-gradient-to-r from-transparent via-[#E6CA85]/50 to-transparent mx-auto mb-8"
-          />
+          {/* DESKTOP LAYOUT (md and up): 3-Column Triptych (Left Card | Center Quote | Right Card) */}
+          <div className="hidden md:grid md:grid-cols-12 md:gap-5 lg:gap-8 items-center">
+            {/* Left Wing: Tara & Adi Photo Card */}
+            <motion.div
+              initial={{ opacity: 0, x: -30, rotate: -2, filter: 'blur(4px)' }}
+              whileInView={{ opacity: 1, x: 0, rotate: -1.5, filter: 'blur(0px)' }}
+              viewport={{ once: true, margin: '-40px' }}
+              whileHover={{ rotate: 0, y: -8, scale: 1.03 }}
+              transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+              className="md:col-span-3 relative p-2.5 lg:p-3 rounded-2xl bg-[#1A1326]/95 border border-[#E6CA85]/35 shadow-[0_20px_50px_rgba(0,0,0,0.6),0_0_35px_rgba(141,118,168,0.22)] backdrop-blur-md group select-none transition-shadow duration-500 hover:shadow-[0_25px_60px_rgba(0,0,0,0.7),0_0_45px_rgba(141,118,168,0.35)] cursor-pointer"
+            >
+              {/* Archival Brass Corner Brackets */}
+              <div className="absolute top-2 left-2 w-3.5 h-3.5 border-t-2 border-l-2 border-[#E6CA85]/75 pointer-events-none rounded-tl-sm" />
+              <div className="absolute top-2 right-2 w-3.5 h-3.5 border-t-2 border-r-2 border-[#E6CA85]/75 pointer-events-none rounded-tr-sm" />
+              <div className="absolute bottom-2 left-2 w-3.5 h-3.5 border-b-2 border-l-2 border-[#E6CA85]/75 pointer-events-none rounded-bl-sm" />
+              <div className="absolute bottom-2 right-2 w-3.5 h-3.5 border-b-2 border-r-2 border-[#E6CA85]/75 pointer-events-none rounded-br-sm" />
 
-          <blockquote className="font-serif-title italic text-2xl sm:text-3xl md:text-4xl text-[#FAF6EE] font-light leading-relaxed px-4">
-            &ldquo;Rishma might be Malli&apos;s{' '}
-            <span className="font-semibold text-[#E6CA85] not-italic tracking-wide">
-              TARA
-            </span>
-            , but Malli has always been Rishma&apos;s{' '}
-            <span className="font-semibold text-[#E6CA85] not-italic tracking-wide">
-              GANAPATHY
-            </span>
-            .&rdquo;
-          </blockquote>
+              {/* Photo Inset with Fine Gold Hairline */}
+              <div className="relative aspect-[4/5] w-full rounded-xl overflow-hidden ring-1 ring-[#E6CA85]/30 bg-[#120D1C]">
+                <img
+                  src="https://res.cloudinary.com/drvvekzzm/image/upload/v1791454632/_okkkkkk_%EF%B8%8F___ccugxw.jpg"
+                  alt="OK Kanmani - Tara and Adi"
+                  className="w-full h-full object-cover object-[center_16%] scale-[1.01] group-hover:scale-106 transition-transform duration-700 ease-out"
+                  onError={(e) => {
+                    e.currentTarget.src = '/images/ok-kanmani-tara-framed.jpg'
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#140F1D]/80 via-transparent to-transparent pointer-events-none" />
+              </div>
 
-          <p className="mt-5 font-functional text-[10px] sm:text-xs text-[#D8CEE5] tracking-[0.3em] font-medium opacity-85">
-            AN OK KANMANI REFERENCE
-          </p>
+              {/* Caption */}
+              <div className="pt-2.5 pb-0.5 text-center">
+                <p className="font-functional text-[9px] tracking-[0.28em] text-[#E6CA85] font-semibold uppercase">
+                  HIS TARA
+                </p>
+              </div>
+            </motion.div>
 
-          <motion.div
-            initial={{ scaleX: 0, opacity: 0 }}
-            whileInView={{ scaleX: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.3, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="w-16 h-px bg-gradient-to-r from-transparent via-[#E6CA85]/50 to-transparent mx-auto mt-8"
-          />
-        </motion.div>
+            {/* Centerpiece: The Cinematic Pull-Quote */}
+            <motion.div
+              initial={{ opacity: 0, y: 26, filter: 'blur(5px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              className="md:col-span-6 text-center relative flex flex-col items-center justify-center px-4 lg:px-6"
+            >
+              {/* Decorative Cinema Label */}
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-8 lg:w-12 h-px bg-gradient-to-r from-transparent to-[#E6CA85]/60" />
+                <span className="font-functional text-[9px] text-[#E6CA85] tracking-[0.3em] font-semibold uppercase">
+                  ✦ CINEMATIC INSPIRATION ✦
+                </span>
+                <div className="w-8 lg:w-12 h-px bg-gradient-to-l from-transparent to-[#E6CA85]/60" />
+              </div>
+
+              <blockquote className="font-serif-title italic text-2xl lg:text-3xl xl:text-[34px] text-[#FAF6EE] font-light leading-relaxed drop-shadow-sm">
+                &ldquo;Rishma might be Malli&apos;s{' '}
+                <span className="font-semibold text-[#E6CA85] not-italic tracking-wide drop-shadow-[0_0_14px_rgba(230,202,133,0.45)]">
+                  TARA
+                </span>
+                ,<br className="hidden lg:inline" /> but Malli has always been Rishma&apos;s{' '}
+                <span className="font-semibold text-[#E6CA85] not-italic tracking-wide drop-shadow-[0_0_14px_rgba(230,202,133,0.45)]">
+                  GANAPATHY
+                </span>
+                .&rdquo;
+              </blockquote>
+
+              <div className="mt-5 flex flex-col items-center gap-1.5">
+                <p className="font-functional text-[10px] lg:text-xs text-[#E6CA85] tracking-[0.3em] font-semibold opacity-95">
+                  AN OK KANMANI REFERENCE
+                </p>
+                <p className="font-serif-title italic text-xs lg:text-sm text-[#D8CEE5]/75">
+                  Two souls holding both the free spirit and a lifetime of devotion.
+                </p>
+              </div>
+
+              <motion.div
+                initial={{ scaleX: 0, opacity: 0 }}
+                whileInView={{ scaleX: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.2, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                className="w-24 h-px bg-gradient-to-r from-transparent via-[#E6CA85]/60 to-transparent mx-auto mt-6"
+              />
+            </motion.div>
+
+            {/* Right Wing: Ganapathy & Bhavani Photo Card */}
+            <motion.div
+              initial={{ opacity: 0, x: 30, rotate: 2, filter: 'blur(4px)' }}
+              whileInView={{ opacity: 1, x: 0, rotate: 1.5, filter: 'blur(0px)' }}
+              viewport={{ once: true, margin: '-40px' }}
+              whileHover={{ rotate: 0, y: -8, scale: 1.03 }}
+              transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+              className="md:col-span-3 relative p-2.5 lg:p-3 rounded-2xl bg-[#1A1326]/95 border border-[#E6CA85]/35 shadow-[0_20px_50px_rgba(0,0,0,0.6),0_0_35px_rgba(230,202,133,0.18)] backdrop-blur-md group select-none transition-shadow duration-500 hover:shadow-[0_25px_60px_rgba(0,0,0,0.7),0_0_45px_rgba(230,202,133,0.3)] cursor-pointer"
+            >
+              {/* Archival Brass Corner Brackets */}
+              <div className="absolute top-2 left-2 w-3.5 h-3.5 border-t-2 border-l-2 border-[#E6CA85]/75 pointer-events-none rounded-tl-sm" />
+              <div className="absolute top-2 right-2 w-3.5 h-3.5 border-t-2 border-r-2 border-[#E6CA85]/75 pointer-events-none rounded-tr-sm" />
+              <div className="absolute bottom-2 left-2 w-3.5 h-3.5 border-b-2 border-l-2 border-[#E6CA85]/75 pointer-events-none rounded-bl-sm" />
+              <div className="absolute bottom-2 right-2 w-3.5 h-3.5 border-b-2 border-r-2 border-[#E6CA85]/75 pointer-events-none rounded-br-sm" />
+
+              {/* Photo Inset with Fine Gold Hairline */}
+              <div className="relative aspect-[4/5] w-full rounded-xl overflow-hidden ring-1 ring-[#E6CA85]/30 bg-[#120D1C]">
+                <img
+                  src="https://res.cloudinary.com/drvvekzzm/image/upload/v1791454633/Nostalgic_Portraits_in_Sepia_Light_ky5glv.png"
+                  alt="OK Kanmani - Ganapathy and Bhavani"
+                  className="w-full h-full object-cover object-[48%_center] scale-[1.01] group-hover:scale-106 transition-transform duration-700 ease-out"
+                  onError={(e) => {
+                    e.currentTarget.src = '/images/ok-kanmani-ganapathy-framed.jpg'
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#140F1D]/80 via-transparent to-transparent pointer-events-none" />
+              </div>
+
+              {/* Caption */}
+              <div className="pt-2.5 pb-0.5 text-center">
+                <p className="font-functional text-[9px] tracking-[0.28em] text-[#E6CA85] font-semibold uppercase">
+                  HER GANAPATHY
+                </p>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* MOBILE LAYOUT (< md): Quote on Top + Side-by-Side Photo Diptych */}
+          <div className="md:hidden flex flex-col items-center space-y-7">
+            {/* 1. Mobile Quote Block */}
+            <motion.div
+              initial={{ opacity: 0, y: 24, filter: 'blur(5px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+              className="text-center relative px-2"
+            >
+              <div className="flex items-center justify-center gap-2 mb-3">
+                <div className="w-6 h-px bg-gradient-to-r from-transparent to-[#E6CA85]/60" />
+                <span className="font-functional text-[8px] text-[#E6CA85] tracking-[0.28em] font-semibold uppercase">
+                  ✦ CINEMATIC INSPIRATION ✦
+                </span>
+                <div className="w-6 h-px bg-gradient-to-l from-transparent to-[#E6CA85]/60" />
+              </div>
+
+              <blockquote className="font-serif-title italic text-xl xs:text-2xl text-[#FAF6EE] font-light leading-snug px-1">
+                &ldquo;Rishma might be Malli&apos;s{' '}
+                <span className="font-semibold text-[#E6CA85] not-italic tracking-wide drop-shadow-[0_0_10px_rgba(230,202,133,0.4)]">
+                  TARA
+                </span>
+                , but Malli has always been Rishma&apos;s{' '}
+                <span className="font-semibold text-[#E6CA85] not-italic tracking-wide drop-shadow-[0_0_10px_rgba(230,202,133,0.4)]">
+                  GANAPATHY
+                </span>
+                .&rdquo;
+              </blockquote>
+
+              <p className="mt-3 font-functional text-[9px] text-[#E6CA85] tracking-[0.28em] font-semibold opacity-95">
+                AN OK KANMANI REFERENCE
+              </p>
+
+              <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#E6CA85]/50 to-transparent mx-auto mt-4" />
+            </motion.div>
+
+            {/* 2. Mobile Side-by-Side Dual Photo Diptych */}
+            <div className="grid grid-cols-2 gap-3 w-full max-w-sm px-1">
+              {/* Left Photo: Tara */}
+              <motion.div
+                initial={{ opacity: 0, y: 20, rotate: -1.5 }}
+                whileInView={{ opacity: 1, y: 0, rotate: -1.5 }}
+                viewport={{ once: true }}
+                whileHover={{ rotate: 0, scale: 1.02 }}
+                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                className="relative p-2 rounded-xl bg-[#1A1326]/95 border border-[#E6CA85]/35 shadow-lg group select-none"
+              >
+                <div className="relative aspect-[4/5] w-full rounded-lg overflow-hidden ring-1 ring-[#E6CA85]/30 bg-[#120D1C]">
+                  <img
+                    src="https://res.cloudinary.com/drvvekzzm/image/upload/v1791454632/_okkkkkk_%EF%B8%8F___ccugxw.jpg"
+                    alt="OK Kanmani - Tara and Adi"
+                    className="w-full h-full object-cover object-[center_16%]"
+                    onError={(e) => {
+                      e.currentTarget.src = '/images/ok-kanmani-tara-framed.jpg'
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#140F1D]/80 via-transparent to-transparent pointer-events-none" />
+                </div>
+                <div className="pt-2 text-center">
+                  <p className="font-functional text-[8px] tracking-[0.22em] text-[#E6CA85] font-semibold uppercase">
+                    HIS TARA
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Right Photo: Ganapathy */}
+              <motion.div
+                initial={{ opacity: 0, y: 20, rotate: 1.5 }}
+                whileInView={{ opacity: 1, y: 0, rotate: 1.5 }}
+                viewport={{ once: true }}
+                whileHover={{ rotate: 0, scale: 1.02 }}
+                transition={{ duration: 0.9, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+                className="relative p-2 rounded-xl bg-[#1A1326]/95 border border-[#E6CA85]/35 shadow-lg group select-none"
+              >
+                <div className="relative aspect-[4/5] w-full rounded-lg overflow-hidden ring-1 ring-[#E6CA85]/30 bg-[#120D1C]">
+                  <img
+                    src="https://res.cloudinary.com/drvvekzzm/image/upload/v1791454633/Nostalgic_Portraits_in_Sepia_Light_ky5glv.png"
+                    alt="OK Kanmani - Ganapathy and Bhavani"
+                    className="w-full h-full object-cover object-[48%_center]"
+                    onError={(e) => {
+                      e.currentTarget.src = '/images/ok-kanmani-ganapathy-framed.jpg'
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#140F1D]/80 via-transparent to-transparent pointer-events-none" />
+                </div>
+                <div className="pt-2 text-center">
+                  <p className="font-functional text-[8px] tracking-[0.22em] text-[#E6CA85] font-semibold uppercase">
+                    HER GANAPATHY
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )

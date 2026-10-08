@@ -47,27 +47,27 @@ const notoTamil = Noto_Serif_Tamil({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://rishma-found-her-pavazha-malli.vercel.app'),
-  title: 'Rishma John & Malli Sumandhar · Wedding Invitation',
+  title: 'Malli Sumandhar & Rishma John · Wedding Invitation',
   description:
-    'Two Days. Two Cultures. One Celebration of Love. Official Wedding Invitation of Rishma John & Malli Sumandhar — Coimbatore, November 18 & 20, 2026.',
+    'Two Days. Two Cultures. One Celebration of Love. Official Wedding Invitation of Malli Sumandhar & Rishma John — Coimbatore, November 18 & 20, 2026.',
   keywords: [
     'Wedding Invitation',
-    'Rishma John',
     'Malli Sumandhar',
+    'Rishma John',
     'Pavazha Malli',
     'Coimbatore Wedding',
     'Christian Nuptials',
     'Hindu Wedding',
   ],
   openGraph: {
-    title: 'Rishma John & Malli Sumandhar · Wedding Invitation',
+    title: 'Malli Sumandhar & Rishma John · Wedding Invitation',
     description: '#RishmaFoundHerPavazhaMalli — Celebrating Two Cultures, One Eternal Love in Coimbatore.',
     images: [
       {
         url: '/editorial-poster-bg.jpg',
         width: 1200,
         height: 630,
-        alt: 'Rishma & Malli Wedding Invitation Editorial Poster',
+        alt: 'Malli & Rishma Wedding Invitation Editorial Poster',
       },
     ],
   },

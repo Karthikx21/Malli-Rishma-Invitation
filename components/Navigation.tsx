@@ -45,7 +45,7 @@ export default function Navigation({ onReplayVideo }: NavigationProps) {
             ✦
           </div>
           <span className="font-cinzel text-xs tracking-[0.2em] uppercase text-[#F8F4ED]">
-            Rishma &amp; Malli
+            Malli &amp; Rishma
           </span>
         </a>
 

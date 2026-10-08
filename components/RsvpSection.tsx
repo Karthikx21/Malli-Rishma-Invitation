@@ -32,7 +32,7 @@ export default function RsvpSection() {
 
   const handleShareWhatsApp = () => {
     const text = encodeURIComponent(
-      `💍 Wedding Invitation: Rishma John & Malli Sumandhar (#RishmaFoundHerPavazhaMalli) are getting married on 18 & 20 November 2026 in Coimbatore! Check the details and celebrate with us: ${window.location.href}`
+      `💍 Wedding Invitation: Malli Sumandhar & Rishma John (#RishmaFoundHerPavazhaMalli) are getting married on 18 & 20 November 2026 in Coimbatore! Check the details and celebrate with us: ${window.location.href}`
     )
     window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank')
   }
@@ -213,7 +213,7 @@ export default function RsvpSection() {
                 rows={2}
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                placeholder="Share your prayers, love, or blessings for Rishma & Malli..."
+                placeholder="Share your prayers, love, or blessings for Malli & Rishma..."
                 className="w-full bg-transparent border-0 border-b border-[#B08D57] py-2.5 text-[#4B1424] font-cormorant text-lg outline-none resize-none focus:border-[#4B1424] transition-colors placeholder:text-[#4B1424]/30 placeholder:font-cormorant"
               />
             </div>

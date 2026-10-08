@@ -86,7 +86,7 @@ export default function EditorialFooter({ onReplayIntro }: EditorialFooterProps)
           className="space-y-1 pt-1"
         >
           <h3 className="font-accent text-5xl sm:text-7xl md:text-8xl text-[#FAF6EE] font-normal leading-tight">
-            Rishma &amp; Malli
+            Malli &amp; Rishma
           </h3>
 
           {/* Tamil Line */}

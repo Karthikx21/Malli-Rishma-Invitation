@@ -3,7 +3,7 @@ const https = require('https');
 const cp = require('child_process');
 const ffmpegPath = require('ffmpeg-static');
 
-const videoUrl = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/311864db-fea4-4b2e-b0e5-9503b7638797-ri1XMcGm1XiD7j190TbUVtHLPkrVHS.mp4';
+const videoUrl = 'https://res.cloudinary.com/drvvekzzm/video/upload/v1791453046/Wedding_invitation_opening_film_1080p_20261008151626_nrg1qy.mp4';
 const rawPath = 'scratch_raw_intro.mp4';
 const outputPath = 'public/intro.mp4';
 

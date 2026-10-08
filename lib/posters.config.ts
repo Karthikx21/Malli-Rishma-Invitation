@@ -8,7 +8,7 @@ export const POSTERS_CONFIG = {
   hero: {
     mobile: '/posters/hero-9-16.webp',
     desktop: '/posters/hero-16-9.webp',
-    alt: 'Rishma & Malli Wedding Editorial Poster',
+    alt: 'Malli & Rishma Wedding Editorial Poster',
     fallbackColor: '#4A0F20',
   },
 
@@ -24,7 +24,7 @@ export const POSTERS_CONFIG = {
   hinduTemple: {
     mobile: '/posters/hindu-temple-9-16.webp',
     desktop: '/posters/hindu-temple-16-9.webp',
-    alt: 'Sacred Hillside Temple · Hindu Muhurtham & Feast',
+    alt: 'Sacred Hillside Temple · Hindu Muhurtham & Reception',
     fallbackColor: '#4A0F20',
   },
 
@@ -42,7 +42,7 @@ export const POSTERS_CONFIG = {
     },
     jointCover: {
       src: '/posters/couple-cover.webp',
-      alt: 'Rishma John & Malli Sumandhar',
+      alt: 'Malli Sumandhar & Rishma John',
       fallbackColor: '#4A0F20',
     },
   },

@@ -70,11 +70,11 @@ export default function EditorialIntro({ onStartTransition, onComplete }: Editor
     }, 1000)
   }, [onStartTransition, onComplete])
 
-  // Smooth detection: trigger dissolve when envelope opens and smoke plumes billow (>= 6.8s) or on ended
+  // Smooth detection: trigger dissolve when envelope opens and invitation card centers (>= 7.8s) or on ended
   const handleTimeUpdate = () => {
     if (hasTriggeredRef.current) return
     const video = videoRef.current
-    if (video && (video.currentTime >= 6.8 || video.ended)) {
+    if (video && (video.currentTime >= 7.8 || video.ended)) {
       triggerTransition()
     }
   }
@@ -96,18 +96,26 @@ export default function EditorialIntro({ onStartTransition, onComplete }: Editor
       {/* Pure Fullscreen Video with zero button overlays */}
       <video
         ref={videoRef}
-        src="/intro.mp4"
+        src="https://res.cloudinary.com/drvvekzzm/video/upload/v1791453046/Wedding_invitation_opening_film_1080p_20261008151626_nrg1qy.mp4"
+        poster="/intro-poster.jpg"
         className="w-full h-full object-cover object-center"
         autoPlay
         muted
         playsInline
+        preload="auto"
         onPlay={applySpeed}
         onLoadedMetadata={applySpeed}
         onCanPlay={applySpeed}
         onTimeUpdate={handleTimeUpdate}
         onEnded={triggerTransition}
         onError={triggerTransition}
-      />
+      >
+        <source
+          src="https://res.cloudinary.com/drvvekzzm/video/upload/v1791453046/Wedding_invitation_opening_film_1080p_20261008151626_nrg1qy.mp4"
+          type="video/mp4"
+        />
+        <source src="/intro.mp4" type="video/mp4" />
+      </video>
     </div>
   )
 }

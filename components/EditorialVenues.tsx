@@ -16,18 +16,18 @@ export default function EditorialVenues() {
     {
       day: '20 Nov 2026',
       title: 'Hindu Muhurtham',
-      name: 'Kumaran Kundra Temple',
+      name: 'Kumarankundru Temple',
       address: 'Mettupalayam, Coimbatore District, Tamil Nadu',
       time: '6 AM to 7 AM',
       mapsUrl:
-        'https://www.google.com/maps/search/?api=1&query=Kumaran+Kundra+Temple+Mettupalayam',
+        'https://www.google.com/maps/search/?api=1&query=Kumarankundru+Temple+Mettupalayam',
     },
     {
       day: '20 Nov 2026',
-      title: 'Reception & Lunch',
+      title: 'Reception',
       name: 'Shri Lakshmi Hall',
       address: 'Mettupalayam – Annur Road, Coimbatore, Tamil Nadu',
-      time: '11 AM to 2 PM, followed by lunch',
+      time: '11 AM to 2 PM',
       mapsUrl:
         'https://www.google.com/maps/search/?api=1&query=Shri+Lakshmi+Hall+Annur+Road+Mettupalayam',
     },
@@ -74,7 +74,7 @@ export default function EditorialVenues() {
             Find Us Here
           </h2>
           <p className="font-functional text-xs text-[#D8CEE5]/75 tracking-[0.2em] mt-1">
-            SCAN, CLICK, AND COME BE A PART OF OUR BIG DAY
+            CLICK AND COME BE A PART OF OUR BIG DAY
           </p>
           <motion.div
             initial={{ scaleX: 0, opacity: 0 }}

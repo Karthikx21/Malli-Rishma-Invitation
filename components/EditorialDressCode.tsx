@@ -129,7 +129,7 @@ export default function EditorialDressCode() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#2A0510]/70 via-transparent to-transparent pointer-events-none" />
                 <div className="absolute bottom-3 left-4 right-4 text-[#FAF6EE] font-functional text-[9px] tracking-[0.25em]">
-                  TRADITIONAL SAREE &amp; DRESS
+                  TRADITIONAL ATTIRE
                 </div>
               </motion.div>
 
@@ -140,7 +140,7 @@ export default function EditorialDressCode() {
                 Hindu Wedding &amp; Reception
               </h3>
               <p className="font-serif-title text-base sm:text-lg text-[#1A0A0F]/85 font-light leading-relaxed">
-                Wear whatever you love and feel your best in — traditional saree, elegant dress, or festive attire. There are no colour rules, just come ready to look picture perfect!
+                Wear whatever you love and feel your best in — traditional attire is the dress code. There are no colour rules, just come ready to celebrate!
               </p>
             </div>
 
@@ -150,7 +150,7 @@ export default function EditorialDressCode() {
                 STYLE GUIDANCE
               </span>
               <p className="font-functional text-xs text-[#3D0B1B] tracking-[0.1em] font-medium">
-                Traditional Saree &amp; Dress
+                Traditional Attire
               </p>
             </div>
           </motion.div>
@@ -168,7 +168,7 @@ export default function EditorialDressCode() {
             &ldquo;Malli and Rishma are crazy about making memories with everyone celebrating alongside them, so bring your best smile and your best outfit.&rdquo;
           </p>
           <p className="font-accent text-3xl sm:text-4xl text-[#8D76A8] pt-1">
-            Be picture perfect.
+            Dress like you’re already in the memories.
           </p>
         </motion.div>
       </div>

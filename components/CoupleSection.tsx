@@ -46,13 +46,22 @@ export default function CoupleSection() {
               </p>
             </div>
 
-            {/* Glowing Orb Trait Bullets */}
-            <ul className="space-y-3 pt-3 font-cormorant text-lg text-[#E6DBD0] border-t border-white/10">
+            {/* Parents Giving Away The Groom */}
+            <div className="pt-4 border-t border-white/10 space-y-1.5">
+              <span className="font-sans text-[9px] uppercase tracking-[0.25em] text-[#B08D57] font-medium block">
+                THE PARENTS GIVING AWAY THE GROOM
+              </span>
+              <p className="font-cormorant text-xl text-[#F8F4ED]">
+                R.E. RAMESH KUMAR &amp; JAYASRI <span className="text-xs text-[#BFAEA0] font-sans uppercase tracking-[0.15em]">(LATE)</span>
+              </p>
+            </div>
+
+            {/* Traits */}
+            <ul className="space-y-2.5 pt-3 font-cormorant text-lg text-[#E6DBD0] border-t border-white/10">
               {[
-                'Calm, composed, and endlessly patient',
-                'Loyal to the core with an unwavering heart',
-                'Big dreams, quiet determination & thoughtful plans',
-                'Her rock, anchor, and eternal sanctuary',
+                'Big heart, bigger plans',
+                'Loves adventure & travel',
+                "Rishma's safe place",
               ].map((trait, i) => (
                 <li key={i} className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-[#B08D57] shadow-[0_0_8px_rgba(176,141,87,0.8)] shrink-0" />
@@ -85,13 +94,21 @@ export default function CoupleSection() {
               </p>
             </div>
 
-            {/* Glowing Orb Trait Bullets */}
-            <ul className="space-y-3 pt-3 font-cormorant text-lg text-[#E6DBD0] border-t border-white/10">
+            {/* Parents Giving Away The Bride */}
+            <div className="pt-4 border-t border-white/10 space-y-1.5">
+              <span className="font-sans text-[9px] uppercase tracking-[0.25em] text-[#D95C80] font-medium block">
+                THE PARENTS GIVING AWAY THE BRIDE
+              </span>
+              <p className="font-cormorant text-xl text-[#F8F4ED]">
+                JOHN T.P &amp; CAROLINE JOHN
+              </p>
+            </div>
+
+            {/* Traits */}
+            <ul className="space-y-2.5 pt-3 font-cormorant text-lg text-[#E6DBD0] border-t border-white/10">
               {[
-                'Romantic daydreamer with a vibrant spirit',
-                'Golden heart filled with boundless affection',
-                'Finds luminous joy in life’s simplest moments',
-                'Believer in everlasting love and enduring grace',
+                'Soft heart, strong mind',
+                'Finds joy in little things',
               ].map((trait, i) => (
                 <li key={i} className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-[#D95C80] shadow-[0_0_8px_rgba(217,92,128,0.8)] shrink-0" />

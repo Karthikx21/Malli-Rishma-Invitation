@@ -23,7 +23,7 @@ export default function EditorialRsvp() {
     }
     const guestName = name.trim() || 'Guest'
     const noteLine = note.trim() ? `\nNote: ${note.trim()}` : ''
-    const text = `Hi Rishma & Malli,\n\nI am delighted to RSVP for your wedding celebrations!\n\nName: ${guestName}\nGuests: ${guestCount}\nAttending: ${daysText}${noteLine}\n\n#RishmaFoundHerPavazhaMalli`
+    const text = `Hi Malli & Rishma,\n\nI am delighted to RSVP for your wedding celebrations!\n\nName: ${guestName}\nGuests: ${guestCount}\nAttending: ${daysText}${noteLine}\n\n#RishmaFoundHerPavazhaMalli`
     return `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`
   }
 
@@ -37,7 +37,7 @@ export default function EditorialRsvp() {
     const guestName = name.trim() || 'Guest'
     const subject = `Wedding RSVP - ${guestName}`
     const noteLine = note.trim() ? `\nNote: ${note.trim()}` : ''
-    const body = `Hi Rishma & Malli,\n\nI would love to RSVP for your wedding celebration!\n\nName: ${guestName}\nGuests: ${guestCount}\nAttending: ${daysText}${noteLine}\n\nWarm regards,\n${guestName}`
+    const body = `Hi Malli & Rishma,\n\nI would love to RSVP for your wedding celebration!\n\nName: ${guestName}\nGuests: ${guestCount}\nAttending: ${daysText}${noteLine}\n\nWarm regards,\n${guestName}`
     return `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
   }
 

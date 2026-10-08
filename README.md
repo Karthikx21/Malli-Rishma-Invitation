@@ -1,6 +1,6 @@
 # Malli-Rishma-Invitation
 
-Official Luxury Wedding Invitation Web Application for **Rishma John & Malli Sumandhar**.
+Official Luxury Wedding Invitation Web Application for **Malli Sumandhar & Rishma John**.
 
 > *Two Days. Two Cultures. One Celebration of Love.*  
 > Coimbatore, Tamil Nadu — 18 & 20 November 2026.  
@@ -20,7 +20,7 @@ Official Luxury Wedding Invitation Web Application for **Rishma John & Malli Sum
   - Mechanical countdown timer with day switcher (18 Nov vs 20 Nov).
   - Verbatim couple traits & *"How We Met"* Bangalore story.
   - OK Kanmani pull quote with audio tracks on loop (*"The song on loop in his head"* / *"The song that will loop in her head"*).
-  - Dress code guidance with wine & maroon swatches for 18 Nov, and *"Be picture perfect"* for 20 Nov.
+  - Dress code guidance with wine & maroon swatches for 18 Nov, and *"Dress like you’re already in the memories"* for 20 Nov.
   - *"Find us here"* interactive venue cards with direct Google Maps navigation.
   - One-tap Add to Calendar (`.ics` generation) for both events.
   - Responsive RSVP form with guest counter stepper, event checkmarks, celebratory confetti, and instant WhatsApp confirmation link.

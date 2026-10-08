@@ -27,7 +27,7 @@ export default function WeddingSchedule() {
     const icsData = [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
-      'PRODID:-//Rishma & Malli Wedding//EN',
+      'PRODID:-//Malli & Rishma Wedding//EN',
       'BEGIN:VEVENT',
       `SUMMARY:${title}`,
       `DESCRIPTION:${details}`,
@@ -75,14 +75,14 @@ export default function WeddingSchedule() {
     {
       time: '06:00 AM – 07:00 AM',
       title: 'Sacred Muhurtham & Thali Kettu',
-      location: 'Kumaran Kundra Temple',
+      location: 'Kumarankundru Temple',
       desc: 'Auspicious Vedic chants, Mangala Vaathiyam, Thali tying ceremony, and divine blessings at the hillside sanctum.',
     },
     {
       time: '11:00 AM – 02:00 PM',
-      title: 'Grand Reception & Festive Feast',
+      title: 'Grand Reception',
       location: 'Shri Lakshmi Hall, Mettupalayam',
-      desc: 'Welcoming the newlyweds on the ceremonial stage, followed by a traditional wedding feast (மதிய விருந்து).',
+      desc: 'Welcoming the newlyweds on the ceremonial stage at Shri Lakshmi Hall.',
     },
   ]
 
@@ -186,12 +186,12 @@ export default function WeddingSchedule() {
               <button
                 onClick={() =>
                   downloadIcs(
-                    'Rishma & Malli · Christian Nuptials',
-                    'Christian Nuptials and Gala Dinner of Rishma John & Malli Sumandhar.',
+                    'Malli & Rishma · Christian Nuptials',
+                    'Christian Nuptials and Gala Dinner of Malli Sumandhar & Rishma John.',
                     'Jenneys Residency, Avinashi Road, Coimbatore',
                     '2026-11-18T12:30:00.000Z',
                     '2026-11-18T16:30:00.000Z',
-                    'Rishma_Malli_Christian_Nuptials'
+                    'Malli_Rishma_Christian_Nuptials'
                   )
                 }
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-[#B08D57]/20 to-[#D95C80]/20 hover:from-[#B08D57]/30 hover:to-[#D95C80]/30 border border-[#B08D57]/50 text-[#F5E5C0] font-sans text-xs uppercase tracking-[0.2em] transition-all duration-300 cursor-pointer"
@@ -209,10 +209,10 @@ export default function WeddingSchedule() {
                 CHAPTER II · HINDU CEREMONY
               </span>
               <h3 className="font-cinzel text-2xl sm:text-3xl text-[#F8F4ED] font-normal">
-                Sacred Muhurtham &amp; Feast
+                Sacred Muhurtham &amp; Reception
               </h3>
               <p className="font-tamil text-lg text-[#F5E5C0] mt-1">
-                முகூர்த்தம் · வரவேற்பு · மதிய விருந்து
+                முகூர்த்தம் · வரவேற்பு
               </p>
               <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-[#BFAEA0] mt-1">
                 FRIDAY, 20 NOVEMBER 2026 · COIMBATORE DISTRICT
@@ -251,7 +251,7 @@ export default function WeddingSchedule() {
             <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex flex-wrap gap-3 w-full sm:w-auto">
                 <a
-                  href="https://maps.google.com/?q=Kumaran+Kundra+Temple"
+                  href="https://maps.google.com/?q=Kumarankundru+Temple"
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/[0.05] hover:bg-white/[0.1] border border-white/15 text-[#F8F4ED] font-sans text-xs uppercase tracking-[0.18em] transition-all"
@@ -266,19 +266,19 @@ export default function WeddingSchedule() {
                   className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/[0.05] hover:bg-white/[0.1] border border-white/15 text-[#F8F4ED] font-sans text-xs uppercase tracking-[0.18em] transition-all"
                 >
                   <Navigation className="w-3 h-3 text-[#B08D57]" />
-                  <span>FEAST HALL MAP</span>
+                  <span>RECEPTION MAP</span>
                 </a>
               </div>
 
               <button
                 onClick={() =>
                   downloadIcs(
-                    'Rishma & Malli · Hindu Muhurtham & Feast',
-                    'Traditional Hindu Muhurtham at Kumaran Kundra Temple followed by Reception and Feast at Shri Lakshmi Hall, Mettupalayam.',
-                    'Kumaran Kundra Temple & Shri Lakshmi Hall, Coimbatore',
+                    'Malli & Rishma · Hindu Muhurtham & Reception',
+                    'Traditional Hindu Muhurtham at Kumarankundru Temple followed by Reception at Shri Lakshmi Hall, Mettupalayam.',
+                    'Kumarankundru Temple & Shri Lakshmi Hall, Coimbatore',
                     '2026-11-20T00:30:00.000Z',
                     '2026-11-20T08:30:00.000Z',
-                    'Rishma_Malli_Hindu_Wedding'
+                    'Malli_Rishma_Hindu_Wedding'
                   )
                 }
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-[#B08D57]/20 to-[#D95C80]/20 hover:from-[#B08D57]/30 hover:to-[#D95C80]/30 border border-[#B08D57]/50 text-[#F5E5C0] font-sans text-xs uppercase tracking-[0.2em] transition-all duration-300 cursor-pointer"

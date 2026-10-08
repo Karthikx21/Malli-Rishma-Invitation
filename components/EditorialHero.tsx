@@ -52,7 +52,12 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
             loop
             muted
             playsInline
+            preload="auto"
           >
+            <source
+              src="https://res.cloudinary.com/drvvekzzm/video/upload/v1791453303/HERO_scbjkz.mp4"
+              type="video/mp4"
+            />
             <source src="/HERO.mp4" type="video/mp4" />
           </video>
         )}
@@ -123,9 +128,9 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
           transition={{ duration: 1.3, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           className="w-full flex flex-col items-center text-center"
         >
-          {/* Bride Name */}
+          {/* Groom Name */}
           <h1 className="font-serif-title text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-light text-[#FAF7F2] tracking-[0.12em] uppercase leading-none drop-shadow-[0_4px_30px_rgba(0,0,0,0.95)] flex items-center justify-center">
-            <span>RISHMA JOHN</span>
+            <span>MALLI SUMANDHAR</span>
             <motion.span
               animate={{ scale: [1, 1.16, 1], opacity: [0.85, 1, 0.85] }}
               transition={{ repeat: Infinity, duration: 3.2, ease: "easeInOut" }}
@@ -148,9 +153,9 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
             <div className="flex-1 h-px bg-gradient-to-l from-transparent via-[#E6CA85]/50 to-[#E6CA85]/80" />
           </div>
 
-          {/* Groom Name */}
+          {/* Bride Name */}
           <h2 className="font-serif-title text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-light text-[#FAF7F2] tracking-[0.12em] uppercase leading-none drop-shadow-[0_4px_30px_rgba(0,0,0,0.95)] flex items-center justify-center">
-            <span>MALLI SUMANDHAR</span>
+            <span>RISHMA JOHN</span>
             <motion.span
               animate={{ scale: [1, 1.16, 1], opacity: [0.85, 1, 0.85] }}
               transition={{ repeat: Infinity, duration: 3.2, delay: 0.5, ease: "easeInOut" }}
@@ -214,7 +219,7 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
           </p>
 
           {/* Sacred Dedication: Cinzel Classical Roman Inscriptional */}
-          <p className="font-display text-xs sm:text-sm md:text-base text-[#E6CA85] font-semibold tracking-[0.28em] uppercase mt-2 drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] drop-shadow-[0_4px_28px_rgba(0,0,0,0.95)]">
+          <p className="font-display text-xs sm:text-sm md:text-base text-white font-semibold tracking-[0.28em] uppercase mt-2 drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] drop-shadow-[0_4px_28px_rgba(0,0,0,0.95)]">
             LORD JESUS CHRIST
           </p>
         </motion.div>
@@ -229,9 +234,9 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
             : { opacity: 0, y: 12 }
         }
         transition={{ duration: 1.2, delay: 0.75, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-10 w-full max-w-4xl mx-auto border-t border-[#E6CA85]/25 pt-3.5 flex items-center justify-center font-functional text-[9px] sm:text-[10px] text-[#FAF7F2]/75 text-center tracking-[0.25em] drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]"
+        className="relative z-10 w-full max-w-4xl mx-auto border-t border-[#E6CA85]/25 pt-3.5 px-4 flex items-center justify-center font-functional text-[9px] sm:text-[10px] text-[#FAF7F2]/75 text-center tracking-[0.25em] leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]"
       >
-        <span>COIMBATORE · CHRISTIAN NUPTIALS &amp; HINDU MUHURTHAM</span>
+        <span>COIMBATORE · CHRISTIAN NUPTIALS &amp; HINDU MUHURTHAM FOLLOWED BY RECEPTION</span>
       </motion.footer>
     </section>
   )
