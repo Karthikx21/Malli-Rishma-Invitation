@@ -15,7 +15,7 @@ export default function EditorialCouple() {
           initial={{ opacity: 0, y: 26, filter: 'blur(5px)' }}
           whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16 sm:mb-20"
         >
           <p className="font-functional text-[10px] sm:text-xs text-[#8D76A8] font-semibold mb-2 tracking-[0.25em]">
@@ -31,7 +31,7 @@ export default function EditorialCouple() {
             initial={{ scaleX: 0, opacity: 0 }}
             whileInView={{ scaleX: 1, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="w-16 h-px bg-gradient-to-r from-transparent via-[#8D76A8]/50 to-transparent mx-auto mt-4"
           />
         </motion.div>
@@ -41,7 +41,7 @@ export default function EditorialCouple() {
           initial={{ opacity: 0, y: 30, filter: 'blur(6px)' }}
           whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 1.2, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="rounded-3xl bg-[#FFFFFF] border border-[#E5DCF0] p-6 sm:p-10 md:p-12 shadow-sm"
         >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
@@ -50,7 +50,7 @@ export default function EditorialCouple() {
               initial={{ opacity: 0, x: -24, filter: 'blur(5px)' }}
               whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
               viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 1.1, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 1.1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
               className="lg:col-span-4 flex flex-col justify-between space-y-6 order-2 lg:order-1 text-center lg:text-left rounded-2xl bg-[#FAF8FC]/80 border border-[#E5DCF0] p-6 sm:p-7 shadow-xs"
             >
               <div>
@@ -80,24 +80,24 @@ export default function EditorialCouple() {
                 {/* Groom Personality Traits */}
                 <ul className="mt-5 pt-4 border-t border-[#E5DCF0]/80 space-y-2.5 font-functional text-xs sm:text-[13px] text-[#2D2338]/85 tracking-[0.08em] lowercase leading-relaxed text-left max-w-xs mx-auto lg:mx-0">
                   <motion.li
-                    whileHover={{ x: 4 }}
-                    transition={{ duration: 0.2 }}
+                    whileHover={{ x: 5 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 25 }}
                     className="flex items-center gap-3 cursor-default"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-[#8D76A8] shrink-0" />
                     <span>Big heart, bigger plans</span>
                   </motion.li>
                   <motion.li
-                    whileHover={{ x: 4 }}
-                    transition={{ duration: 0.2 }}
+                    whileHover={{ x: 5 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 25 }}
                     className="flex items-center gap-3 cursor-default"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-[#8D76A8] shrink-0" />
                     <span>Loves adventure &amp; travel</span>
                   </motion.li>
                   <motion.li
-                    whileHover={{ x: 4 }}
-                    transition={{ duration: 0.2 }}
+                    whileHover={{ x: 5 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 25 }}
                     className="flex items-center gap-3 cursor-default"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-[#8D76A8] shrink-0" />
@@ -108,7 +108,8 @@ export default function EditorialCouple() {
 
               <div className="pt-4 border-t border-[#E5DCF0]/80">
                 <motion.p
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ scale: 1.025 }}
+                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                   className="font-accent text-3xl sm:text-4xl text-[#8D76A8] italic inline-block cursor-default"
                 >
                   &ldquo;Her calm in every storm&rdquo;
@@ -132,12 +133,12 @@ export default function EditorialCouple() {
               initial={{ opacity: 0, scale: 0.92, y: 20, filter: 'blur(8px)' }}
               whileInView={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
               viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 1.25, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 1.25, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
               className="lg:col-span-4 flex flex-col items-center order-1 lg:order-2"
             >
               <motion.div
-                whileHover={{ scale: 1.03, y: -6 }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ scale: 1.025, y: -4 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 className="relative w-full max-w-[280px] sm:max-w-[320px] cursor-pointer"
               >
                 {/* Arch-shaped Frame */}
@@ -165,7 +166,7 @@ export default function EditorialCouple() {
               initial={{ opacity: 0, x: 24, filter: 'blur(5px)' }}
               whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
               viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 1.1, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 1.1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
               className="lg:col-span-4 flex flex-col justify-between space-y-6 order-3 text-center lg:text-left rounded-2xl bg-[#FAF8FC]/80 border border-[#E5DCF0] p-6 sm:p-7 shadow-xs"
             >
               <div>
@@ -193,16 +194,16 @@ export default function EditorialCouple() {
                 {/* Bride Personality Traits */}
                 <ul className="mt-5 pt-4 border-t border-[#E5DCF0]/80 space-y-2.5 font-functional text-xs sm:text-[13px] text-[#2D2338]/85 tracking-[0.08em] lowercase leading-relaxed text-left max-w-xs mx-auto lg:mx-0">
                   <motion.li
-                    whileHover={{ x: 4 }}
-                    transition={{ duration: 0.2 }}
+                    whileHover={{ x: 5 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 25 }}
                     className="flex items-center gap-3 cursor-default"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-[#8D76A8] shrink-0" />
                     <span>Soft heart, strong mind</span>
                   </motion.li>
                   <motion.li
-                    whileHover={{ x: 4 }}
-                    transition={{ duration: 0.2 }}
+                    whileHover={{ x: 5 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 25 }}
                     className="flex items-center gap-3 cursor-default"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-[#8D76A8] shrink-0" />
@@ -213,7 +214,8 @@ export default function EditorialCouple() {
 
               <div className="pt-4 border-t border-[#E5DCF0]/80">
                 <motion.p
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ scale: 1.025 }}
+                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                   className="font-accent text-3xl sm:text-4xl text-[#8D76A8] italic inline-block cursor-default"
                 >
                   &ldquo;Believes in love, always&rdquo;
@@ -227,7 +229,7 @@ export default function EditorialCouple() {
             initial={{ opacity: 0, y: 22, filter: 'blur(4px)' }}
             whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 1.1, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1.1, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="mt-12 pt-10 border-t border-[#E5DCF0] text-center space-y-4 max-w-3xl mx-auto"
           >
             <p className="font-functional text-[10px] sm:text-xs text-[#8D76A8] font-semibold tracking-[0.3em]">

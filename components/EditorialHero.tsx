@@ -93,7 +93,7 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
               ? { opacity: 1, y: 0, filter: 'blur(0px)' }
               : { opacity: 0, y: -12, filter: 'blur(4px)' }
           }
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col items-center"
         >
           {/* Line 1: #RISHMA FOUND HER */}
@@ -125,7 +125,7 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
               ? { opacity: 1, y: 0, filter: 'blur(0px)' }
               : { opacity: 0, y: 20, filter: 'blur(6px)' }
           }
-          transition={{ duration: 1.3, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.3, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           className="w-full flex flex-col items-center text-center"
         >
           {/* Groom Name */}
@@ -174,7 +174,7 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
               ? { scaleX: 1, opacity: 1 }
               : { scaleX: 0, opacity: 0 }
           }
-          transition={{ duration: 1.4, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.4, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
           className="w-24 sm:w-36 h-px bg-gradient-to-r from-transparent via-[#E6CA85]/70 to-transparent mx-auto my-4 sm:my-5"
         />
 
@@ -186,7 +186,7 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
               ? { opacity: 1, y: 0, filter: 'blur(0px)' }
               : { opacity: 0, y: 14, filter: 'blur(4px)' }
           }
-          transition={{ duration: 1.2, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.2, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
           className="text-center space-y-1"
         >
           <p className="font-display text-[11px] sm:text-xs md:text-sm text-[#FAF7F2] tracking-[0.3em] uppercase font-medium drop-shadow-[0_2px_14px_rgba(0,0,0,0.95)]">
@@ -205,7 +205,7 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
               ? { opacity: 1, y: 0, filter: 'blur(0px)' }
               : { opacity: 0, y: 14, filter: 'blur(4px)' }
           }
-          transition={{ duration: 1.2, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.2, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="mt-6 sm:mt-7 text-center max-w-lg mx-auto px-4"
         >
           {/* Whisper-thin Champagne Gold Hairline */}
@@ -233,7 +233,7 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
             ? { opacity: 1, y: 0 }
             : { opacity: 0, y: 12 }
         }
-        transition={{ duration: 1.2, delay: 0.75, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 1.2, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
         className="relative z-10 w-full max-w-4xl mx-auto border-t border-[#E6CA85]/25 pt-3.5 px-4 flex items-center justify-center font-functional text-[9px] sm:text-[10px] text-[#FAF7F2]/75 text-center tracking-[0.25em] leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]"
       >
         <span>COIMBATORE · CHRISTIAN NUPTIALS &amp; HINDU MUHURTHAM FOLLOWED BY RECEPTION</span>

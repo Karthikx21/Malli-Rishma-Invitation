@@ -1,21 +1,21 @@
 import { type Transition, type Variants } from 'framer-motion'
 
 // Bespoke editorial luxury easing curve: slow, intentional, velvety deceleration
-export const LUXURY_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1]
+export const LUXURY_EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
 export const LUXURY_EASE_IN_OUT: [number, number, number, number] = [0.65, 0, 0.35, 1]
 
 export const TRANSITION_SLOW: Transition = {
-  duration: 1.2,
+  duration: 1.3,
   ease: LUXURY_EASE,
 }
 
 export const TRANSITION_MEDIUM: Transition = {
-  duration: 0.9,
+  duration: 1.0,
   ease: LUXURY_EASE,
 }
 
 export const TRANSITION_FAST: Transition = {
-  duration: 0.5,
+  duration: 0.55,
   ease: LUXURY_EASE,
 }
 

@@ -102,15 +102,15 @@ export default function EditorialChapters() {
           initial={{ opacity: 0, y: 32, filter: 'blur(5px)' }}
           whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.25, ease: [0.16, 1, 0.3, 1] }}
           className="relative z-10 w-full max-w-4xl mx-auto my-auto pt-16 pb-8"
         >
           {/* Very Large Number Date & Month */}
           <div className="space-y-1">
             <div className="flex items-baseline gap-4 sm:gap-6">
               <motion.span
-                whileHover={{ scale: 1.03 }}
-                transition={{ duration: 0.3 }}
+                whileHover={{ scale: 1.025 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 className="font-serif-title text-7xl xs:text-8xl sm:text-9xl md:text-[11rem] font-light text-[#FAF6EE] leading-none tracking-tighter drop-shadow-[0_4px_30px_rgba(0,0,0,0.85)] cursor-default inline-block"
               >
                 18
@@ -134,7 +134,11 @@ export default function EditorialChapters() {
           <div className="mt-10 pt-8 border-t border-[#C5A059]/30 space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 font-functional text-xs text-[#FAF6EE]/90">
               {/* Col 1: TIME & RING EXCHANGE HIGHLIGHT */}
-              <motion.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }} className="space-y-3">
+              <motion.div
+                whileHover={{ y: -3 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="space-y-3"
+              >
                 <div>
                   <span className="text-[#C5A059] block text-[10px] tracking-[0.3em] mb-1">
                     TIME
@@ -156,7 +160,10 @@ export default function EditorialChapters() {
               </motion.div>
 
               {/* Col 2: VENUE */}
-              <motion.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
+              <motion.div
+                whileHover={{ y: -3 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              >
                 <span className="text-[#C5A059] block text-[10px] tracking-[0.3em] mb-1">
                   VENUE
                 </span>
@@ -171,7 +178,7 @@ export default function EditorialChapters() {
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               className="font-serif-title italic text-base sm:text-lg md:text-xl text-[#FAF6EE] leading-relaxed pt-4 border-t border-[#C5A059]/20"
             >
               &ldquo;Our forever begins with the Ring Exchange at 6:00 PM sharp. We want our favorite people right in front of us as we say yes for a lifetime.&rdquo;
@@ -180,8 +187,8 @@ export default function EditorialChapters() {
             {/* Action Links: Text Links with Left-to-Right Drawing Gold Underline */}
             <div className="pt-2 flex flex-wrap items-center gap-6 sm:gap-10">
               <motion.a
-                whileHover={{ x: 4 }}
-                transition={{ duration: 0.2 }}
+                whileHover={{ x: 5 }}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 href="https://www.google.com/maps/search/?api=1&query=Jenneys+Residency+Avinashi+Road+Coimbatore"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -192,9 +199,9 @@ export default function EditorialChapters() {
 
               <motion.button
                 type="button"
-                whileHover={{ x: 4 }}
+                whileHover={{ x: 5 }}
                 whileTap={{ scale: 0.97 }}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 onClick={() =>
                   downloadIcs(
                     'Malli & Rishma - Christian Nuptials Ceremony',
@@ -258,15 +265,15 @@ export default function EditorialChapters() {
           initial={{ opacity: 0, y: 32, filter: 'blur(5px)' }}
           whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.25, ease: [0.16, 1, 0.3, 1] }}
           className="relative z-10 w-full max-w-4xl mx-auto my-auto pt-16 pb-8"
         >
           {/* Very Large Number Date & Month */}
           <div className="space-y-1">
             <div className="flex items-baseline gap-4 sm:gap-6">
               <motion.span
-                whileHover={{ scale: 1.03 }}
-                transition={{ duration: 0.3 }}
+                whileHover={{ scale: 1.025 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 className="font-serif-title text-7xl xs:text-8xl sm:text-9xl md:text-[11rem] font-light text-[#FAF6EE] leading-none tracking-tighter drop-shadow-[0_4px_30px_rgba(0,0,0,0.85)] cursor-default inline-block"
               >
                 20
@@ -291,8 +298,8 @@ export default function EditorialChapters() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 font-functional text-xs text-[#FAF6EE]/90">
               {/* Col 1: MUHURTHAM */}
               <motion.div
-                whileHover={{ y: -2 }}
-                transition={{ duration: 0.2 }}
+                whileHover={{ y: -3 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                 className="space-y-2"
               >
                 <div className="flex items-baseline justify-between">
@@ -311,8 +318,8 @@ export default function EditorialChapters() {
                 </p>
                 <div className="pt-2">
                   <motion.a
-                    whileHover={{ x: 4 }}
-                    transition={{ duration: 0.2 }}
+                    whileHover={{ x: 5 }}
+                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                     href="https://www.google.com/maps/search/?api=1&query=Kumarankundru+Temple+Mettupalayam"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -325,8 +332,8 @@ export default function EditorialChapters() {
 
               {/* Col 2: RECEPTION */}
               <motion.div
-                whileHover={{ y: -2 }}
-                transition={{ duration: 0.2 }}
+                whileHover={{ y: -3 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                 className="space-y-2 border-t md:border-t-0 md:border-l border-[#C5A059]/30 pt-6 md:pt-0 md:pl-10"
               >
                 <div className="flex items-baseline justify-between">
@@ -345,8 +352,8 @@ export default function EditorialChapters() {
                 </p>
                 <div className="pt-2">
                   <motion.a
-                    whileHover={{ x: 4 }}
-                    transition={{ duration: 0.2 }}
+                    whileHover={{ x: 5 }}
+                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                     href="https://www.google.com/maps/search/?api=1&query=Shri+Lakshmi+Hall+Annur+Road+Mettupalayam"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -362,9 +369,9 @@ export default function EditorialChapters() {
             <div className="pt-6 flex flex-wrap items-center gap-6 sm:gap-10 border-t border-[#C5A059]/30">
               <motion.button
                 type="button"
-                whileHover={{ x: 4 }}
+                whileHover={{ x: 5 }}
                 whileTap={{ scale: 0.97 }}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 onClick={() =>
                   downloadIcs(
                     'Malli & Rishma - Hindu Wedding & Reception',

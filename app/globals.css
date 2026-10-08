@@ -248,7 +248,10 @@
 }
 
 .animate-vinyl-spin {
-  animation: spinSlow 18s linear infinite;
+  animation: spinSlow 20s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 /* Smooth Editorial Scrollbar */

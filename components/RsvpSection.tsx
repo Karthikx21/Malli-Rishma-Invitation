@@ -34,7 +34,7 @@ export default function RsvpSection() {
     const text = encodeURIComponent(
       `Wedding Invitation: Malli Sumandhar & Rishma John (#RishmaFoundHerPavazhaMalli) are getting married on 18 & 20 November 2026 in Coimbatore! Check the details and celebrate with us: ${window.location.href}`
     )
-    window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank')
+    window.open(`https://api.whatsapp.com/send?phone=919894063444&text=${text}`, '_blank')
   }
 
   return (

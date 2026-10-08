@@ -23,7 +23,7 @@ export default function EditorialDressCode() {
           initial={{ opacity: 0, y: 26, filter: 'blur(5px)' }}
           whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
         >
           <p className="font-functional text-[10px] sm:text-xs text-[#8D76A8] font-semibold mb-2 tracking-[0.25em]">
             WHAT TO WEAR
@@ -35,7 +35,7 @@ export default function EditorialDressCode() {
             initial={{ scaleX: 0, opacity: 0 }}
             whileInView={{ scaleX: 1, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="w-16 h-px bg-gradient-to-r from-transparent via-[#8D76A8]/50 to-transparent mx-auto mt-3 mb-16"
           />
         </motion.div>
@@ -47,14 +47,14 @@ export default function EditorialDressCode() {
             initial={{ opacity: 0, y: 30, filter: 'blur(5px)' }}
             whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 1.2, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="space-y-6 flex flex-col justify-between border-t border-[#E5DCF0] pt-6"
           >
             <div>
               {/* Baroque Candelabra & Grand Stairs Moodboard Photo */}
               <motion.div
                 whileHover={{ scale: 1.025, y: -4 }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 className="relative aspect-[3/4] w-full max-w-[280px] mx-auto rounded-t-[140px] overflow-hidden shadow-lg border border-[#E5DCF0] bg-[#EFEAF5] mb-6 cursor-pointer group"
               >
                 <img
@@ -93,7 +93,13 @@ export default function EditorialDressCode() {
                       whileHover={{ scale: 1.2, y: -3 }}
                       whileTap={{ scale: 0.95 }}
                       viewport={{ once: true }}
-                      transition={{ delay: 0.1 + i * 0.07, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                      transition={{
+                        delay: 0.1 + i * 0.07,
+                        duration: 0.4,
+                        ease: [0.16, 1, 0.3, 1],
+                        scale: { duration: 0.25, ease: [0.16, 1, 0.3, 1] },
+                        y: { duration: 0.25, ease: [0.16, 1, 0.3, 1] },
+                      }}
                       className="w-8 h-8 rounded-full border border-black/10 shadow-sm cursor-pointer"
                       style={{ backgroundColor: swatch.color }}
                       title={`${swatch.name} (${swatch.color})`}
@@ -112,14 +118,14 @@ export default function EditorialDressCode() {
             initial={{ opacity: 0, y: 30, filter: 'blur(5px)' }}
             whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 1.2, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1.2, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
             className="space-y-6 flex flex-col justify-between border-t border-[#C5A059]/30 pt-6"
           >
             <div>
               {/* Crimson Fresco & Floral Brass Urulis Moodboard Photo */}
               <motion.div
                 whileHover={{ scale: 1.025, y: -4 }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 className="relative aspect-[3/4] w-full max-w-[280px] mx-auto rounded-t-[140px] overflow-hidden shadow-lg border border-[#C5A059]/30 bg-[#2A0510] mb-6 cursor-pointer group"
               >
                 <img
@@ -161,7 +167,7 @@ export default function EditorialDressCode() {
           initial={{ opacity: 0, y: 24, filter: 'blur(4px)' }}
           whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-xl mx-auto space-y-3 pt-6 border-t border-[#E5DCF0]"
         >
           <p className="font-serif-title italic text-base sm:text-lg text-[#2D2338]/85 leading-relaxed">

@@ -54,7 +54,7 @@ export default function EditorialCountdown() {
           initial={{ opacity: 0, y: 26, filter: 'blur(5px)' }}
           whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
         >
           <p className="font-functional text-[10px] sm:text-xs text-[#8D76A8] font-semibold mb-2 tracking-[0.25em]">
             COUNTING THE DAYS
@@ -66,7 +66,7 @@ export default function EditorialCountdown() {
             initial={{ scaleX: 0, opacity: 0 }}
             whileInView={{ scaleX: 1, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="w-16 h-px bg-gradient-to-r from-transparent via-[#8D76A8]/50 to-transparent mx-auto mt-3 mb-10"
           />
         </motion.div>
@@ -76,9 +76,10 @@ export default function EditorialCountdown() {
           <motion.button
             type="button"
             onClick={() => setTargetDate('18')}
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
-            className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-all duration-300 pb-1 relative cursor-pointer ${
+            whileHover={{ scale: 1.03, y: -1 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-colors duration-300 pb-1 relative cursor-pointer ${
               targetDate === '18'
                 ? 'text-[#8D76A8] font-semibold'
                 : 'text-[#2D2338]/40 hover:text-[#2D2338]/80'
@@ -89,7 +90,7 @@ export default function EditorialCountdown() {
               <motion.span
                 layoutId="countdownTabLine"
                 className="absolute bottom-0 left-0 right-0 h-px bg-[#8D76A8]"
-                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ type: 'spring', stiffness: 380, damping: 30 }}
               />
             )}
           </motion.button>
@@ -99,9 +100,10 @@ export default function EditorialCountdown() {
           <motion.button
             type="button"
             onClick={() => setTargetDate('20')}
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
-            className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-all duration-300 pb-1 relative cursor-pointer ${
+            whileHover={{ scale: 1.03, y: -1 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-colors duration-300 pb-1 relative cursor-pointer ${
               targetDate === '20'
                 ? 'text-[#8D76A8] font-semibold'
                 : 'text-[#2D2338]/40 hover:text-[#2D2338]/80'
@@ -112,7 +114,7 @@ export default function EditorialCountdown() {
               <motion.span
                 layoutId="countdownTabLine"
                 className="absolute bottom-0 left-0 right-0 h-px bg-[#8D76A8]"
-                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ type: 'spring', stiffness: 380, damping: 30 }}
               />
             )}
           </motion.button>
@@ -122,10 +124,10 @@ export default function EditorialCountdown() {
         <AnimatePresence mode="wait">
           <motion.div
             key={targetDate}
-            initial={{ opacity: 0, y: 16, filter: 'blur(4px)' }}
+            initial={{ opacity: 0, y: 14, filter: 'blur(4px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            exit={{ opacity: 0, y: -10, filter: 'blur(4px)' }}
-            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            exit={{ opacity: 0, y: -8, filter: 'blur(4px)' }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 max-w-3xl mx-auto divide-y-0 sm:divide-x sm:divide-[#E5DCF0]"
           >
             {timeUnits.map((item, idx) => (
@@ -133,15 +135,21 @@ export default function EditorialCountdown() {
                 key={item.label}
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -4, scale: 1.03 }}
-                transition={{ duration: 0.4, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -4, scale: 1.02 }}
+                transition={{
+                  duration: 0.4,
+                  delay: idx * 0.08,
+                  ease: [0.16, 1, 0.3, 1],
+                  y: { duration: 0.3, ease: [0.16, 1, 0.3, 1] },
+                  scale: { duration: 0.3, ease: [0.16, 1, 0.3, 1] },
+                }}
                 className="flex flex-col items-center justify-center py-4 px-2 cursor-default select-none"
               >
                 <motion.span
                   key={item.val}
-                  initial={{ opacity: 0.8, y: -2 }}
+                  initial={{ opacity: 0.85, y: -1 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.25, ease: 'easeOut' }}
+                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                   className="font-serif-title text-5xl sm:text-7xl md:text-8xl text-[#2D2338] font-light tracking-tight leading-none"
                 >
                   {String(item.val).padStart(2, '0')}

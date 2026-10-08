@@ -42,7 +42,7 @@ export default function EditorialFooter({ onReplayIntro }: EditorialFooterProps)
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
           className="flex items-center justify-center gap-3"
         >
           <div className="w-8 sm:w-16 h-px bg-gradient-to-r from-transparent to-[#E6CA85]/60" />
@@ -61,7 +61,7 @@ export default function EditorialFooter({ onReplayIntro }: EditorialFooterProps)
           initial={{ opacity: 0, y: 24, filter: 'blur(6px)' }}
           whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 1.3, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
           className="py-1"
         >
           <motion.h2
@@ -82,7 +82,7 @@ export default function EditorialFooter({ onReplayIntro }: EditorialFooterProps)
           initial={{ opacity: 0, y: 18, filter: 'blur(4px)' }}
           whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 1.1, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.1, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
           className="space-y-1 pt-1"
         >
           <h3 className="font-accent text-5xl sm:text-7xl md:text-8xl text-[#FAF6EE] font-normal leading-tight">
@@ -100,7 +100,7 @@ export default function EditorialFooter({ onReplayIntro }: EditorialFooterProps)
           initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col items-center pt-2"
         >
           <span className="font-functional text-[10px] sm:text-xs text-[#FAF6EE]/75 tracking-[0.35em]">
@@ -116,7 +116,7 @@ export default function EditorialFooter({ onReplayIntro }: EditorialFooterProps)
           initial={{ scaleX: 0, opacity: 0 }}
           whileInView={{ scaleX: 1, opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 1.2, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.2, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
           className="w-20 h-px bg-gradient-to-r from-transparent via-[#E6CA85]/40 to-transparent my-2"
         />
 
@@ -125,13 +125,13 @@ export default function EditorialFooter({ onReplayIntro }: EditorialFooterProps)
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.4 }}
+          transition={{ duration: 1.1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
         >
           <motion.button
             type="button"
-            whileHover={{ scale: 1.06, x: 2 }}
+            whileHover={{ scale: 1.05, x: 2 }}
             whileTap={{ scale: 0.95 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
             onClick={onReplayIntro}
             className="gold-link text-[10px] tracking-[0.28em] text-[#E6CA85] cursor-pointer"
           >

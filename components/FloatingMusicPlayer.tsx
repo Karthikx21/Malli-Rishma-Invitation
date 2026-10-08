@@ -2,7 +2,11 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { playExclusive, isAnyOtherAudioPlaying } from '@/lib/audioCoordinator'
+import {
+  playExclusive,
+  isAnyOtherAudioPlaying,
+  isAudioSectionActive,
+} from '@/lib/audioCoordinator'
 
 /**
  * FloatingMusicPlayer:
@@ -13,21 +17,23 @@ import { playExclusive, isAnyOtherAudioPlaying } from '@/lib/audioCoordinator'
  * - Dancing gold audio equalizer bars and spinning vinyl disc when playing.
  * - Single-tap toggle to Mute / Play ("Touch to Mute" / "Touch to Play").
  * - High z-index (z-[70]) so it is visible and usable during the intro video as well.
+ * - Intelligent cross-section coordination: automatically yields to section audio (Side A/B)
+ *   when in view, and automatically resumes when the user scrolls away.
  */
 export default function FloatingMusicPlayer() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [hasInteracted, setHasInteracted] = useState(false)
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const userMutedRef = useRef(false)
-  const shouldResumeAfterOtherAudioRef = useRef(false)
+  const pausedBySectionRef = useRef(false)
   const resumeTimerRef = useRef<NodeJS.Timeout | null>(null)
 
   const attemptPlay = useCallback(() => {
     const audio = audioRef.current
     if (!audio) return
     if (userMutedRef.current) return
-    // Never clash if any other audio is already playing
-    if (isAnyOtherAudioPlaying(audio)) return
+    // Never clash if an audio section (e.g. OK Kanmani) is active or any other audio is playing
+    if (isAudioSectionActive() || isAnyOtherAudioPlaying(audio)) return
 
     audio.muted = false
     audio.volume = 0.8
@@ -53,7 +59,6 @@ export default function FloatingMusicPlayer() {
     attemptPlay()
 
     // Global listener for the FIRST user gesture to unlock browser autoplay policy.
-    // Removes itself immediately once unlocked to NEVER clash with clicks on other media!
     let unlocked = false
     const events = ['click', 'touchstart', 'touchend', 'pointerdown', 'mousedown', 'keydown']
 
@@ -74,7 +79,12 @@ export default function FloatingMusicPlayer() {
       setHasInteracted(true)
       const currentAudio = audioRef.current
 
-      if (currentAudio && !userMutedRef.current && !isAnyOtherAudioPlaying(currentAudio)) {
+      if (
+        currentAudio &&
+        !userMutedRef.current &&
+        !isAudioSectionActive() &&
+        !isAnyOtherAudioPlaying(currentAudio)
+      ) {
         currentAudio.muted = false
         currentAudio.volume = 0.8
         currentAudio
@@ -102,11 +112,62 @@ export default function FloatingMusicPlayer() {
     }
   }, [attemptPlay])
 
-  // 2. Intelligent Auto-Pause & Resume ONLY for secondary audio (Side A, Side B, Ceremony BGM)
+  // 2. Intelligent Auto-Pause & Resume with Section Audio Coordination (Side A, Side B)
   useEffect(() => {
+    // Fired when user scrolls INTO an audio section (like OK Kanmani)
+    const handleSectionEnter = () => {
+      if (resumeTimerRef.current) {
+        clearTimeout(resumeTimerRef.current)
+        resumeTimerRef.current = null
+      }
+      const mainAudio = audioRef.current
+      if (mainAudio) {
+        if (!mainAudio.paused) {
+          pausedBySectionRef.current = true
+          mainAudio.pause()
+          setIsPlaying(false)
+        } else if (!userMutedRef.current) {
+          // Main audio was unmuted/intended to play
+          pausedBySectionRef.current = true
+        }
+      }
+    }
+
+    // Fired when user scrolls OUT OF an audio section
+    const handleSectionLeave = () => {
+      if (isAudioSectionActive()) return
+
+      if (resumeTimerRef.current) {
+        clearTimeout(resumeTimerRef.current)
+      }
+
+      resumeTimerRef.current = setTimeout(() => {
+        if (isAudioSectionActive()) return
+
+        const otherAudios = Array.from(document.querySelectorAll('audio')).filter(
+          (el) => el !== audioRef.current
+        )
+        const isAnyOtherAudioPlaying = otherAudios.some((el) => !el.paused)
+        if (isAnyOtherAudioPlaying) return
+
+        const mainAudio = audioRef.current
+        if (mainAudio && pausedBySectionRef.current && !userMutedRef.current) {
+          mainAudio.muted = false
+          mainAudio.volume = 0.8
+          mainAudio
+            .play()
+            .then(() => {
+              setIsPlaying(true)
+              pausedBySectionRef.current = false
+            })
+            .catch(() => {})
+        }
+      }, 100)
+    }
+
+    // Fallback: whenever another audio element starts playing anywhere
     const handleOtherAudioPlay = (e?: Event) => {
       const target = e?.target as HTMLElement | undefined
-      // CRITICAL FIX: ONLY respond to secondary <audio> elements (NEVER <video> elements like intro.mp4 or hero videos!)
       if (target && target.tagName === 'AUDIO' && target !== audioRef.current) {
         if (resumeTimerRef.current) {
           clearTimeout(resumeTimerRef.current)
@@ -115,7 +176,7 @@ export default function FloatingMusicPlayer() {
         const mainAudio = audioRef.current
         if (mainAudio) {
           if (!userMutedRef.current) {
-            shouldResumeAfterOtherAudioRef.current = true
+            pausedBySectionRef.current = true
           }
           if (!mainAudio.paused) {
             mainAudio.pause()
@@ -125,57 +186,54 @@ export default function FloatingMusicPlayer() {
       }
     }
 
-    const checkAndResumeMainAudio = () => {
-      if (resumeTimerRef.current) {
-        clearTimeout(resumeTimerRef.current)
-      }
-      // Small 150ms buffer to allow seamless track transitions without audio collision
-      resumeTimerRef.current = setTimeout(() => {
-        const otherAudios = Array.from(document.querySelectorAll('audio')).filter(
-          (el) => el !== audioRef.current
-        )
-        const isAnyOtherAudioPlaying = otherAudios.some((el) => !el.paused)
-
-        if (!isAnyOtherAudioPlaying) {
-          const mainAudio = audioRef.current
-          if (mainAudio && shouldResumeAfterOtherAudioRef.current && !userMutedRef.current) {
-            // Resume from exact timestamp where it was paused
-            mainAudio.muted = false
-            mainAudio
-              .play()
-              .then(() => {
-                setIsPlaying(true)
-                shouldResumeAfterOtherAudioRef.current = false
-              })
-              .catch(() => {})
-          }
-        }
-      }, 150)
-    }
-
+    // Fallback: whenever an audio pauses, only resume if NO audio section is active
     const handleOtherAudioStop = (e?: Event) => {
       const target = e?.target as HTMLElement | undefined
-      // CRITICAL FIX: ONLY respond to secondary <audio> elements (NEVER <video> elements!)
       if (target && target.tagName === 'AUDIO' && target !== audioRef.current) {
-        checkAndResumeMainAudio()
+        // If an audio section is active, strictly do NOT resume!
+        if (isAudioSectionActive()) return
+
+        if (resumeTimerRef.current) {
+          clearTimeout(resumeTimerRef.current)
+        }
+        resumeTimerRef.current = setTimeout(() => {
+          if (isAudioSectionActive()) return
+
+          const otherAudios = Array.from(document.querySelectorAll('audio')).filter(
+            (el) => el !== audioRef.current
+          )
+          const isAnyOtherAudioPlaying = otherAudios.some((el) => !el.paused)
+
+          if (!isAnyOtherAudioPlaying) {
+            const mainAudio = audioRef.current
+            if (mainAudio && pausedBySectionRef.current && !userMutedRef.current) {
+              mainAudio.muted = false
+              mainAudio
+                .play()
+                .then(() => {
+                  setIsPlaying(true)
+                  pausedBySectionRef.current = false
+                })
+                .catch(() => {})
+            }
+          }
+        }, 150)
       }
     }
 
-    // Capture phase listeners catch all native audio events across the entire DOM
     document.addEventListener('play', handleOtherAudioPlay, true)
     document.addEventListener('pause', handleOtherAudioStop, true)
     document.addEventListener('ended', handleOtherAudioStop, true)
 
-    // Explicit custom events for extra safety
-    window.addEventListener('wedding-secondary-audio-start', handleOtherAudioPlay)
-    window.addEventListener('wedding-secondary-audio-stop', checkAndResumeMainAudio)
+    window.addEventListener('wedding-section-audio-enter', handleSectionEnter)
+    window.addEventListener('wedding-section-audio-leave', handleSectionLeave)
 
     return () => {
       document.removeEventListener('play', handleOtherAudioPlay, true)
       document.removeEventListener('pause', handleOtherAudioStop, true)
       document.removeEventListener('ended', handleOtherAudioStop, true)
-      window.removeEventListener('wedding-secondary-audio-start', handleOtherAudioPlay)
-      window.removeEventListener('wedding-secondary-audio-stop', checkAndResumeMainAudio)
+      window.removeEventListener('wedding-section-audio-enter', handleSectionEnter)
+      window.removeEventListener('wedding-section-audio-leave', handleSectionLeave)
       if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
     }
   }, [])
@@ -188,13 +246,13 @@ export default function FloatingMusicPlayer() {
 
     if (isPlaying) {
       userMutedRef.current = true
-      shouldResumeAfterOtherAudioRef.current = false
+      pausedBySectionRef.current = false
       if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
       audio.pause()
       setIsPlaying(false)
     } else {
       userMutedRef.current = false
-      shouldResumeAfterOtherAudioRef.current = false
+      pausedBySectionRef.current = false
       attemptPlay()
     }
   }
@@ -218,15 +276,15 @@ export default function FloatingMusicPlayer() {
       <motion.div
         initial={{ opacity: 0, scale: 0.8, y: 15 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 1.0, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
         className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[70] select-none"
       >
         <motion.button
           type="button"
           onClick={togglePlay}
-          whileHover={{ scale: 1.1, y: -1 }}
+          whileHover={{ scale: 1.08, y: -2 }}
           whileTap={{ scale: 0.92 }}
-          transition={{ duration: 0.18 }}
+          transition={{ type: 'spring', stiffness: 380, damping: 24 }}
           className={`relative w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center backdrop-blur-md transition-all shadow-[0_4px_20px_rgba(0,0,0,0.55),0_0_12px_rgba(230,202,133,0.22)] border cursor-pointer group ${
             isPlaying
               ? 'bg-[#181324]/90 border-[#E6CA85]/80 text-[#E6CA85]'

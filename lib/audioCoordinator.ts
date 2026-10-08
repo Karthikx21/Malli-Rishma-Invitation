@@ -1,6 +1,8 @@
 // lib/audioCoordinator.ts
 // Global Audio Coordinator ensuring strictly ONE audio source can play at any given moment.
 
+let activeSectionId: string | null = null
+
 if (typeof window !== 'undefined') {
   // Capture-phase listener on document: Whenever ANY audio begins playing,
   // instantly pause all other <audio> elements across the entire page.
@@ -44,3 +46,48 @@ export function isAnyOtherAudioPlaying(excludeAudio?: HTMLAudioElement | null): 
   const allAudios = Array.from(document.querySelectorAll('audio'))
   return allAudios.some((audio) => audio !== excludeAudio && !audio.paused)
 }
+
+/**
+ * Notifies the coordinator that a specific section audio has become active (e.g. user scrolled into Songs on Loop).
+ */
+export function enterAudioSection(sectionId: string): void {
+  activeSectionId = sectionId
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(
+      new CustomEvent('wedding-section-audio-enter', {
+        detail: { sectionId },
+      })
+    )
+  }
+}
+
+/**
+ * Notifies the coordinator that a specific section audio has become inactive (e.g. user scrolled out).
+ */
+export function leaveAudioSection(sectionId: string): void {
+  if (activeSectionId === sectionId) {
+    activeSectionId = null
+  }
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(
+      new CustomEvent('wedding-section-audio-leave', {
+        detail: { sectionId },
+      })
+    )
+  }
+}
+
+/**
+ * Returns whether any audio section is currently active in the viewport.
+ */
+export function isAudioSectionActive(): boolean {
+  return activeSectionId !== null
+}
+
+/**
+ * Returns the currently active audio section ID, if any.
+ */
+export function getActiveAudioSection(): string | null {
+  return activeSectionId
+}
+

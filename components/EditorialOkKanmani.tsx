@@ -1,8 +1,12 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { playExclusive } from '@/lib/audioCoordinator'
+import {
+  playExclusive,
+  enterAudioSection,
+  leaveAudioSection,
+} from '@/lib/audioCoordinator'
 
 type ActiveSide = 'rishma' | 'malli'
 
@@ -12,8 +16,8 @@ const TRACKS = {
     person: 'MALLI',
     vibe: 'HIS VIBE',
     title: 'The song on loop in his head on his wedding day',
-    src: '/audio/him.mp3',
-    fallbackDuration: '0:27',
+    src: '/side%20a.mpeg',
+    fallbackDuration: '1:34',
   },
   rishma: {
     side: 'SIDE B',
@@ -30,14 +34,22 @@ export default function EditorialOkKanmani() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [progress, setProgress] = useState(0)
   const [currentTime, setCurrentTime] = useState('0:00')
-  const [duration, setDuration] = useState('0:35')
+  const [duration, setDuration] = useState('1:34')
   const [audioError, setAudioError] = useState(false)
 
+  const sectionRef = useRef<HTMLElement | null>(null)
   const audioRishmaRef = useRef<HTMLAudioElement | null>(null)
   const audioMalliRef = useRef<HTMLAudioElement | null>(null)
 
+  const activeSideRef = useRef<ActiveSide>(activeSide)
+  useEffect(() => {
+    activeSideRef.current = activeSide
+  }, [activeSide])
+
+  const isInViewRef = useRef(false)
+  const userPausedRef = useRef(false)
+
   const activeTrack = TRACKS[activeSide]
-  const currentAudioRef = activeSide === 'rishma' ? audioRishmaRef : audioMalliRef
 
   const formatTime = (secs: number) => {
     if (isNaN(secs) || secs < 0) return '0:00'
@@ -61,43 +73,58 @@ export default function EditorialOkKanmani() {
   }
 
   const handleEnded = () => {
-    setIsPlaying(false)
     setProgress(0)
     setCurrentTime('0:00')
-    if (typeof window !== 'undefined') {
-      window.dispatchEvent(
-        new CustomEvent('wedding-secondary-audio-stop', {
-          detail: { id: `ok-kanmani-${activeSide}` },
-        })
-      )
-    }
   }
 
+  // Play active track helper
+  const playActiveTrack = useCallback(() => {
+    const audio = activeSideRef.current === 'rishma' ? audioRishmaRef.current : audioMalliRef.current
+    if (!audio) return
+
+    audio.muted = false
+    playExclusive(audio)
+      .then(() => {
+        setIsPlaying(true)
+        setAudioError(false)
+      })
+      .catch(() => {
+        // Autoplay policy fallback: attach one-shot listener
+        const gestureUnlock = () => {
+          if (isInViewRef.current && !userPausedRef.current) {
+            const target =
+              activeSideRef.current === 'rishma' ? audioRishmaRef.current : audioMalliRef.current
+            if (target) {
+              playExclusive(target)
+                .then(() => {
+                  setIsPlaying(true)
+                  setAudioError(false)
+                })
+                .catch(() => {})
+            }
+          }
+          window.removeEventListener('scroll', gestureUnlock)
+          window.removeEventListener('touchstart', gestureUnlock)
+          window.removeEventListener('click', gestureUnlock)
+        }
+        window.addEventListener('scroll', gestureUnlock, { once: true, passive: true })
+        window.addEventListener('touchstart', gestureUnlock, { once: true, passive: true })
+        window.addEventListener('click', gestureUnlock, { once: true, passive: true })
+      })
+  }, [])
+
+  // Manual Toggle Play / Pause button
   const togglePlay = () => {
-    const audio = currentAudioRef.current
+    const audio = activeSideRef.current === 'rishma' ? audioRishmaRef.current : audioMalliRef.current
     if (!audio) return
 
     if (isPlaying) {
+      userPausedRef.current = true
       audio.pause()
       setIsPlaying(false)
-      if (typeof window !== 'undefined') {
-        window.dispatchEvent(
-          new CustomEvent('wedding-secondary-audio-stop', {
-            detail: { id: `ok-kanmani-${activeSide}` },
-          })
-        )
-      }
     } else {
-      if (typeof window !== 'undefined') {
-        window.dispatchEvent(
-          new CustomEvent('wedding-secondary-audio-start', {
-            detail: { id: `ok-kanmani-${activeSide}` },
-          })
-        )
-      }
-      playExclusive(audio)
-        .then(() => setIsPlaying(true))
-        .catch(() => setAudioError(true))
+      userPausedRef.current = false
+      playActiveTrack()
     }
   }
 
@@ -105,47 +132,92 @@ export default function EditorialOkKanmani() {
   const switchSide = (side: ActiveSide) => {
     if (side === activeSide) return
 
-    const prevAudio = currentAudioRef.current
-    const wasPlaying = isPlaying
-
+    // Pause previous audio
+    const prevAudio = activeSide === 'rishma' ? audioRishmaRef.current : audioMalliRef.current
     if (prevAudio) {
       prevAudio.pause()
     }
 
     setActiveSide(side)
+    activeSideRef.current = side
     setProgress(0)
     setCurrentTime('0:00')
+    userPausedRef.current = false // User explicitly selected this side to listen to it
 
-    // Prepare next audio
-    setTimeout(() => {
-      const nextAudio = side === 'rishma' ? audioRishmaRef.current : audioMalliRef.current
-      if (nextAudio && !isNaN(nextAudio.duration)) {
-        setDuration(formatTime(nextAudio.duration))
-      }
+    const nextAudio = side === 'rishma' ? audioRishmaRef.current : audioMalliRef.current
+    if (nextAudio && !isNaN(nextAudio.duration) && nextAudio.duration > 0) {
+      setDuration(formatTime(nextAudio.duration))
+    } else {
+      setDuration(TRACKS[side].fallbackDuration)
+    }
 
-      if (wasPlaying && nextAudio) {
-        if (typeof window !== 'undefined') {
-          window.dispatchEvent(
-            new CustomEvent('wedding-secondary-audio-start', {
-              detail: { id: `ok-kanmani-${side}` },
-            })
-          )
-        }
-        playExclusive(nextAudio)
-          .then(() => setIsPlaying(true))
-          .catch(() => setIsPlaying(false))
-      } else {
-        setIsPlaying(false)
-        if (wasPlaying && typeof window !== 'undefined') {
-          window.dispatchEvent(
-            new CustomEvent('wedding-secondary-audio-stop', {
-              detail: { id: `ok-kanmani-${side}` },
-            })
-          )
-        }
-      }
-    }, 50)
+    // Play next side immediately if section is currently in view
+    if (isInViewRef.current && nextAudio) {
+      nextAudio.muted = false
+      playExclusive(nextAudio)
+        .then(() => {
+          setIsPlaying(true)
+          setAudioError(false)
+        })
+        .catch(() => {
+          setIsPlaying(false)
+        })
+    } else {
+      setIsPlaying(false)
+    }
   }
+
+  // Section Scroll Coordination (IntersectionObserver)
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section || typeof window === 'undefined') return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // User scrolled INTO OK Kanmani section
+            isInViewRef.current = true
+            enterAudioSection('songs')
+
+            // If user did not manually pause during this viewing, auto-start Side A (or active track)
+            if (!userPausedRef.current) {
+              playActiveTrack()
+            }
+          } else {
+            // User scrolled OUT OF OK Kanmani section (down to Countdown/Chapters or up to Couple/Hero)
+            if (isInViewRef.current) {
+              isInViewRef.current = false
+              userPausedRef.current = false // Reset manual pause for subsequent visits
+
+              // Stop both Side A and Side B immediately
+              if (audioMalliRef.current && !audioMalliRef.current.paused) {
+                audioMalliRef.current.pause()
+              }
+              if (audioRishmaRef.current && !audioRishmaRef.current.paused) {
+                audioRishmaRef.current.pause()
+              }
+              setIsPlaying(false)
+
+              // Notify coordinator that user left this section -> floating background music resumes!
+              leaveAudioSection('songs')
+            }
+          }
+        })
+      },
+      {
+        threshold: 0,
+        rootMargin: '-15% 0px -15% 0px',
+      }
+    )
+
+    observer.observe(section)
+
+    return () => {
+      observer.disconnect()
+      leaveAudioSection('songs')
+    }
+  }, [playActiveTrack])
 
   // Circumference for r = 48.5
   const circumference = 2 * Math.PI * 48.5
@@ -153,6 +225,7 @@ export default function EditorialOkKanmani() {
 
   return (
     <section
+      ref={sectionRef}
       id="songs"
       className="relative w-full bg-[#140F1D] text-[#FAF6EE] py-24 sm:py-32 px-5 sm:px-10 border-y border-[#3D2C52]/50 overflow-hidden"
       style={{
@@ -181,33 +254,50 @@ export default function EditorialOkKanmani() {
       <audio
         ref={audioRishmaRef}
         src={TRACKS.rishma.src}
-        preload="metadata"
-        onPlay={() => activeSide === 'rishma' && setIsPlaying(true)}
-        onPause={() => activeSide === 'rishma' && setIsPlaying(false)}
-        onTimeUpdate={(e) => activeSide === 'rishma' && handleTimeUpdate(e.currentTarget)}
-        onLoadedMetadata={(e) => activeSide === 'rishma' && handleLoadedMetadata(e.currentTarget)}
+        preload="auto"
+        loop
+        onPlay={() => {
+          if (activeSideRef.current === 'rishma') setIsPlaying(true)
+        }}
+        onPause={() => {
+          if (activeSideRef.current === 'rishma' && !isInViewRef.current) setIsPlaying(false)
+        }}
+        onTimeUpdate={(e) => activeSideRef.current === 'rishma' && handleTimeUpdate(e.currentTarget)}
+        onLoadedMetadata={(e) => activeSideRef.current === 'rishma' && handleLoadedMetadata(e.currentTarget)}
         onEnded={handleEnded}
         onError={() => setAudioError(true)}
-      />
+      >
+        <source src="/audio/her.mp3" type="audio/mpeg" />
+      </audio>
       <audio
         ref={audioMalliRef}
         src={TRACKS.malli.src}
-        preload="metadata"
-        onPlay={() => activeSide === 'malli' && setIsPlaying(true)}
-        onPause={() => activeSide === 'malli' && setIsPlaying(false)}
-        onTimeUpdate={(e) => activeSide === 'malli' && handleTimeUpdate(e.currentTarget)}
-        onLoadedMetadata={(e) => activeSide === 'malli' && handleLoadedMetadata(e.currentTarget)}
+        preload="auto"
+        loop
+        onPlay={() => {
+          if (activeSideRef.current === 'malli') setIsPlaying(true)
+        }}
+        onPause={() => {
+          if (activeSideRef.current === 'malli' && !isInViewRef.current) setIsPlaying(false)
+        }}
+        onTimeUpdate={(e) => activeSideRef.current === 'malli' && handleTimeUpdate(e.currentTarget)}
+        onLoadedMetadata={(e) => activeSideRef.current === 'malli' && handleLoadedMetadata(e.currentTarget)}
         onEnded={handleEnded}
         onError={() => setAudioError(true)}
-      />
+      >
+        <source src="/side%20a.mpeg" type="audio/mpeg" />
+        <source src="/audio/side-a.mp3" type="audio/mpeg" />
+        <source src="/audio/him.mp3" type="audio/mpeg" />
+      </audio>
+
 
       <div className="relative z-10 max-w-5xl mx-auto">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 26, filter: 'blur(5px)' }}
+          initial={{ opacity: 0, y: 28, filter: 'blur(6px)' }}
           whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-12 sm:mb-16"
         >
           <p className="font-functional text-[10px] sm:text-xs text-[#E6CA85] font-semibold mb-2 tracking-[0.25em]">
@@ -220,7 +310,7 @@ export default function EditorialOkKanmani() {
             initial={{ scaleX: 0, opacity: 0 }}
             whileInView={{ scaleX: 1, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1.2, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
             className="w-16 h-px bg-gradient-to-r from-transparent via-[#E6CA85]/60 to-transparent mx-auto mt-4"
           />
         </motion.div>
@@ -230,9 +320,10 @@ export default function EditorialOkKanmani() {
           <motion.button
             type="button"
             onClick={() => switchSide('malli')}
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.05, y: -1 }}
             whileTap={{ scale: 0.95 }}
-            className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-all duration-300 pb-1 relative cursor-pointer ${
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-colors duration-300 pb-1 relative cursor-pointer ${
               activeSide === 'malli'
                 ? 'text-[#E6CA85] font-semibold'
                 : 'text-[#FAF6EE]/45 hover:text-[#FAF6EE]/80'
@@ -242,20 +333,21 @@ export default function EditorialOkKanmani() {
             {activeSide === 'malli' && (
               <motion.span
                 layoutId="vinylToggleActive"
-                className="absolute bottom-0 left-0 right-0 h-px bg-[#E6CA85] shadow-[0_0_8px_rgba(230,202,133,0.5)]"
-                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute bottom-0 left-0 right-0 h-px bg-[#E6CA85] shadow-[0_0_10px_rgba(230,202,133,0.6)]"
+                transition={{ type: 'spring', stiffness: 380, damping: 30 }}
               />
             )}
           </motion.button>
 
-          <span className="text-[#E6CA85]/40 text-xs">/</span>
+          <span className="text-[#E6CA85]/40 text-xs select-none">/</span>
 
           <motion.button
             type="button"
             onClick={() => switchSide('rishma')}
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.05, y: -1 }}
             whileTap={{ scale: 0.95 }}
-            className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-all duration-300 pb-1 relative cursor-pointer ${
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-colors duration-300 pb-1 relative cursor-pointer ${
               activeSide === 'rishma'
                 ? 'text-[#E6CA85] font-semibold'
                 : 'text-[#FAF6EE]/45 hover:text-[#FAF6EE]/80'
@@ -265,8 +357,8 @@ export default function EditorialOkKanmani() {
             {activeSide === 'rishma' && (
               <motion.span
                 layoutId="vinylToggleActive"
-                className="absolute bottom-0 left-0 right-0 h-px bg-[#E6CA85] shadow-[0_0_8px_rgba(230,202,133,0.5)]"
-                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute bottom-0 left-0 right-0 h-px bg-[#E6CA85] shadow-[0_0_10px_rgba(230,202,133,0.6)]"
+                transition={{ type: 'spring', stiffness: 380, damping: 30 }}
               />
             )}
           </motion.button>
@@ -274,10 +366,10 @@ export default function EditorialOkKanmani() {
 
         {/* Vinyl Player Stage: Disc partly cropped off right edge */}
         <motion.div
-          initial={{ opacity: 0, y: 30, filter: 'blur(5px)' }}
+          initial={{ opacity: 0, y: 32, filter: 'blur(6px)' }}
           whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           className="relative flex flex-col md:flex-row items-center justify-between min-h-[340px] sm:min-h-[420px] gap-8"
         >
           {/* Left: Track Information & Play Controls with AnimatePresence */}
@@ -285,10 +377,10 @@ export default function EditorialOkKanmani() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeSide}
-                initial={{ opacity: 0, y: 14, filter: 'blur(4px)' }}
+                initial={{ opacity: 0, y: 14, filter: 'blur(6px)' }}
                 animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                exit={{ opacity: 0, y: -10, filter: 'blur(4px)' }}
-                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                exit={{ opacity: 0, y: -10, filter: 'blur(6px)' }}
+                transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                 className="space-y-4"
               >
                 <div className="flex items-center gap-2">
@@ -313,8 +405,9 @@ export default function EditorialOkKanmani() {
 
             {/* Play/Pause Text Link */}
             <motion.div
-              whileHover={{ scale: 1.05, x: 2 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.04, x: 2 }}
+              whileTap={{ scale: 0.96 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               className="pt-3 inline-block"
             >
               <button
@@ -331,9 +424,9 @@ export default function EditorialOkKanmani() {
           <div className="w-full md:w-1/2 flex justify-center md:justify-end overflow-visible relative py-4">
             <motion.div
               onClick={togglePlay}
-              whileHover={{ scale: 1.025 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
               className="relative w-[280px] h-[280px] xs:w-[320px] xs:h-[320px] sm:w-[380px] sm:h-[380px] md:w-[420px] md:h-[420px] md:-mr-24 cursor-pointer select-none group"
               title={isPlaying ? 'Click to Pause' : 'Click to Play'}
             >
@@ -445,8 +538,8 @@ export default function EditorialOkKanmani() {
               initial={{ opacity: 0, x: -30, rotate: -2, filter: 'blur(4px)' }}
               whileInView={{ opacity: 1, x: 0, rotate: -1.5, filter: 'blur(0px)' }}
               viewport={{ once: true, margin: '-40px' }}
-              whileHover={{ rotate: 0, y: -8, scale: 1.03 }}
-              transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ rotate: 0, y: -8, scale: 1.025 }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
               className="md:col-span-3 relative p-2.5 lg:p-3 rounded-2xl bg-[#1A1326]/95 border border-[#E6CA85]/35 shadow-[0_20px_50px_rgba(0,0,0,0.6),0_0_35px_rgba(141,118,168,0.22)] backdrop-blur-md group select-none transition-shadow duration-500 hover:shadow-[0_25px_60px_rgba(0,0,0,0.7),0_0_45px_rgba(141,118,168,0.35)] cursor-pointer"
             >
               {/* Archival Brass Corner Brackets */}
@@ -481,7 +574,7 @@ export default function EditorialOkKanmani() {
               initial={{ opacity: 0, y: 26, filter: 'blur(5px)' }}
               whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
               className="md:col-span-6 text-center relative flex flex-col items-center justify-center px-4 lg:px-6"
             >
               {/* Decorative Cinema Label */}
@@ -518,7 +611,7 @@ export default function EditorialOkKanmani() {
                 initial={{ scaleX: 0, opacity: 0 }}
                 whileInView={{ scaleX: 1, opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 1.2, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                 className="w-24 h-px bg-gradient-to-r from-transparent via-[#E6CA85]/60 to-transparent mx-auto mt-6"
               />
             </motion.div>
@@ -528,8 +621,8 @@ export default function EditorialOkKanmani() {
               initial={{ opacity: 0, x: 30, rotate: 2, filter: 'blur(4px)' }}
               whileInView={{ opacity: 1, x: 0, rotate: 1.5, filter: 'blur(0px)' }}
               viewport={{ once: true, margin: '-40px' }}
-              whileHover={{ rotate: 0, y: -8, scale: 1.03 }}
-              transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ rotate: 0, y: -8, scale: 1.025 }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
               className="md:col-span-3 relative p-2.5 lg:p-3 rounded-2xl bg-[#1A1326]/95 border border-[#E6CA85]/35 shadow-[0_20px_50px_rgba(0,0,0,0.6),0_0_35px_rgba(230,202,133,0.18)] backdrop-blur-md group select-none transition-shadow duration-500 hover:shadow-[0_25px_60px_rgba(0,0,0,0.7),0_0_45px_rgba(230,202,133,0.3)] cursor-pointer"
             >
               {/* Archival Brass Corner Brackets */}
@@ -567,7 +660,7 @@ export default function EditorialOkKanmani() {
               initial={{ opacity: 0, y: 24, filter: 'blur(5px)' }}
               whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
               className="text-center relative px-2"
             >
               <div className="flex items-center justify-center gap-2 mb-3">
@@ -605,7 +698,7 @@ export default function EditorialOkKanmani() {
                 whileInView={{ opacity: 1, y: 0, rotate: -1.5 }}
                 viewport={{ once: true }}
                 whileHover={{ rotate: 0, scale: 1.02 }}
-                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
                 className="relative p-2 rounded-xl bg-[#1A1326]/95 border border-[#E6CA85]/35 shadow-lg group select-none"
               >
                 <div className="relative aspect-[4/5] w-full rounded-lg overflow-hidden ring-1 ring-[#E6CA85]/30 bg-[#120D1C]">
@@ -632,7 +725,7 @@ export default function EditorialOkKanmani() {
                 whileInView={{ opacity: 1, y: 0, rotate: 1.5 }}
                 viewport={{ once: true }}
                 whileHover={{ rotate: 0, scale: 1.02 }}
-                transition={{ duration: 0.9, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 1.0, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
                 className="relative p-2 rounded-xl bg-[#1A1326]/95 border border-[#E6CA85]/35 shadow-lg group select-none"
               >
                 <div className="relative aspect-[4/5] w-full rounded-lg overflow-hidden ring-1 ring-[#E6CA85]/30 bg-[#120D1C]">

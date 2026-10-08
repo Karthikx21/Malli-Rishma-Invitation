@@ -15,14 +15,14 @@ interface EditorialCardRevealProps {
 /**
  * EditorialCardReveal:
  * Luxury Framer Motion wrapper for silky, card-by-card scroll reveals.
- * Uses high-end editorial cubic-bezier easing ([0.22, 1, 0.36, 1]).
+ * Uses high-end editorial cubic-bezier easing ([0.16, 1, 0.3, 1]).
  * Automatically respects prefers-reduced-motion.
  */
 export default function EditorialCardReveal({
   children,
   className = '',
   delay = 0,
-  duration = 0.8,
+  duration = 0.9,
   direction = 'up',
   scale = false,
 }: EditorialCardRevealProps) {
@@ -67,7 +67,7 @@ export default function EditorialCardReveal({
       transition={{
         duration,
         delay,
-        ease: [0.22, 1, 0.36, 1],
+        ease: [0.16, 1, 0.3, 1],
       }}
       className={className}
     >

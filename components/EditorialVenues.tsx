@@ -65,7 +65,7 @@ export default function EditorialVenues() {
           initial={{ opacity: 0, y: 26, filter: 'blur(5px)' }}
           whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
         >
           <p className="font-functional text-[10px] sm:text-xs text-[#E6CA85] font-semibold mb-2 tracking-[0.25em]">
             LOCATION &amp; DIRECTIONS
@@ -80,7 +80,7 @@ export default function EditorialVenues() {
             initial={{ scaleX: 0, opacity: 0 }}
             whileInView={{ scaleX: 1, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="w-16 h-px bg-gradient-to-r from-transparent via-[#E6CA85]/60 to-transparent mx-auto mt-4 mb-16"
           />
         </motion.div>
@@ -94,7 +94,12 @@ export default function EditorialVenues() {
               whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               whileHover={{ y: -6 }}
               viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.5, delay: 0.1 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+              transition={{
+                duration: 1.1,
+                delay: 0.1 + i * 0.12,
+                ease: [0.16, 1, 0.3, 1],
+                y: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
+              }}
               className={`flex flex-col justify-between pt-6 border-t border-[#3D2C52]/70 group ${
                 i > 0 ? 'md:border-t-0 md:border-l md:border-[#3D2C52]/70 md:pl-8' : ''
               }`}
@@ -123,7 +128,7 @@ export default function EditorialVenues() {
                 <motion.a
                   whileHover={{ x: 5 }}
                   whileTap={{ scale: 0.96 }}
-                  transition={{ duration: 0.2, ease: 'easeOut' }}
+                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                   href={v.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"

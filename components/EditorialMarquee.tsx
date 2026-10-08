@@ -11,7 +11,7 @@ export default function EditorialMarquee() {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
       className="relative w-full bg-[#FAF8FC] text-[#8D76A8] border-y border-[#D8CEE5]/60 py-3 overflow-hidden select-none cursor-default"
       aria-hidden="true"
     >
@@ -39,6 +39,9 @@ export default function EditorialMarquee() {
         .animate-marquee {
           display: inline-flex;
           animation: marquee 40s linear infinite;
+          will-change: transform;
+          transform: translateZ(0);
+          backface-visibility: hidden;
         }
         .animate-marquee:hover {
           animation-play-state: paused;
