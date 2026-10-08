@@ -152,8 +152,29 @@ export default function EditorialChapters() {
               </motion.div>
             </div>
 
+            {/* Catchy Ring Exchange Timing Callout */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.15 }}
+              className="p-3 sm:px-4 sm:py-3 rounded-xl bg-gradient-to-r from-[#E6CA85]/15 via-[#E6CA85]/10 to-transparent border border-[#E6CA85]/35 backdrop-blur-md flex items-center gap-2.5 sm:gap-3"
+            >
+              <span className="text-base sm:text-lg shrink-0" aria-hidden="true">
+                💍
+              </span>
+              <p className="font-functional text-xs sm:text-sm text-[#FAF6EE] tracking-[0.03em] leading-snug">
+                <span className="font-semibold text-[#E6CA85]">
+                  Dinner can wait, but the rings won’t!
+                </span>{' '}
+                <span className="text-[#FAF6EE]/90 font-light">
+                  Ring exchange is at 6:00 PM sharp — no rewinds!
+                </span>
+              </p>
+            </motion.div>
+
             {/* Action Links: Text Links with Left-to-Right Drawing Gold Underline */}
-            <div className="pt-6 flex flex-wrap items-center gap-6 sm:gap-10">
+            <div className="pt-4 flex flex-wrap items-center gap-6 sm:gap-10">
               <motion.a
                 whileHover={{ x: 4 }}
                 transition={{ duration: 0.2 }}
