@@ -1,10 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import {
-  WEDDING_CALENDAR_EVENTS,
-  buildGoogleCalendarUrl,
-} from '@/lib/calendar'
 
 export default function EditorialVenues() {
   const venues = [
@@ -16,7 +12,6 @@ export default function EditorialVenues() {
       time: '6 PM to 10 PM',
       mapsUrl:
         'https://www.google.com/maps/search/?api=1&query=Jenneys+Residency+Avinashi+Road+Coimbatore',
-      calUrl: buildGoogleCalendarUrl(WEDDING_CALENDAR_EVENTS.christianNuptials),
     },
     {
       day: '20 Nov 2026',
@@ -26,7 +21,6 @@ export default function EditorialVenues() {
       time: '6 AM to 7 AM',
       mapsUrl:
         'https://www.google.com/maps/search/?api=1&query=Kumarankundru+Temple+Mettupalayam',
-      calUrl: buildGoogleCalendarUrl(WEDDING_CALENDAR_EVENTS.hinduMuhurtham),
     },
     {
       day: '20 Nov 2026',
@@ -36,7 +30,6 @@ export default function EditorialVenues() {
       time: '11 AM to 2 PM',
       mapsUrl:
         'https://www.google.com/maps/search/?api=1&query=Shri+Lakshmi+Hall+Annur+Road+Mettupalayam',
-      calUrl: buildGoogleCalendarUrl(WEDDING_CALENDAR_EVENTS.hinduReception),
     },
   ]
 
@@ -130,29 +123,18 @@ export default function EditorialVenues() {
                 </p>
               </div>
 
-              {/* Text links with gold drawing underline */}
-              <div className="pt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
+              {/* Text link with gold drawing underline */}
+              <div className="pt-6">
                 <motion.a
-                  whileHover={{ x: 3 }}
+                  whileHover={{ x: 5 }}
                   whileTap={{ scale: 0.96 }}
                   transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                   href={v.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="gold-link text-[11px] tracking-[0.25em] inline-flex items-center"
+                  className="gold-link text-xs tracking-[0.28em] inline-flex items-center"
                 >
-                  MAPS ↗
-                </motion.a>
-                <motion.a
-                  whileHover={{ x: 3 }}
-                  whileTap={{ scale: 0.96 }}
-                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                  href={v.calUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="gold-link text-[11px] tracking-[0.25em] inline-flex items-center text-[#E6CA85]/80 hover:text-[#FAF6EE]"
-                >
-                  + GOOGLE CALENDAR ↗
+                  VIEW ON GOOGLE MAPS ↗
                 </motion.a>
               </div>
             </motion.div>

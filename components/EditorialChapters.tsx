@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import {
   WEDDING_CALENDAR_EVENTS,
-  buildGoogleCalendarUrl,
   downloadIcsFile,
 } from '@/lib/calendar'
 
@@ -171,17 +170,6 @@ export default function EditorialChapters() {
                 VIEW ON GOOGLE MAPS ↗
               </motion.a>
 
-              <motion.a
-                whileHover={{ x: 5 }}
-                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                href={buildGoogleCalendarUrl(WEDDING_CALENDAR_EVENTS.christianNuptials)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="gold-link inline-block"
-              >
-                + GOOGLE CALENDAR ↗
-              </motion.a>
-
               <motion.button
                 type="button"
                 whileHover={{ x: 5 }}
@@ -192,7 +180,7 @@ export default function EditorialChapters() {
                 }
                 className="gold-link text-[#FAF6EE]/80 cursor-pointer"
               >
-                + APPLE / ICAL (.ICS)
+                + ADD TO CALENDAR
               </motion.button>
             </div>
           </div>
@@ -295,7 +283,7 @@ export default function EditorialChapters() {
                 <p className="font-serif-title text-base sm:text-lg text-[#FAF6EE]/90 font-light leading-relaxed">
                   Kumarankundru Temple, Mettupalayam
                 </p>
-                <div className="pt-2 flex flex-wrap items-center gap-4">
+                <div className="pt-2">
                   <motion.a
                     whileHover={{ x: 5 }}
                     transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
@@ -305,16 +293,6 @@ export default function EditorialChapters() {
                     className="gold-link inline-block"
                   >
                     TEMPLE ON MAPS ↗
-                  </motion.a>
-                  <motion.a
-                    whileHover={{ x: 5 }}
-                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                    href={buildGoogleCalendarUrl(WEDDING_CALENDAR_EVENTS.hinduMuhurtham)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="gold-link text-[11px] opacity-80 hover:opacity-100 inline-block"
-                  >
-                    + GOOGLE CAL (6 AM) ↗
                   </motion.a>
                 </div>
               </motion.div>
@@ -339,7 +317,7 @@ export default function EditorialChapters() {
                 <p className="font-serif-title text-base sm:text-lg text-[#FAF6EE]/90 font-light leading-relaxed">
                   Shri Lakshmi Hall, Mettupalayam – Annur Road
                 </p>
-                <div className="pt-2 flex flex-wrap items-center gap-4">
+                <div className="pt-2">
                   <motion.a
                     whileHover={{ x: 5 }}
                     transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
@@ -350,33 +328,12 @@ export default function EditorialChapters() {
                   >
                     HALL ON MAPS ↗
                   </motion.a>
-                  <motion.a
-                    whileHover={{ x: 5 }}
-                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                    href={buildGoogleCalendarUrl(WEDDING_CALENDAR_EVENTS.hinduReception)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="gold-link text-[11px] opacity-80 hover:opacity-100 inline-block"
-                  >
-                    + GOOGLE CAL (11 AM) ↗
-                  </motion.a>
                 </div>
               </motion.div>
             </div>
 
             {/* Add to Calendar Action */}
             <div className="pt-6 flex flex-wrap items-center gap-6 sm:gap-10 border-t border-[#C5A059]/30">
-              <motion.a
-                whileHover={{ x: 5 }}
-                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                href={buildGoogleCalendarUrl(WEDDING_CALENDAR_EVENTS.hinduWeddingFull)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="gold-link inline-block"
-              >
-                + GOOGLE CALENDAR (FULL DAY) ↗
-              </motion.a>
-
               <motion.button
                 type="button"
                 whileHover={{ x: 5 }}
@@ -387,7 +344,7 @@ export default function EditorialChapters() {
                 }
                 className="gold-link text-[#FAF6EE]/80 cursor-pointer"
               >
-                + APPLE / ICAL (.ICS)
+                + ADD TO CALENDAR
               </motion.button>
             </div>
           </div>

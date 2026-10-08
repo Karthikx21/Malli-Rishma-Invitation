@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   WEDDING_CALENDAR_EVENTS,
-  buildGoogleCalendarUrl,
   downloadIcsFile,
 } from '@/lib/calendar'
 
@@ -173,25 +172,8 @@ export default function EditorialCountdown() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mt-12 flex flex-wrap items-center justify-center gap-6 sm:gap-8 select-none"
+          className="mt-12 flex items-center justify-center select-none"
         >
-          <motion.a
-            whileHover={{ scale: 1.03, y: -1 }}
-            whileTap={{ scale: 0.97 }}
-            href={
-              targetDate === '18'
-                ? buildGoogleCalendarUrl(WEDDING_CALENDAR_EVENTS.christianNuptials)
-                : buildGoogleCalendarUrl(WEDDING_CALENDAR_EVENTS.hinduWeddingFull)
-            }
-            target="_blank"
-            rel="noopener noreferrer"
-            className="gold-link-dark text-xs tracking-[0.25em] font-semibold cursor-pointer"
-          >
-            + ADD {targetDate === '18' ? '18 NOV' : '20 NOV'} TO GOOGLE CALENDAR ↗
-          </motion.a>
-
-          <span className="text-[#8D76A8]/40 text-xs hidden sm:inline select-none">·</span>
-
           <motion.button
             type="button"
             whileHover={{ scale: 1.03, y: -1 }}
@@ -203,9 +185,9 @@ export default function EditorialCountdown() {
                   : WEDDING_CALENDAR_EVENTS.hinduWeddingFull
               )
             }
-            className="gold-link-dark text-xs tracking-[0.25em] opacity-80 hover:opacity-100 cursor-pointer"
+            className="gold-link-dark text-xs tracking-[0.25em] font-semibold cursor-pointer"
           >
-            + DOWNLOAD .ICS
+            + ADD TO CALENDAR
           </motion.button>
         </motion.div>
       </div>
