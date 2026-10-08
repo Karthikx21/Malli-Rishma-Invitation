@@ -75,7 +75,7 @@ export default function EditorialDressCode() {
                 Christian Nuptials Ceremony
               </h3>
               <p className="font-serif-title text-base sm:text-lg text-[#2D2338]/85 font-light leading-relaxed">
-                The groom will be in a classic coat suit and the bride in a white gown. We would love for you to join us in shades of red wine or evening formal elegance.
+                The groom and the bride will be in classic Christian attire. We would love for you to join us in shades of red wine or evening formal elegance.
               </p>
             </div>
 
