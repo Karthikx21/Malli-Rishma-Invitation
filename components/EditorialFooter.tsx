@@ -107,7 +107,7 @@ export default function EditorialFooter({ onReplayIntro }: EditorialFooterProps)
             #RISHMA FOUND HER
           </span>
           <span className="font-accent text-2xl text-[#E6CA85] leading-none mt-1">
-            Pavazha Malli
+            (Pavazha) Malli
           </span>
         </motion.div>
 

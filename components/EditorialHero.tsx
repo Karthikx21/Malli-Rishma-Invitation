@@ -101,10 +101,10 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
             #RISHMA FOUND HER
           </span>
 
-          {/* Line 2: Pavazha (Script) + MALLI (White Sans) */}
+          {/* Line 2: (Pavazha) (Script) + MALLI (White Sans) */}
           <div className="flex items-center justify-center gap-2 mt-1">
             <span className="font-accent text-2xl sm:text-3xl text-[#E6CA85] leading-none drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)]">
-              Pavazha
+              (Pavazha)
             </span>
             <span className="font-functional text-xs sm:text-sm text-[#FAF7F2] font-semibold tracking-[0.28em] uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
               MALLI
