@@ -12,6 +12,11 @@ if (typeof window !== 'undefined') {
       const playingTarget = event.target as HTMLAudioElement | null
       if (!playingTarget || playingTarget.tagName !== 'AUDIO') return
 
+      // Enforce balanced 65% volume ceiling across all audio sources (60-70% range)
+      if (playingTarget.volume > 0.65) {
+        playingTarget.volume = 0.65
+      }
+
       const allAudios = document.querySelectorAll('audio')
       allAudios.forEach((audio) => {
         if (audio !== playingTarget && !audio.paused) {
@@ -27,6 +32,11 @@ if (typeof window !== 'undefined') {
  * Safely plays a target audio element while ensuring every other audio element is paused.
  */
 export function playExclusive(targetAudio: HTMLAudioElement): Promise<void> {
+  // Enforce balanced 65% volume ceiling across all audio sources (60-70% range)
+  if (targetAudio.volume > 0.65) {
+    targetAudio.volume = 0.65
+  }
+
   if (typeof document !== 'undefined') {
     const allAudios = document.querySelectorAll('audio')
     allAudios.forEach((audio) => {

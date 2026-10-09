@@ -24,8 +24,8 @@ const TRACKS = {
     person: 'MALLI',
     vibe: 'HIS VIBE',
     title: 'The song on loop in his head on his wedding day',
-    src: '/side%20a.mpeg',
-    fallbackDuration: '1:34',
+    src: '/side%20b%202.mp3',
+    fallbackDuration: '0:22',
   },
 }
 
@@ -45,6 +45,12 @@ export default function EditorialOkKanmani() {
   useEffect(() => {
     activeSideRef.current = activeSide
   }, [activeSide])
+
+  // Initialize both audio elements to balanced 65% volume (60-70% range)
+  useEffect(() => {
+    if (audioRishmaRef.current) audioRishmaRef.current.volume = 0.65
+    if (audioMalliRef.current) audioMalliRef.current.volume = 0.65
+  }, [])
 
   const isInViewRef = useRef(false)
   const userPausedRef = useRef(false)
@@ -83,6 +89,7 @@ export default function EditorialOkKanmani() {
     if (!audio) return
 
     audio.muted = false
+    audio.volume = 0.65
     playExclusive(audio)
       .then(() => {
         setIsPlaying(true)
@@ -154,6 +161,7 @@ export default function EditorialOkKanmani() {
     // Play next side immediately if section is currently in view
     if (isInViewRef.current && nextAudio) {
       nextAudio.muted = false
+      nextAudio.volume = 0.65
       playExclusive(nextAudio)
         .then(() => {
           setIsPlaying(true)
@@ -256,7 +264,8 @@ export default function EditorialOkKanmani() {
         src={TRACKS.rishma.src}
         preload="auto"
         loop
-        onPlay={() => {
+        onPlay={(e) => {
+          e.currentTarget.volume = 0.65
           if (activeSideRef.current === 'rishma') setIsPlaying(true)
         }}
         onPause={() => {
@@ -276,7 +285,8 @@ export default function EditorialOkKanmani() {
         src={TRACKS.malli.src}
         preload="auto"
         loop
-        onPlay={() => {
+        onPlay={(e) => {
+          e.currentTarget.volume = 0.65
           if (activeSideRef.current === 'malli') setIsPlaying(true)
         }}
         onPause={() => {
@@ -287,8 +297,8 @@ export default function EditorialOkKanmani() {
         onEnded={handleEnded}
         onError={() => setAudioError(true)}
       >
-        <source src="/side%20a.mpeg" type="audio/mpeg" />
-        <source src="/audio/side-a.mp3" type="audio/mpeg" />
+        <source src="/side%20b%202.mp3" type="audio/mpeg" />
+        <source src="/audio/side-b-2.mp3" type="audio/mpeg" />
         <source src="/audio/him.mp3" type="audio/mpeg" />
       </audio>
 

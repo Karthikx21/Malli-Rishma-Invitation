@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import {
   playExclusive,
   isAnyOtherAudioPlaying,
@@ -10,19 +10,22 @@ import {
 
 /**
  * FloatingMusicPlayer:
- * Plays "Church Wedding (Anbil Avan).mp3" starting from the intro video itself.
- * Anchored in the bottom-right corner as a luxury editorial media pill.
- * Features:
- * - Autoplay initiation from site load with fallback to first user interaction.
- * - Dancing gold audio equalizer bars and spinning vinyl disc when playing.
- * - Single-tap toggle to Mute / Play ("Touch to Mute" / "Touch to Play").
- * - High z-index (z-[70]) so it is visible and usable during the intro video as well.
- * - Intelligent cross-section coordination: automatically yields to section audio (Side A/B)
- *   when in view, and automatically resumes when the user scrolls away.
+ * Minimal, elegant invitation-matching music button.
+ * - 44x44px circular frosted glass button at bottom-4 right-4 (sm:bottom-6 sm:right-6).
+ * - Thin-stroke gold Play and Pause icons with 200ms crossfade.
+ * - Gentle 2.4s breathing pulse on load, expanding gold ring when playing.
+ * - "Tap for music" Cormorant Garamond tooltip on first load (fades after 4s or first tap).
+ * - Full audio coordinator integration preserved.
+ * - Plays soundtrack once through (no loop).
  */
 export default function FloatingMusicPlayer() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [hasInteracted, setHasInteracted] = useState(false)
+  const [showTooltip, setShowTooltip] = useState(true)
+  const [isBreathing, setIsBreathing] = useState(false)
+
+  const shouldReduceMotion = useReducedMotion()
+
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const userMutedRef = useRef(false)
   const pausedBySectionRef = useRef(false)
@@ -32,11 +35,12 @@ export default function FloatingMusicPlayer() {
     const audio = audioRef.current
     if (!audio) return
     if (userMutedRef.current) return
+    if (audio.ended) return
     // Never clash if an audio section (e.g. OK Kanmani) is active or any other audio is playing
     if (isAudioSectionActive() || isAnyOtherAudioPlaying(audio)) return
 
     audio.muted = false
-    audio.volume = 0.8
+    audio.volume = 0.65
 
     playExclusive(audio)
       .then(() => {
@@ -52,7 +56,7 @@ export default function FloatingMusicPlayer() {
     const audio = audioRef.current
     if (!audio) return
 
-    audio.volume = 0.8
+    audio.volume = 0.65
     audio.muted = false
 
     // Attempt immediately on mount
@@ -82,11 +86,12 @@ export default function FloatingMusicPlayer() {
       if (
         currentAudio &&
         !userMutedRef.current &&
+        !currentAudio.ended &&
         !isAudioSectionActive() &&
         !isAnyOtherAudioPlaying(currentAudio)
       ) {
         currentAudio.muted = false
-        currentAudio.volume = 0.8
+        currentAudio.volume = 0.65
         currentAudio
           .play()
           .then(() => {
@@ -114,7 +119,6 @@ export default function FloatingMusicPlayer() {
 
   // 2. Intelligent Auto-Pause & Resume with Section Audio Coordination (Side A, Side B)
   useEffect(() => {
-    // Fired when user scrolls INTO an audio section (like OK Kanmani)
     const handleSectionEnter = () => {
       if (resumeTimerRef.current) {
         clearTimeout(resumeTimerRef.current)
@@ -127,13 +131,11 @@ export default function FloatingMusicPlayer() {
           mainAudio.pause()
           setIsPlaying(false)
         } else if (!userMutedRef.current) {
-          // Main audio was unmuted/intended to play
           pausedBySectionRef.current = true
         }
       }
     }
 
-    // Fired when user scrolls OUT OF an audio section
     const handleSectionLeave = () => {
       if (isAudioSectionActive()) return
 
@@ -152,8 +154,9 @@ export default function FloatingMusicPlayer() {
 
         const mainAudio = audioRef.current
         if (mainAudio && pausedBySectionRef.current && !userMutedRef.current) {
+          if (mainAudio.ended) return
           mainAudio.muted = false
-          mainAudio.volume = 0.8
+          mainAudio.volume = 0.65
           mainAudio
             .play()
             .then(() => {
@@ -165,7 +168,6 @@ export default function FloatingMusicPlayer() {
       }, 100)
     }
 
-    // Fallback: whenever another audio element starts playing anywhere
     const handleOtherAudioPlay = (e?: Event) => {
       const target = e?.target
       if (target instanceof HTMLAudioElement && target !== audioRef.current) {
@@ -186,11 +188,9 @@ export default function FloatingMusicPlayer() {
       }
     }
 
-    // Fallback: whenever an audio pauses, only resume if NO audio section is active
     const handleOtherAudioStop = (e?: Event) => {
       const target = e?.target
       if (target instanceof HTMLAudioElement && target !== audioRef.current) {
-        // If an audio section is active, strictly do NOT resume!
         if (isAudioSectionActive()) return
 
         if (resumeTimerRef.current) {
@@ -207,7 +207,9 @@ export default function FloatingMusicPlayer() {
           if (!isAnyOtherAudioPlaying) {
             const mainAudio = audioRef.current
             if (mainAudio && pausedBySectionRef.current && !userMutedRef.current) {
+              if (mainAudio.ended) return
               mainAudio.muted = false
+              mainAudio.volume = 0.65
               mainAudio
                 .play()
                 .then(() => {
@@ -238,9 +240,43 @@ export default function FloatingMusicPlayer() {
     }
   }, [])
 
-  // 3. Manual Toggle Play / Mute
+  // 3. Tooltip: Fades out after 4 seconds on first load or on first tap
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowTooltip(false)
+    }, 4000)
+    return () => clearTimeout(timer)
+  }, [])
+
+  useEffect(() => {
+    if (isPlaying) {
+      setShowTooltip(false)
+      setIsBreathing(false)
+    }
+  }, [isPlaying])
+
+  // 4. Paused State Breathing Pulse:
+  // After 2 seconds on page load, shows gentle breathing scale pulse a few times (3 cycles * 2.4s), then stops
+  useEffect(() => {
+    const startTimer = setTimeout(() => {
+      setIsBreathing(true)
+    }, 2000)
+
+    const stopTimer = setTimeout(() => {
+      setIsBreathing(false)
+    }, 2000 + 3 * 2400)
+
+    return () => {
+      clearTimeout(startTimer)
+      clearTimeout(stopTimer)
+    }
+  }, [])
+
+  // 5. Manual Toggle Play / Pause
   const togglePlay = (e: React.MouseEvent) => {
     e.stopPropagation()
+    setShowTooltip(false)
+    setIsBreathing(false)
     const audio = audioRef.current
     if (!audio) return
 
@@ -253,103 +289,146 @@ export default function FloatingMusicPlayer() {
     } else {
       userMutedRef.current = false
       pausedBySectionRef.current = false
+      if (audio.ended || (audio.duration && audio.currentTime >= audio.duration)) {
+        audio.currentTime = 0
+      }
       attemptPlay()
     }
   }
 
+  const isPulseActive = isBreathing && !isPlaying && !shouldReduceMotion
+
   return (
     <>
-      {/* Background Audio Element */}
+      {/* Background Audio Element - One-time playback (no loop) */}
       <audio
         ref={audioRef}
         src="/audio/anbil-avan.mp3"
-        loop
         preload="auto"
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
+        onEnded={() => {
+          setIsPlaying(false)
+          pausedBySectionRef.current = false
+        }}
       >
         <source src="/audio/anbil-avan.mp3" type="audio/mpeg" />
         <source src="/Church%20Wedding%20(Anbil%20Avan).mp3" type="audio/mpeg" />
       </audio>
 
-      {/* Floating Bottom-Right Luxury Music Control (Compact & Icon-Only) */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8, y: 15 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ duration: 1.0, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[70] select-none"
-      >
+      {/* Floating Bottom-Right 44x44px Minimal Music Control */}
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[70] select-none">
+        {/* Optional Tiny Tooltip on First Load Only */}
+        <AnimatePresence>
+          {showTooltip && !isPlaying && (
+            <motion.div
+              initial={{ opacity: 0, y: 3 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -2 }}
+              transition={{ duration: 0.35, ease: 'easeOut' }}
+              className="absolute bottom-full right-0 mb-2 whitespace-nowrap pointer-events-none select-none"
+            >
+              <span
+                className="text-[11px] sm:text-xs italic tracking-wider text-[#D4AF37]/70 drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]"
+                style={{ fontFamily: 'var(--font-serif-var, "Cormorant Garamond", Georgia, serif)' }}
+              >
+                Tap for music
+              </span>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* 44x44px Circular Frosted Glass Button */}
         <motion.button
           type="button"
           onClick={togglePlay}
-          whileHover={{ scale: 1.08, y: -2 }}
-          whileTap={{ scale: 0.92 }}
-          transition={{ type: 'spring', stiffness: 380, damping: 24 }}
-          className={`relative w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center backdrop-blur-md transition-all shadow-[0_4px_20px_rgba(0,0,0,0.55),0_0_12px_rgba(230,202,133,0.22)] border cursor-pointer group ${
-            isPlaying
-              ? 'bg-[#181324]/90 border-[#E6CA85]/80 text-[#E6CA85]'
-              : 'bg-[#181324]/80 border-[#E6CA85]/40 text-[#E6CA85]/60 hover:border-[#E6CA85] hover:text-[#E6CA85]'
-          }`}
-          aria-label={isPlaying ? 'Mute background music' : 'Play background music'}
-          title={isPlaying ? 'Mute Music' : 'Play Music'}
+          animate={
+            isPulseActive
+              ? { scale: [1, 1.06, 1] }
+              : { scale: 1 }
+          }
+          transition={
+            isPulseActive
+              ? { duration: 2.4, repeat: Infinity, ease: 'easeInOut' }
+              : { duration: 0.2 }
+          }
+          whileHover={{
+            scale: 1.05,
+            borderColor: 'rgba(212, 175, 55, 1)',
+          }}
+          whileTap={{ scale: 0.95 }}
+          className="relative w-[44px] h-[44px] rounded-full flex items-center justify-center bg-white/10 backdrop-blur-md border border-[rgba(212,175,55,0.5)] shadow-[0_4px_20px_rgba(0,0,0,0.25)] transition-colors cursor-pointer group focus:outline-none focus-visible:ring-1 focus-visible:ring-[#D4AF37]"
+          aria-label={isPlaying ? 'Pause music' : 'Play music'}
         >
-          {/* Subtle Outer Pulsing Halo when playing */}
-          {isPlaying && (
-            <span className="absolute -inset-1 rounded-full border border-[#E6CA85]/25 animate-ping pointer-events-none" />
+          {/* Expanding Gold Ring when Playing (scale 1 -> 1.5, opacity 0.5 -> 0, 2.4s, infinite) */}
+          {isPlaying && !shouldReduceMotion && (
+            <motion.span
+              aria-hidden="true"
+              className="absolute inset-0 rounded-full border border-[#D4AF37] pointer-events-none"
+              initial={{ scale: 1, opacity: 0.5 }}
+              animate={{ scale: 1.5, opacity: 0 }}
+              transition={{
+                duration: 2.4,
+                repeat: Infinity,
+                ease: 'easeOut',
+              }}
+            />
           )}
 
-          {/* Dancing Sound Bars when playing, Clean Play Glyph when paused */}
-          {isPlaying ? (
-            <div className="flex items-end justify-center gap-[2.5px] h-4 px-1" aria-hidden="true">
-              <span className="w-[2.5px] bg-[#E6CA85] rounded-full eq-bar-1" />
-              <span className="w-[2.5px] bg-[#FAF6EE] rounded-full eq-bar-2" />
-              <span className="w-[2.5px] bg-[#E6CA85] rounded-full eq-bar-3" />
-              <span className="w-[2.5px] bg-[#C5A059] rounded-full eq-bar-4" />
-            </div>
-          ) : (
-            <div className="relative flex items-center justify-center" aria-hidden="true">
-              <svg
-                className="w-4 h-4 ml-0.5 fill-current text-[#E6CA85] transition-transform group-hover:scale-110"
-                viewBox="0 0 24 24"
+          {/* Crossfade between Play & Pause Icons (opacity + slight scale, 200ms) */}
+          <AnimatePresence mode="wait" initial={false}>
+            {isPlaying ? (
+              <motion.div
+                key="pause-icon"
+                initial={{ opacity: 0, scale: 0.85 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.85 }}
+                transition={{ duration: 0.2 }}
+                className="flex items-center justify-center"
+                aria-hidden="true"
               >
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            </div>
-          )}
+                <svg
+                  width="17"
+                  height="17"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#D4AF37"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="8" y1="5" x2="8" y2="19" />
+                  <line x1="16" y1="5" x2="16" y2="19" />
+                </svg>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="play-icon"
+                initial={{ opacity: 0, scale: 0.85 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.85 }}
+                transition={{ duration: 0.2 }}
+                className="flex items-center justify-center"
+                aria-hidden="true"
+              >
+                <svg
+                  width="17"
+                  height="17"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#D4AF37"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="translate-x-[1px]"
+                >
+                  <polygon points="6 4 20 12 6 20 6 4" />
+                </svg>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.button>
-      </motion.div>
-
-      {/* Pure Equalizer Keyframe Styles */}
-      <style jsx global>{`
-        @keyframes eq1 {
-          0%, 100% { height: 4px; }
-          50% { height: 14px; }
-        }
-        @keyframes eq2 {
-          0%, 100% { height: 12px; }
-          50% { height: 5px; }
-        }
-        @keyframes eq3 {
-          0%, 100% { height: 6px; }
-          50% { height: 15px; }
-        }
-        @keyframes eq4 {
-          0%, 100% { height: 10px; }
-          50% { height: 4px; }
-        }
-        .eq-bar-1 {
-          animation: eq1 0.8s ease-in-out infinite;
-        }
-        .eq-bar-2 {
-          animation: eq2 0.7s ease-in-out infinite;
-        }
-        .eq-bar-3 {
-          animation: eq3 0.9s ease-in-out infinite;
-        }
-        .eq-bar-4 {
-          animation: eq4 0.65s ease-in-out infinite;
-        }
-      `}</style>
+      </div>
     </>
   )
 }

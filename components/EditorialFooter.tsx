@@ -10,7 +10,7 @@ interface EditorialFooterProps {
 export default function EditorialFooter({ onReplayIntro }: EditorialFooterProps) {
   return (
     <footer
-      className="relative w-full bg-[#181324] text-[#FAF6EE] pt-24 pb-20 sm:pt-32 sm:pb-28 px-6 sm:px-12 border-t border-[#8D76A8]/30 text-center overflow-hidden"
+      className="relative w-full bg-[#181324] text-[#FAF6EE] pt-24 pb-28 sm:pt-32 sm:pb-32 px-6 sm:px-12 border-t border-[#8D76A8]/30 text-center overflow-hidden"
       aria-label="Footer and Blessings Sign-off"
     >
       {/* 1. Atmospheric Candlelit Chapel / Candelabra Background */}
