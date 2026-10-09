@@ -142,12 +142,15 @@ export default function EditorialCouple() {
                 className="relative w-full max-w-[280px] sm:max-w-[320px] cursor-pointer"
               >
                 {/* Arch-shaped Frame */}
-                <div className="relative aspect-[3/4] w-full rounded-t-[140px] sm:rounded-t-[160px] rounded-b-2xl overflow-hidden shadow-xl border-2 border-[#E6CA85]/70 bg-[#FAF8FC] group">
-                  <img
-                    src="/editorial/couple-caricature-v2.jpg"
-                    alt="Malli Sumandhar and Rishma John Wedding Caricature"
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-                  />
+                <div className="relative aspect-[2/3] w-full rounded-t-[140px] sm:rounded-t-[160px] rounded-b-2xl overflow-hidden shadow-xl border-2 border-[#E6CA85]/70 bg-[#FAF8FC] group">
+                  <picture>
+                    <source srcSet="/editorial/couple-traditional.webp" type="image/webp" />
+                    <img
+                      src="/editorial/couple-traditional.jpg"
+                      alt="Malli Sumandhar and Rishma John Wedding Portrait"
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                    />
+                  </picture>
                   {/* Subtle soft vignette */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#2D2338]/10 via-transparent to-transparent pointer-events-none" />
                 </div>
