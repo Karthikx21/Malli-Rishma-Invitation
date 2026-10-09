@@ -35,7 +35,7 @@ export const WEDDING_CALENDAR_EVENTS = {
     endDateLocal: '20261120T140000',
   },
   hinduMuhurtham: {
-    title: 'Malli & Rishma · Hindu Muhurtham',
+    title: 'Malli & Rishma · Muhurtham',
     description:
       'Sacred Muhurtham Ceremony of Malli Sumandhar & Rishma John at Kumarankundru Temple, Mettupalayam.\nTime: 6:00 AM to 7:00 AM IST.\n\n#RishmaFoundHerPavazhaMalli',
     location: 'Kumarankundru Temple, Mettupalayam, Coimbatore, Tamil Nadu',

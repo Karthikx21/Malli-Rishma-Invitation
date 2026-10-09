@@ -25,7 +25,7 @@ export default function VenueCards() {
     {
       name: 'Kumarankundru Temple',
       tamilName: 'குமரன்குன்று திருக்கோவில்',
-      occasion: '20 Nov · Sacred Hindu Muhurtham',
+      occasion: '20 Nov · Sacred Muhurtham',
       time: '6:00 AM – 7:00 AM',
       address: 'Kumarankundru, Coimbatore, Tamil Nadu',
       landmark: 'Hillside Temple Sanctum',

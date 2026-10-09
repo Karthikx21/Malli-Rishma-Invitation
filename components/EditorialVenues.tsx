@@ -15,7 +15,7 @@ export default function EditorialVenues() {
     },
     {
       day: '20 Nov 2026',
-      title: 'Hindu Muhurtham',
+      title: 'Muhurtham',
       name: 'Kumarankundru Temple',
       address: 'Mettupalayam, Coimbatore District, Tamil Nadu',
       time: '6 AM to 7 AM',

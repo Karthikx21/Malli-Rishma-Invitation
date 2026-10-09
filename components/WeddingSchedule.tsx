@@ -273,8 +273,8 @@ export default function WeddingSchedule() {
               <button
                 onClick={() =>
                   downloadIcs(
-                    'Malli & Rishma · Hindu Muhurtham & Reception',
-                    'Traditional Hindu Muhurtham at Kumarankundru Temple followed by Reception at Shri Lakshmi Hall, Mettupalayam.',
+                    'Malli & Rishma · Muhurtham & Reception',
+                    'Traditional Muhurtham at Kumarankundru Temple followed by Reception at Shri Lakshmi Hall, Mettupalayam.',
                     'Kumarankundru Temple & Shri Lakshmi Hall, Coimbatore',
                     '2026-11-20T00:30:00.000Z',
                     '2026-11-20T08:30:00.000Z',

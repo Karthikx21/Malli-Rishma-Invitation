@@ -579,15 +579,6 @@ export default function EditorialOkKanmani() {
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
               className="md:col-span-6 text-center relative flex flex-col items-center justify-center px-4 lg:px-6"
             >
-              {/* Decorative Cinema Label */}
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 lg:w-12 h-px bg-gradient-to-r from-transparent to-[#E6CA85]/60" />
-                <span className="font-functional text-[9px] text-[#E6CA85] tracking-[0.3em] font-semibold uppercase">
-                  ✦ CINEMATIC INSPIRATION ✦
-                </span>
-                <div className="w-8 lg:w-12 h-px bg-gradient-to-l from-transparent to-[#E6CA85]/60" />
-              </div>
-
               <blockquote className="font-serif-title italic text-2xl lg:text-3xl xl:text-[34px] text-[#FAF6EE] font-light leading-relaxed drop-shadow-sm">
                 &ldquo;Rishma might be Malli&apos;s{' '}
                 <span className="font-semibold text-[#E6CA85] not-italic tracking-wide drop-shadow-[0_0_14px_rgba(230,202,133,0.45)]">
@@ -665,14 +656,6 @@ export default function EditorialOkKanmani() {
               transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
               className="text-center relative px-2"
             >
-              <div className="flex items-center justify-center gap-2 mb-3">
-                <div className="w-6 h-px bg-gradient-to-r from-transparent to-[#E6CA85]/60" />
-                <span className="font-functional text-[8px] text-[#E6CA85] tracking-[0.28em] font-semibold uppercase">
-                  ✦ CINEMATIC INSPIRATION ✦
-                </span>
-                <div className="w-6 h-px bg-gradient-to-l from-transparent to-[#E6CA85]/60" />
-              </div>
-
               <blockquote className="font-serif-title italic text-xl xs:text-2xl text-[#FAF6EE] font-light leading-snug px-1">
                 &ldquo;Rishma might be Malli&apos;s{' '}
                 <span className="font-semibold text-[#E6CA85] not-italic tracking-wide drop-shadow-[0_0_10px_rgba(230,202,133,0.4)]">
