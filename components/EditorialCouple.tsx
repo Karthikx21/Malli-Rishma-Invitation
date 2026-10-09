@@ -95,14 +95,6 @@ export default function EditorialCouple() {
                     <span className="w-1.5 h-1.5 rounded-full bg-[#8D76A8] shrink-0" />
                     <span>Loves adventure &amp; travel</span>
                   </motion.li>
-                  <motion.li
-                    whileHover={{ x: 5 }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                    className="flex items-center gap-3 cursor-default"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#8D76A8] shrink-0" />
-                    <span>Rishma&apos;s safe place</span>
-                  </motion.li>
                 </ul>
               </div>
 
