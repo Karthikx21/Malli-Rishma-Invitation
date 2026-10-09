@@ -71,8 +71,8 @@ export default function FloatingMusicPlayer() {
 
     const handleFirstGesture = (e?: Event) => {
       // If the user tapped on a media control for another audio element, don't hijack it!
-      const target = e?.target as HTMLElement | undefined
-      if (target && target.closest('#songs, [data-audio-control]')) {
+      const target = e?.target
+      if (target instanceof Element && target.closest('#songs, [data-audio-control]')) {
         return
       }
 
@@ -167,8 +167,8 @@ export default function FloatingMusicPlayer() {
 
     // Fallback: whenever another audio element starts playing anywhere
     const handleOtherAudioPlay = (e?: Event) => {
-      const target = e?.target as HTMLElement | undefined
-      if (target && target.tagName === 'AUDIO' && target !== audioRef.current) {
+      const target = e?.target
+      if (target instanceof HTMLAudioElement && target !== audioRef.current) {
         if (resumeTimerRef.current) {
           clearTimeout(resumeTimerRef.current)
           resumeTimerRef.current = null
@@ -188,8 +188,8 @@ export default function FloatingMusicPlayer() {
 
     // Fallback: whenever an audio pauses, only resume if NO audio section is active
     const handleOtherAudioStop = (e?: Event) => {
-      const target = e?.target as HTMLElement | undefined
-      if (target && target.tagName === 'AUDIO' && target !== audioRef.current) {
+      const target = e?.target
+      if (target instanceof HTMLAudioElement && target !== audioRef.current) {
         // If an audio section is active, strictly do NOT resume!
         if (isAudioSectionActive()) return
 

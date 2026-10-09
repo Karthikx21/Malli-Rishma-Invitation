@@ -44,13 +44,17 @@ export default function EditorialIntro({ onStartTransition, onComplete }: Editor
 
   // Trigger the transition directly to Hero
   const triggerTransition = useCallback(() => {
-    // Unmute & play floating background soundtrack immediately on interaction
-    if (typeof window !== 'undefined') {
-      window.dispatchEvent(new CustomEvent('wedding-play-music'))
-    }
-
     if (hasTriggeredRef.current) return
     hasTriggeredRef.current = true
+
+    // Unmute & play floating background soundtrack immediately on interaction
+    if (typeof window !== 'undefined') {
+      try {
+        window.dispatchEvent(new CustomEvent('wedding-play-music'))
+      } catch {
+        // Safe fallback
+      }
+    }
 
     // 1. Immediately pin scroll position strictly to Hero before starting any fade
     if (typeof window !== 'undefined') {
@@ -84,7 +88,11 @@ export default function EditorialIntro({ onStartTransition, onComplete }: Editor
       onClick={triggerTransition}
       onPointerDown={() => {
         if (typeof window !== 'undefined') {
-          window.dispatchEvent(new CustomEvent('wedding-play-music'))
+          try {
+            window.dispatchEvent(new CustomEvent('wedding-play-music'))
+          } catch {
+            // Safe fallback
+          }
         }
       }}
       className={`fixed inset-0 z-50 bg-[#181324] flex items-center justify-center cursor-pointer select-none transition-opacity duration-1000 ease-in-out ${
