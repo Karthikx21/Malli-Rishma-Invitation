@@ -103,12 +103,17 @@ export default function EditorialFooter({ onReplayIntro }: EditorialFooterProps)
           transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col items-center pt-2"
         >
-          <span className="font-functional text-[10px] sm:text-xs text-[#FAF6EE]/75 tracking-[0.35em]">
+          <span className="font-functional text-[10px] sm:text-xs text-[#FAF6EE] font-bold tracking-[0.35em] uppercase">
             #RISHMA FOUND HER
           </span>
-          <span className="font-accent text-2xl text-[#E6CA85] leading-none mt-1">
-            (Pavazha) Malli
-          </span>
+          <div className="flex items-center justify-center gap-2 mt-1">
+            <span className="font-accent text-2xl sm:text-3xl text-[#E6CA85] leading-none">
+              (Pavazha)
+            </span>
+            <span className="font-functional text-xs sm:text-sm text-[#FAF6EE] font-bold tracking-[0.28em] uppercase">
+              MALLI
+            </span>
+          </div>
         </motion.div>
 
         {/* Delicate Hairline */}

@@ -97,7 +97,7 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
           className="flex flex-col items-center"
         >
           {/* Line 1: #RISHMA FOUND HER */}
-          <span className="font-functional text-[9px] sm:text-[10px] text-[#FAF7F2]/90 font-medium tracking-[0.35em] uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
+          <span className="font-functional text-[9px] sm:text-[10px] text-[#FAF7F2] font-bold tracking-[0.35em] uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
             #RISHMA FOUND HER
           </span>
 
@@ -106,7 +106,7 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
             <span className="font-accent text-2xl sm:text-3xl text-[#E6CA85] leading-none drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)]">
               (Pavazha)
             </span>
-            <span className="font-functional text-xs sm:text-sm text-[#FAF7F2] font-semibold tracking-[0.28em] uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
+            <span className="font-functional text-xs sm:text-sm text-[#FAF7F2] font-bold tracking-[0.28em] uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
               MALLI
             </span>
           </div>
