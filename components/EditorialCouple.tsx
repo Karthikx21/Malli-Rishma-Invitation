@@ -180,7 +180,7 @@ export default function EditorialCouple() {
                     THE PARENTS GIVING AWAY THE BRIDE
                   </span>
                   <div className="space-y-0.5 font-serif-title text-base sm:text-lg text-[#2D2338] font-normal tracking-wide">
-                    <p className="leading-snug">JOHN T.P</p>
+                    <p className="leading-snug">JOHN THAIPARAMBIL</p>
                     <p className="text-xs font-functional text-[#8D76A8]/70 tracking-[0.2em] font-light uppercase">&amp;</p>
                     <p className="leading-snug">CAROLINE JOHN</p>
                   </div>

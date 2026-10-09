@@ -100,7 +100,7 @@ export default function CoupleSection() {
                 THE PARENTS GIVING AWAY THE BRIDE
               </span>
               <p className="font-cormorant text-xl text-[#F8F4ED]">
-                JOHN T.P &amp; CAROLINE JOHN
+                JOHN THAIPARAMBIL &amp; CAROLINE JOHN
               </p>
             </div>
 
