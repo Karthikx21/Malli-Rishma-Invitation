@@ -130,14 +130,7 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
         >
           {/* Groom Name */}
           <h1 className="font-serif-title text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-light text-[#FAF7F2] tracking-[0.12em] uppercase leading-none drop-shadow-[0_4px_30px_rgba(0,0,0,0.95)] flex items-center justify-center">
-            <span>MALLI SUMANDHAR</span>
-            <motion.span
-              animate={{ scale: [1, 1.16, 1], opacity: [0.85, 1, 0.85] }}
-              transition={{ repeat: Infinity, duration: 3.2, ease: "easeInOut" }}
-              className="text-[#E6CA85] text-[0.65em] font-normal ml-2.5 opacity-90 select-none inline-block"
-            >
-              ♡
-            </motion.span>
+            MALLI SUMANDHAR
           </h1>
 
           {/* Romantic Gold Ampersand Divider */}
@@ -155,14 +148,7 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
 
           {/* Bride Name */}
           <h2 className="font-serif-title text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-light text-[#FAF7F2] tracking-[0.12em] uppercase leading-none drop-shadow-[0_4px_30px_rgba(0,0,0,0.95)] flex items-center justify-center">
-            <span>RISHMA JOHN</span>
-            <motion.span
-              animate={{ scale: [1, 1.16, 1], opacity: [0.85, 1, 0.85] }}
-              transition={{ repeat: Infinity, duration: 3.2, delay: 0.5, ease: "easeInOut" }}
-              className="text-[#E6CA85] text-[0.65em] font-normal ml-2.5 opacity-90 select-none inline-block"
-            >
-              ♡
-            </motion.span>
+            RISHMA JOHN
           </h2>
         </motion.div>
 
