@@ -212,10 +212,10 @@ export default function EditorialChapters() {
               className="w-full h-full object-cover object-[center_45%]"
             />
             {/* Soft Warm Golden Glow overlay */}
-            <div className="absolute inset-0 bg-[#A63C1E]/10 mix-blend-color pointer-events-none" />
-            {/* Lighter, clearer gradient for optimal image brightness while preserving typography legibility */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#120307]/70 via-[#1F0710]/35 to-transparent pointer-events-none" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(18,3,7,0.5)_0%,transparent_80%)] pointer-events-none" />
+            <div className="absolute inset-0 bg-[#A63C1E]/15 mix-blend-color pointer-events-none" />
+            {/* Balanced rich moody vignette & gradient for gorgeous text contrast and visible ceremony background */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#120307]/85 via-[#1A0A0F]/55 to-[#1A0A0F]/30 pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(18,3,7,0.25)_0%,rgba(18,3,7,0.65)_100%)] pointer-events-none" />
           </motion.div>
         </div>
 
