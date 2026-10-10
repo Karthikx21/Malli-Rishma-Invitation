@@ -75,7 +75,7 @@ export default function WeddingSchedule() {
     {
       time: '06:00 AM – 07:00 AM',
       title: 'Sacred Muhurtham & Thali Kettu',
-      location: 'Kumarankundru Temple',
+      location: 'Arulmigu Kalyana Subramaniya Swamy Temple, Kumarankundru',
       desc: 'Auspicious Vedic chants, Mangala Vaathiyam, Thali tying ceremony, and divine blessings at the hillside sanctum.',
     },
     {
@@ -251,7 +251,7 @@ export default function WeddingSchedule() {
             <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex flex-wrap gap-3 w-full sm:w-auto">
                 <a
-                  href="https://maps.google.com/?q=Kumarankundru+Temple"
+                  href="https://maps.google.com/?q=Arulmigu+Kalyana+Subramaniya+Swamy+Temple+Kumarankundru"
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/[0.05] hover:bg-white/[0.1] border border-white/15 text-[#F8F4ED] font-sans text-xs uppercase tracking-[0.18em] transition-all"

@@ -23,13 +23,13 @@ export default function VenueCards() {
       badgeColor: 'text-[#B08D57]',
     },
     {
-      name: 'Kumarankundru Temple',
-      tamilName: 'குமரன்குன்று திருக்கோவில்',
+      name: 'Arulmigu Kalyana Subramaniya Swamy Temple',
+      tamilName: 'அருள்மிகு கல்யாண சுப்பிரமணிய சுவாமி திருக்கோவில், குமரன்குன்று',
       occasion: '20 Nov · Sacred Muhurtham',
       time: '6:00 AM – 7:00 AM',
-      address: 'Kumarankundru, Coimbatore, Tamil Nadu',
+      address: 'Kumarankundru, Mettupalayam, Coimbatore, Tamil Nadu',
       landmark: 'Hillside Temple Sanctum',
-      mapUrl: 'https://maps.google.com/?q=Kumarankundru+Temple',
+      mapUrl: 'https://maps.google.com/?q=Arulmigu+Kalyana+Subramaniya+Swamy+Temple+Kumarankundru',
       badgeColor: 'text-[#D95C80]',
     },
     {

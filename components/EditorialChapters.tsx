@@ -281,13 +281,13 @@ export default function EditorialChapters() {
                   6:00 AM TO 7:00 AM
                 </p>
                 <p className="font-serif-title text-base sm:text-lg text-[#FAF6EE]/90 font-light leading-relaxed">
-                  Kumarankundru Temple, Mettupalayam
+                  Arulmigu Kalyana Subramaniya Swamy Temple, Kumarankundru
                 </p>
                 <div className="pt-2">
                   <motion.a
                     whileHover={{ x: 5 }}
                     transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                    href="https://www.google.com/maps/search/?api=1&query=Kumarankundru+Temple+Mettupalayam"
+                    href="https://www.google.com/maps/search/?api=1&query=Arulmigu+Kalyana+Subramaniya+Swamy+Temple+Kumarankundru+Mettupalayam"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="gold-link inline-block"

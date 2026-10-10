@@ -27,8 +27,8 @@ export const WEDDING_CALENDAR_EVENTS = {
   hinduWeddingFull: {
     title: 'Malli & Rishma · Wedding & Reception',
     description:
-      'Wedding Celebrations of Malli Sumandhar & Rishma John.\n\nDate: Friday, 20 November 2026\n• Muhurtham: 6:00 AM – 7:00 AM at Kumarankundru Temple, Mettupalayam\n• Reception: 11:00 AM – 2:00 PM at Shri Lakshmi Hall, Mettupalayam\n\n#RishmaFoundHerPavazhaMalli',
-    location: 'Kumarankundru Temple & Shri Lakshmi Hall, Mettupalayam, Coimbatore, Tamil Nadu',
+      'Wedding Celebrations of Malli Sumandhar & Rishma John.\n\nDate: Friday, 20 November 2026\n• Muhurtham: 6:00 AM – 7:00 AM at Arulmigu Kalyana Subramaniya Swamy Temple, Kumarankundru, Mettupalayam\n• Reception: 11:00 AM – 2:00 PM at Shri Lakshmi Hall, Mettupalayam\n\n#RishmaFoundHerPavazhaMalli',
+    location: 'Arulmigu Kalyana Subramaniya Swamy Temple, Kumarankundru & Shri Lakshmi Hall, Mettupalayam, Coimbatore',
     startDateUtc: '20261120T003000Z', // 6:00 AM IST
     endDateUtc: '20261120T083000Z', // 2:00 PM IST
     startDateLocal: '20261120T060000',
@@ -37,8 +37,8 @@ export const WEDDING_CALENDAR_EVENTS = {
   hinduMuhurtham: {
     title: 'Malli & Rishma · Muhurtham',
     description:
-      'Sacred Muhurtham Ceremony of Malli Sumandhar & Rishma John at Kumarankundru Temple, Mettupalayam.\nTime: 6:00 AM to 7:00 AM IST.\n\n#RishmaFoundHerPavazhaMalli',
-    location: 'Kumarankundru Temple, Mettupalayam, Coimbatore, Tamil Nadu',
+      'Sacred Muhurtham Ceremony of Malli Sumandhar & Rishma John at Arulmigu Kalyana Subramaniya Swamy Temple, Kumarankundru, Mettupalayam.\nTime: 6:00 AM to 7:00 AM IST.\n\n#RishmaFoundHerPavazhaMalli',
+    location: 'Arulmigu Kalyana Subramaniya Swamy Temple, Kumarankundru, Mettupalayam, Coimbatore',
     startDateUtc: '20261120T003000Z',
     endDateUtc: '20261120T013000Z',
     startDateLocal: '20261120T060000',
