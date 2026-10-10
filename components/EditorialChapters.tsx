@@ -206,16 +206,16 @@ export default function EditorialChapters() {
             {/* Subtle continuous cinematic Ken Burns zoom */}
             <motion.img
               src="/editorial/metti-vertical.jpg"
-              alt="Sacred Metti Ceremony - Tamil Wedding Ritual"
-              animate={{ scale: [1.02, 1.08, 1.02], y: [0, -12, 0] }}
+              alt="Sacred Metti Ceremony - Wedding Ritual"
+              animate={{ scale: [1.02, 1.06, 1.02], y: [0, -8, 0] }}
               transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }}
-              className="w-full h-full object-cover object-[center_35%]"
+              className="w-full h-full object-cover object-[center_45%]"
             />
-            {/* Warm Golden Turmeric & Sacred Kumkum Hue overlay */}
-            <div className="absolute inset-0 bg-[#A63C1E]/20 mix-blend-color pointer-events-none" />
-            {/* Deep Crimson vignette & gradient for optimal typographic legibility */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#120307] via-[#21060E]/85 to-[#2E0914]/40 pointer-events-none" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(18,3,7,0.95)_0%,transparent_75%)] pointer-events-none" />
+            {/* Soft Warm Golden Glow overlay */}
+            <div className="absolute inset-0 bg-[#A63C1E]/10 mix-blend-color pointer-events-none" />
+            {/* Lighter, clearer gradient for optimal image brightness while preserving typography legibility */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#120307]/70 via-[#1F0710]/35 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(18,3,7,0.5)_0%,transparent_80%)] pointer-events-none" />
           </motion.div>
         </div>
 
