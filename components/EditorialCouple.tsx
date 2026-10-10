@@ -64,16 +64,30 @@ export default function EditorialCouple() {
                 </div>
 
                 {/* Parents Giving Away The Groom */}
-                <div className="mt-5 space-y-2">
-                  <span className="font-functional text-[9px] sm:text-[10px] text-[#8D76A8] tracking-[0.25em] block font-semibold uppercase">
-                    THE PARENTS GIVING AWAY THE GROOM
-                  </span>
-                  <div className="space-y-0.5 font-serif-title text-base sm:text-lg text-[#2D2338] font-normal tracking-wide">
-                    <p className="leading-snug">R.E. RAMESH KUMAR</p>
-                    <p className="text-xs font-functional text-[#8D76A8]/70 tracking-[0.2em] font-light uppercase">&amp;</p>
-                    <p className="leading-snug">
-                      JAYASRI <span className="text-xs font-functional text-[#8D76A8] tracking-[0.18em] font-semibold">(LATE)</span>
-                    </p>
+                <div className="mt-5 space-y-3">
+                  <div>
+                    <span className="font-functional text-[9px] sm:text-[10px] text-[#8D76A8] tracking-[0.25em] block font-semibold uppercase">
+                      THE PARENTS GIVING AWAY THE GROOM
+                    </span>
+                    <div className="space-y-0.5 font-serif-title text-base sm:text-lg text-[#2D2338] font-normal tracking-wide mt-1">
+                      <p className="leading-snug">R.E. RAMESH KUMAR</p>
+                      <p className="text-xs font-functional text-[#8D76A8]/70 tracking-[0.2em] font-light uppercase">&amp;</p>
+                      <p className="leading-snug">
+                        JAYASRI <span className="text-xs font-functional text-[#8D76A8] tracking-[0.18em] font-semibold">(LATE)</span>
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Uncle & Aunt */}
+                  <div className="pt-2.5 border-t border-[#E5DCF0]/60">
+                    <span className="font-functional text-[9px] sm:text-[10px] text-[#8D76A8] tracking-[0.25em] block font-semibold uppercase">
+                      UNCLE &amp; AUNT
+                    </span>
+                    <div className="space-y-0.5 font-serif-title text-base sm:text-lg text-[#2D2338] font-normal tracking-wide mt-1">
+                      <p className="leading-snug">ARUN KUMAR</p>
+                      <p className="text-xs font-functional text-[#8D76A8]/70 tracking-[0.2em] font-light uppercase">&amp;</p>
+                      <p className="leading-snug">GEETHA</p>
+                    </div>
                   </div>
                 </div>
 

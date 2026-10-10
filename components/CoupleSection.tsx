@@ -54,6 +54,12 @@ export default function CoupleSection() {
               <p className="font-cormorant text-xl text-[#F8F4ED]">
                 R.E. RAMESH KUMAR &amp; JAYASRI <span className="text-xs text-[#BFAEA0] font-sans uppercase tracking-[0.15em]">(LATE)</span>
               </p>
+              <span className="font-sans text-[9px] uppercase tracking-[0.25em] text-[#B08D57] font-medium block pt-1.5">
+                UNCLE &amp; AUNT
+              </span>
+              <p className="font-cormorant text-xl text-[#F8F4ED]">
+                ARUN KUMAR &amp; GEETHA
+              </p>
             </div>
 
             {/* Traits */}
