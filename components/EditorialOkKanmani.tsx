@@ -601,14 +601,9 @@ export default function EditorialOkKanmani() {
                 .&rdquo;
               </blockquote>
 
-              <div className="mt-5 flex flex-col items-center gap-1.5">
-                <p className="font-functional text-[10px] lg:text-xs text-[#E6CA85] tracking-[0.3em] font-semibold opacity-95">
-                  AN OK KANMANI REFERENCE
-                </p>
-                <p className="font-serif-title italic text-xs lg:text-sm text-[#D8CEE5]/75">
-                  Two souls holding both the free spirit and a lifetime of devotion.
-                </p>
-              </div>
+              <p className="mt-5 font-serif-title italic text-xs lg:text-sm text-[#D8CEE5]/75">
+                Two souls holding both the free spirit and a lifetime of devotion.
+              </p>
 
               <motion.div
                 initial={{ scaleX: 0, opacity: 0 }}
@@ -677,10 +672,6 @@ export default function EditorialOkKanmani() {
                 </span>
                 .&rdquo;
               </blockquote>
-
-              <p className="mt-3 font-functional text-[9px] text-[#E6CA85] tracking-[0.28em] font-semibold opacity-95">
-                AN OK KANMANI REFERENCE
-              </p>
 
               <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#E6CA85]/50 to-transparent mx-auto mt-4" />
             </motion.div>
