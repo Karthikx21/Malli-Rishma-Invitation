@@ -16,7 +16,7 @@ export default function VenueCards() {
       name: 'Jenneys Residency',
       tamilName: 'ஜென்னிஸ் ரெசிடென்சி',
       occasion: '18 Nov · Christian Nuptials & Gala Dinner',
-      time: '6:00 PM – 10:00 PM',
+      time: '6:00 PM – 10:00 PM (Ring Exchange: 6:30 PM Sharp)',
       address: '2/2, Avinashi Road, Civil Aerodrome Post, Peelamedu, Coimbatore',
       landmark: 'Near Coimbatore International Airport',
       mapUrl: 'https://maps.google.com/?q=Jenneys+Residency+Coimbatore',

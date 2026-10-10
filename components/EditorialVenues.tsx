@@ -10,6 +10,7 @@ export default function EditorialVenues() {
       name: 'Jenneys Residency',
       address: 'Avinashi Road, Coimbatore, Tamil Nadu',
       time: '6 PM to 10 PM',
+      highlightTime: 'Ring Exchange: 6:30 PM Sharp',
       mapsUrl:
         'https://www.google.com/maps/search/?api=1&query=Jenneys+Residency+Avinashi+Road+Coimbatore',
     },
@@ -114,9 +115,16 @@ export default function EditorialVenues() {
                   {v.name}
                 </h3>
 
-                <p className="font-functional text-xs text-[#E6CA85] tracking-[0.1em] font-medium">
-                  {v.time}
-                </p>
+                <div className="space-y-1">
+                  <p className="font-functional text-xs text-[#E6CA85] tracking-[0.1em] font-medium">
+                    {v.time}
+                  </p>
+                  {'highlightTime' in v && v.highlightTime && (
+                    <p className="font-functional text-[11px] text-[#FAF6EE]/90 tracking-[0.1em] font-semibold">
+                      <span className="text-[#E6CA85]">RING EXCHANGE:</span> 6:30 PM SHARP
+                    </p>
+                  )}
+                </div>
 
                 <p className="font-serif-title text-sm sm:text-base text-[#FAF6EE]/75 font-light leading-relaxed">
                   {v.address}
