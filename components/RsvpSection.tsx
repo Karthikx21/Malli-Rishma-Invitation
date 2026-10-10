@@ -174,7 +174,7 @@ export default function RsvpSection() {
                 {[
                   { id: 'both', label: 'Both Days (18 & 20 Nov)' },
                   { id: 'ring', label: '18 Nov · Ring Exchange' },
-                  { id: 'muhurtham', label: '20 Nov · Hindu Wedding' },
+                  { id: 'muhurtham', label: '20 Nov · Wedding & Reception' },
                 ].map((opt) => (
                   <label
                     key={opt.id}

@@ -278,7 +278,7 @@ export default function WeddingSchedule() {
                     'Kumarankundru Temple & Shri Lakshmi Hall, Coimbatore',
                     '2026-11-20T00:30:00.000Z',
                     '2026-11-20T08:30:00.000Z',
-                    'Malli_Rishma_Hindu_Wedding'
+                    'Malli_Rishma_Wedding_Celebration'
                   )
                 }
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-[#B08D57]/20 to-[#D95C80]/20 hover:from-[#B08D57]/30 hover:to-[#D95C80]/30 border border-[#B08D57]/50 text-[#F5E5C0] font-sans text-xs uppercase tracking-[0.2em] transition-all duration-300 cursor-pointer"

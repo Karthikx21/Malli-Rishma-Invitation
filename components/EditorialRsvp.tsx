@@ -18,13 +18,13 @@ export default function EditorialRsvp() {
 
   const getDaysText = () => {
     if (attending18 && attending20) {
-      return 'Both Celebrations (18 Nov Christian Nuptials & 20 Nov Hindu Wedding)'
+      return 'Both Celebrations (18 Nov Christian Nuptials & 20 Nov Wedding & Reception)'
     }
     if (attending18 && !attending20) {
       return '18 Nov (Christian Nuptials)'
     }
     if (!attending18 && attending20) {
-      return '20 Nov (Hindu Wedding & Reception)'
+      return '20 Nov (Wedding & Reception)'
     }
     return 'Both Celebrations'
   }
@@ -153,7 +153,7 @@ export default function EditorialRsvp() {
                   ? 'Attending Both Celebrations (18 & 20 Nov)'
                   : attending18
                     ? 'Attending Christian Nuptials (18 Nov)'
-                    : 'Attending Hindu Wedding & Reception (20 Nov)'}
+                    : 'Attending Wedding & Reception (20 Nov)'}
                 {' · '}{guestCount} {guestCount === 1 ? 'Guest' : 'Guests'}
               </div>
 
@@ -360,7 +360,7 @@ export default function EditorialRsvp() {
 
                 {/* Minimal Editorial Subtext */}
                 <p className="font-functional text-[9px] text-[#8D76A8]/70 tracking-wider text-center pt-0.5">
-                  18 Nov: Christian Nuptials · 20 Nov: Hindu Wedding
+                  18 Nov: Christian Nuptials · 20 Nov: Wedding & Reception
                 </p>
               </div>
 

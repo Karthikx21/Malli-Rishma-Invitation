@@ -143,7 +143,7 @@ export default function EditorialDressCode() {
                 20 NOVEMBER
               </span>
               <h3 className="font-serif-title text-2xl sm:text-3xl text-[#3D0B1B] font-light mt-1 mb-3">
-                Hindu Wedding &amp; Reception
+                Wedding &amp; Reception
               </h3>
               <p className="font-serif-title text-base sm:text-lg text-[#1A0A0F]/85 font-light leading-relaxed">
                 Wear whatever you love and feel your best in — traditional attire is the dress code. There are no colour rules, just come ready to celebrate!

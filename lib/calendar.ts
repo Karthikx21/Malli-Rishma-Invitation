@@ -25,9 +25,9 @@ export const WEDDING_CALENDAR_EVENTS = {
     endDateLocal: '20261118T220000',
   },
   hinduWeddingFull: {
-    title: 'Malli & Rishma · Hindu Wedding & Reception',
+    title: 'Malli & Rishma · Wedding & Reception',
     description:
-      'Hindu Wedding Celebrations of Malli Sumandhar & Rishma John.\n\nDate: Friday, 20 November 2026\n• Muhurtham: 6:00 AM – 7:00 AM at Kumarankundru Temple, Mettupalayam\n• Reception: 11:00 AM – 2:00 PM at Shri Lakshmi Hall, Mettupalayam\n\n#RishmaFoundHerPavazhaMalli',
+      'Wedding Celebrations of Malli Sumandhar & Rishma John.\n\nDate: Friday, 20 November 2026\n• Muhurtham: 6:00 AM – 7:00 AM at Kumarankundru Temple, Mettupalayam\n• Reception: 11:00 AM – 2:00 PM at Shri Lakshmi Hall, Mettupalayam\n\n#RishmaFoundHerPavazhaMalli',
     location: 'Kumarankundru Temple & Shri Lakshmi Hall, Mettupalayam, Coimbatore, Tamil Nadu',
     startDateUtc: '20261120T003000Z', // 6:00 AM IST
     endDateUtc: '20261120T083000Z', // 2:00 PM IST

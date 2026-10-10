@@ -24,7 +24,7 @@ export const POSTERS_CONFIG = {
   hinduTemple: {
     mobile: '/posters/hindu-temple-9-16.webp',
     desktop: '/posters/hindu-temple-16-9.webp',
-    alt: 'Sacred Hillside Temple · Hindu Muhurtham & Reception',
+    alt: 'Sacred Hillside Temple · Muhurtham & Reception',
     fallbackColor: '#4A0F20',
   },
 

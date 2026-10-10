@@ -196,7 +196,7 @@ export default function EditorialChapters() {
       <section
         id="chapter-02"
         className="relative min-h-[100svh] w-full flex flex-col justify-between py-16 sm:py-24 px-6 sm:px-12 text-[#FAF6EE] overflow-hidden bg-[#1A0A0F]"
-        aria-label="Chapter 02 - Hindu Wedding and Reception"
+        aria-label="Chapter 02 - Wedding and Reception"
       >
         {/* Full-bleed background: Sacred Metti Ceremony Ritual with subtle living motion */}
         <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
@@ -256,7 +256,7 @@ export default function EditorialChapters() {
             </div>
 
             <h3 className="font-serif-title text-3xl sm:text-5xl md:text-6xl text-[#FAF6EE] font-light tracking-tight leading-tight pt-2">
-              Hindu Wedding &amp; Reception
+              Wedding &amp; Reception
             </h3>
           </div>
 
