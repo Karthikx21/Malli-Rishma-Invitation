@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 
 export default function EditorialMarquee() {
   const tickerText =
-    'TWO DAYS · TWO CULTURES · ONE CELEBRATION OF LOVE · #RISHMAFOUNDHERPAVAZHAMALLI · 18 & 20 NOVEMBER 2026 · COIMBATORE · '
+    'TWO DAYS · TWO CULTURES · ONE CELEBRATION OF LOVE · #RISHMAFOUNDHERPAVAZHAMALLI · 18 & 20 NOVEMBER 2026 · COIMBATORE | METTUPALAYAM · '
 
   return (
     <motion.div

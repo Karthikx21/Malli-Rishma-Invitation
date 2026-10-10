@@ -176,7 +176,7 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
           className="text-center space-y-1"
         >
           <p className="font-display text-[11px] sm:text-xs md:text-sm text-[#FAF7F2] tracking-[0.3em] uppercase font-medium drop-shadow-[0_2px_14px_rgba(0,0,0,0.95)]">
-            18 &amp; 20 NOVEMBER 2026 · COIMBATORE
+            18 &amp; 20 NOVEMBER 2026 · COIMBATORE | METTUPALAYAM
           </p>
           <p className="font-serif-title text-xs sm:text-sm md:text-base italic text-[#E6CA85] tracking-[0.06em] drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)]">
             Two Days · Two Cultures · One Celebration of Love
@@ -222,7 +222,7 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
         transition={{ duration: 1.2, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
         className="relative z-10 w-full max-w-4xl mx-auto border-t border-[#E6CA85]/25 pt-3.5 px-4 flex items-center justify-center font-functional text-[9px] sm:text-[10px] text-[#FAF7F2]/75 text-center tracking-[0.25em] leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]"
       >
-        <span>COIMBATORE · CHRISTIAN NUPTIALS &amp; MUHURTHAM FOLLOWED BY RECEPTION</span>
+        <span>COIMBATORE &amp; METTUPALAYAM · CHRISTIAN NUPTIALS &amp; MUHURTHAM FOLLOWED BY RECEPTION</span>
       </motion.footer>
     </section>
   )
