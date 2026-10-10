@@ -249,8 +249,7 @@ export default function EditorialCouple() {
             </h4>
             <div className="w-12 h-px bg-[#8D76A8]/40 mx-auto my-3" />
             <blockquote className="font-serif-title italic text-xl sm:text-2xl text-[#2D2338]/90 font-light leading-relaxed">
-              &ldquo;It all started on a fine evening in Bangalore, and the rest is
-              history. Bangalore gave us many luxuries, but the finest of them was
+              &ldquo;Bangalore gave us many luxuries, but the finest of them was
               finding each other.&rdquo;
             </blockquote>
             <p className="font-functional text-[10px] text-[#8D76A8] tracking-[0.2em] pt-1">
