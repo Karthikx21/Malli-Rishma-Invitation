@@ -59,11 +59,11 @@ export default function EditorialDressCode() {
               >
                 <img
                   src="/editorial/baroque-candelabra-stairs.jpg"
-                  alt="Opulent Baroque Candelabra Staircase"
+                  alt="Christian Wedding Formal Gala Velvet Tuxedo, Candelabras and Red Wine Florals"
                   className="w-full h-full object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#2D2338]/70 via-transparent to-transparent pointer-events-none" />
-                <div className="absolute bottom-3 left-4 right-4 text-[#FAF8FC] font-functional text-[9px] tracking-[0.25em]">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#2D2338]/60 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-3 left-4 right-4 text-[#FAF8FC] font-functional text-[9px] tracking-[0.25em] drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                   FORMAL GALA AESTHETIC
                 </div>
               </motion.div>
