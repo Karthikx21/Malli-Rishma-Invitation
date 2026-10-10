@@ -67,7 +67,7 @@ export default function EditorialCouple() {
                 <div className="mt-5 space-y-3">
                   <div>
                     <span className="font-functional text-[9px] sm:text-[10px] text-[#8D76A8] tracking-[0.25em] block font-semibold uppercase">
-                      THE PARENTS GIVING AWAY THE GROOM
+                      THE PARENTS PRESENTING THE GROOM
                     </span>
                     <div className="space-y-0.5 font-serif-title text-base sm:text-lg text-[#2D2338] font-normal tracking-wide mt-1">
                       <p className="leading-snug">R.E. RAMESH KUMAR</p>
@@ -191,7 +191,7 @@ export default function EditorialCouple() {
                 {/* Parents Giving Away The Bride */}
                 <div className="mt-5 space-y-2">
                   <span className="font-functional text-[9px] sm:text-[10px] text-[#8D76A8] tracking-[0.25em] block font-semibold uppercase">
-                    THE PARENTS GIVING AWAY THE BRIDE
+                    THE PARENTS PRESENTING THE BRIDE
                   </span>
                   <div className="space-y-0.5 font-serif-title text-base sm:text-lg text-[#2D2338] font-normal tracking-wide">
                     <p className="leading-snug">JOHN THAIPARAMBIL</p>

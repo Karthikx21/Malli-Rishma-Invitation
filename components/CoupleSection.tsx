@@ -49,7 +49,7 @@ export default function CoupleSection() {
             {/* Parents Giving Away The Groom */}
             <div className="pt-4 border-t border-white/10 space-y-1.5">
               <span className="font-sans text-[9px] uppercase tracking-[0.25em] text-[#B08D57] font-medium block">
-                THE PARENTS GIVING AWAY THE GROOM
+                THE PARENTS PRESENTING THE GROOM
               </span>
               <p className="font-cormorant text-xl text-[#F8F4ED]">
                 R.E. RAMESH KUMAR &amp; JAYASRI <span className="text-xs text-[#BFAEA0] font-sans uppercase tracking-[0.15em]">(LATE)</span>
@@ -103,7 +103,7 @@ export default function CoupleSection() {
             {/* Parents Giving Away The Bride */}
             <div className="pt-4 border-t border-white/10 space-y-1.5">
               <span className="font-sans text-[9px] uppercase tracking-[0.25em] text-[#D95C80] font-medium block">
-                THE PARENTS GIVING AWAY THE BRIDE
+                THE PARENTS PRESENTING THE BRIDE
               </span>
               <p className="font-cormorant text-xl text-[#F8F4ED]">
                 JOHN THAIPARAMBIL &amp; CAROLINE JOHN
