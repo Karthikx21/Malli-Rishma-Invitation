@@ -55,11 +55,11 @@ export default function EditorialChapters() {
           )}
 
           {/* Soft Lavender Mist & Ambient Lilac Overlay */}
-          <div className="absolute inset-0 bg-[#B8A9C9]/15 mix-blend-color pointer-events-none" />
+          <div className="absolute inset-0 bg-[#B8A9C9]/10 mix-blend-color pointer-events-none" />
 
-          {/* Twilight Lavender Gradient rising from bottom for contrast (Pure Christian Vibe) */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#181324] via-[#221B30]/85 to-[#382C4A]/40 pointer-events-none" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(24,19,36,0.95)_0%,transparent_75%)] pointer-events-none" />
+          {/* Twilight Lavender Gradient for balanced contrast and clear ring visuals */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#181324]/85 via-[#221B30]/50 to-[#382C4A]/20 pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(24,19,36,0.2)_0%,rgba(24,19,36,0.6)_100%)] pointer-events-none" />
         </div>
 
         {/* Top Bar: Chapter Tag */}
