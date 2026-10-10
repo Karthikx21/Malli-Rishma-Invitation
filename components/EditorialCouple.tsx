@@ -244,9 +244,6 @@ export default function EditorialCouple() {
             <p className="font-functional text-[10px] sm:text-xs text-[#8D76A8] font-semibold tracking-[0.3em]">
               THE STORY
             </p>
-            <h4 className="font-serif-title text-3xl sm:text-4xl text-[#2D2338] font-light">
-              How We Met
-            </h4>
             <div className="w-12 h-px bg-[#8D76A8]/40 mx-auto my-3" />
             <blockquote className="font-serif-title italic text-xl sm:text-2xl text-[#2D2338]/90 font-light leading-relaxed">
               &ldquo;Bangalore gave us many luxuries, but the finest of them was
