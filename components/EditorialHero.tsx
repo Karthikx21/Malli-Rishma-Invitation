@@ -62,18 +62,17 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
           </video>
         )}
 
-        {/* Soft Lavender Mist & Ambient Lilac Color Grading (Pure Christian Vibe) */}
-        <div className="absolute inset-0 bg-[#B8A9C9]/20 mix-blend-color pointer-events-none" />
-        <div className="absolute inset-0 bg-[#8D76A8]/15 mix-blend-soft-light pointer-events-none" />
+        {/* Soft Lavender Mist & Ambient Lilac Color Grading */}
+        <div className="absolute inset-0 bg-[#B8A9C9]/10 mix-blend-color pointer-events-none" />
 
-        {/* Top Vignette for Header Contrast */}
-        <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-[#181324]/85 via-[#181324]/40 to-transparent pointer-events-none" />
+        {/* Subtle Top Vignette for Header Contrast */}
+        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#181324]/60 via-[#181324]/25 to-transparent pointer-events-none" />
 
-        {/* Bottom Twilight Lavender Gradient to smoothly ground the bright aisle runner */}
-        <div className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-[#181324]/95 via-[#181324]/60 to-transparent pointer-events-none" />
+        {/* Balanced Bottom Gradient for Text Legibility while keeping the wedding aisle luminous */}
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#181324]/80 via-[#181324]/40 to-transparent pointer-events-none" />
 
-        {/* Soft Radial Center Scrim for Pristine Contrast Behind Names */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(24,19,36,0.3)_0%,rgba(24,19,36,0.65)_100%)] pointer-events-none" />
+        {/* Gentle Radial Scrim for Clean Contrast Behind Names */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(24,19,36,0.15)_0%,rgba(24,19,36,0.45)_100%)] pointer-events-none" />
 
         {/* Subtle 35mm Film Grain Texture */}
         <div
