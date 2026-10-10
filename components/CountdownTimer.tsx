@@ -18,8 +18,8 @@ interface TimeLeft {
 export default function CountdownTimer() {
   const [selectedEvent, setSelectedEvent] = useState<'ring' | 'muhurtham'>('ring')
 
-  // Ring Exchange: Nov 18, 2026 18:00:00 GMT+0530
-  const ringDate = new Date('2026-11-18T18:00:00+05:30').getTime()
+  // Ring Exchange: Nov 18, 2026 18:30:00 GMT+0530
+  const ringDate = new Date('2026-11-18T18:30:00+05:30').getTime()
   // Hindu Muhurtham: Nov 20, 2026 06:00:00 GMT+0530
   const muhurthamDate = new Date('2026-11-20T06:00:00+05:30').getTime()
 

@@ -127,7 +127,7 @@ export default function EditorialChapters() {
                     RING EXCHANGE
                   </span>
                   <span className="font-functional text-sm sm:text-base tracking-[0.12em] text-[#E6CA85] font-semibold">
-                    6:00 PM SHARP
+                    6:30 PM SHARP
                   </span>
                 </div>
               </motion.div>
@@ -154,7 +154,7 @@ export default function EditorialChapters() {
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               className="font-serif-title italic text-base sm:text-lg md:text-xl text-[#FAF6EE] leading-relaxed pt-4 border-t border-[#C5A059]/20"
             >
-              &ldquo;Our forever begins with the Ring Exchange at 6:00 PM sharp. We want our favorite people right in front of us as we say yes for a lifetime.&rdquo;
+              &ldquo;Our forever begins with the Ring Exchange promptly at 6:30 PM. We want our favorite people right in front of us as we say yes for a lifetime.&rdquo;
             </motion.p>
 
             {/* Action Links: Text Links with Left-to-Right Drawing Gold Underline */}
