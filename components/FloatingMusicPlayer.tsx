@@ -296,7 +296,7 @@ export default function FloatingMusicPlayer() {
       {/* Background Audio Element - One-time playback (no loop) */}
       <audio
         ref={audioRef}
-        src="/audio/anbil-avan.mp3"
+        src="/floating-song.mp3"
         preload="auto"
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
@@ -305,8 +305,8 @@ export default function FloatingMusicPlayer() {
           pausedBySectionRef.current = false
         }}
       >
-        <source src="/audio/anbil-avan.mp3" type="audio/mpeg" />
-        <source src="/Church%20Wedding%20(Anbil%20Avan).mp3" type="audio/mpeg" />
+        <source src="/floating-song.mp3" type="audio/mpeg" />
+        <source src="/FLOATING%20SONG.mp3" type="audio/mpeg" />
       </audio>
 
       {/* Floating Bottom-Right 44x44px Minimal Music Control */}
