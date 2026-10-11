@@ -188,7 +188,8 @@ export default function EnvelopeIntro({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0, transition: { duration: 0.35, ease: 'easeOut' } }}
               transition={{ duration: 0.6 }}
-              className="absolute inset-0 flex flex-col items-center justify-between pointer-events-auto p-5 sm:p-7 select-none"
+              onClick={handleOpenSeal}
+              className="absolute inset-0 flex flex-col items-center justify-between pointer-events-auto p-5 sm:p-7 select-none cursor-pointer"
             >
               {/* Top Royal Monogram & Headline */}
               <motion.div
@@ -271,41 +272,19 @@ export default function EnvelopeIntro({
                 </div>
               </div>
 
-              {/* Bottom Haute Horlogerie Style Cartouche Plaque */}
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.9, delay: 0.25 }}
-                className="pb-4 sm:pb-7 text-center flex flex-col items-center gap-2.5 w-full max-w-xs"
-              >
-                {/* Royal Smoked-Amethyst & Gold Cartouche Button */}
-                <button
-                  type="button"
-                  onClick={handleOpenSeal}
-                  className="relative group w-full px-6 py-3.5 rounded-xl bg-gradient-to-b from-[#1E0D2B]/90 via-[#180A23]/95 to-[#12061A]/95 border border-[#E6CA85]/50 shadow-[0_12px_32px_rgba(0,0,0,0.85),0_0_24px_rgba(230,202,133,0.18)] cursor-pointer overflow-hidden transition-all duration-300 hover:border-[#E6CA85] hover:shadow-[0_14px_40px_rgba(0,0,0,0.9),0_0_32px_rgba(230,202,133,0.32)] active:scale-[0.98]"
+              {/* Bottom Subtle Lead Caption - completely removed button plaque as requested */}
+              {lead && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.9, delay: 0.25 }}
+                  className="pb-6 sm:pb-9 text-center pointer-events-none"
                 >
-                  {/* Subtle Inner Gold Hairline Frame */}
-                  <div className="absolute inset-1 rounded-lg border border-[#E6CA85]/20 pointer-events-none" />
-
-                  {/* Soft Light Sweep on Hover */}
-                  <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 ease-out pointer-events-none" />
-
-                  <div className="relative flex flex-col items-center justify-center gap-0.5">
-                    <span className="font-functional text-[8.5px] sm:text-[9px] tracking-[0.32em] text-[#E6CA85] uppercase">
-                      ROYAL INVITATION
-                    </span>
-                    <span className="font-serif-title italic text-base sm:text-lg text-[#FAF0D7] tracking-wide font-light drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)] flex items-center gap-2">
-                      <span className="text-[#E6CA85]/60 text-xs">❦</span>
-                      Touch to Unseal
-                      <span className="text-[#E6CA85]/60 text-xs">❧</span>
-                    </span>
-                  </div>
-                </button>
-
-                <p className="font-serif-title italic text-[11px] sm:text-xs text-[#D8CEE5]/75 tracking-wider drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-                  {lead}
-                </p>
-              </motion.div>
+                  <p className="font-serif-title italic text-xs sm:text-[13px] text-[#FAF8FC]/80 tracking-wider drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
+                    {lead}
+                  </p>
+                </motion.div>
+              )}
             </motion.div>
           )}
         </AnimatePresence>
