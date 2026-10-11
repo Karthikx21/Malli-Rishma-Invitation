@@ -190,13 +190,13 @@ export default function EditorialChapters() {
 
 
       {/* ========================================================
-          CHAPTER 02: HINDU WEDDING & RECEPTION
+          CHAPTER 02: HINDU MUHURTHAM & RECEPTION
           Full-bleed Sacred Metti Ritual Background with Temple Warmth & Crimson Gradient
       ======================================================== */}
       <section
         id="chapter-02"
         className="relative min-h-[100svh] w-full flex flex-col justify-between py-16 sm:py-24 px-6 sm:px-12 text-[#FAF6EE] overflow-hidden bg-[#1A0A0F]"
-        aria-label="Chapter 02 - Wedding and Reception"
+        aria-label="Chapter 02 - Muhurtham and Reception"
       >
         {/* Full-bleed background: Sacred Metti Ceremony Ritual with subtle living motion */}
         <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
@@ -250,13 +250,13 @@ export default function EditorialChapters() {
                   NOVEMBER 2026
                 </span>
                 <span className="font-functional text-[10px] tracking-[0.25em] text-[#FAF6EE]/60 mt-1">
-                  FRIDAY · SACRED CEREMONY &amp; RECEPTION
+                  FRIDAY · MUHURTHAM &amp; RECEPTION
                 </span>
               </div>
             </div>
 
             <h3 className="font-serif-title text-3xl sm:text-5xl md:text-6xl text-[#FAF6EE] font-light tracking-tight leading-tight pt-2">
-              Wedding &amp; Reception
+              Muhurtham &amp; Reception
             </h3>
           </div>
 
