@@ -145,17 +145,6 @@ export default function EnvelopeIntro({
         <div className="absolute inset-0 bg-radial-gradient from-transparent via-[#140B1A]/40 to-[#140B1A]/95" />
       </div>
 
-      {/* 2. Top-Right Discreet Skip Button */}
-      <motion.button
-        type="button"
-        onClick={completeIntro}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.75 }}
-        whileHover={{ opacity: 1, scale: 1.05 }}
-        className="absolute top-4 right-4 sm:top-6 sm:right-6 z-30 font-functional text-[9px] sm:text-[10px] tracking-[0.25em] text-[#E6CA85]/90 border border-[#E6CA85]/35 rounded-full px-3.5 py-1.5 bg-[#140B1A]/70 backdrop-blur-md cursor-pointer transition-all duration-300 hover:border-[#E6CA85] hover:text-[#FAF0D7] hover:bg-[#140B1A]/90"
-      >
-        SKIP TO INVITATION ↗
-      </motion.button>
 
       {/* 3. Center Video Stage (9:16 aspect ratio matching 1080x1920 video) */}
       <div className="relative z-10 w-full max-w-[480px] sm:max-w-[520px] md:max-w-[560px] h-full max-h-[100svh] aspect-[9/16] flex items-center justify-center overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.85)]">
