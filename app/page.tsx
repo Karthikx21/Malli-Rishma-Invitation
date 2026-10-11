@@ -19,6 +19,7 @@ export default function Page() {
   const [introCompleted, setIntroCompleted] = useState(false)
   const [isRevealed, setIsRevealed] = useState(false)
   const [introKey, setIntroKey] = useState(0)
+  const [contentKey, setContentKey] = useState(0)
 
   // 1. Immediately on page load and reload: enforce manual scroll restoration and pin to Hero
   useEffect(() => {
@@ -67,10 +68,25 @@ export default function Page() {
   }, [])
 
   const handleReplayIntro = useCallback(() => {
+    // 1. Immediately pause soundtrack and reset to 0:00 (so it plays fresh upon tapping the seal)
+    if (typeof window !== 'undefined') {
+      try {
+        window.dispatchEvent(new CustomEvent('wedding-reset-music'))
+      } catch {}
+    }
+
+    // 2. Lock scroll and jump to top instantly
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior })
+    document.getElementById('hero')?.scrollIntoView({ behavior: 'instant', block: 'start' })
+
+    // 3. Reset states for Hero and Intro
     setIsRevealed(false)
     setIntroCompleted(false)
     setIntroKey((prev) => prev + 1)
+
+    // 4. Remount page sections behind the dark envelope intro:
+    // This resets all Framer Motion viewport triggers and initial states without any hard browser reload
+    setContentKey((prev) => prev + 1)
   }, [])
 
   return (
@@ -85,11 +101,11 @@ export default function Page() {
         />
       )}
 
-      {/* Floating Bottom-Right Soundtrack Player (Plays Anbil Avan starting from Intro) */}
+      {/* Floating Bottom-Right Soundtrack Player */}
       <FloatingMusicPlayer />
 
-      {/* 2. Main Luxury Wedding Invitation - Mounted ready underneath for zero delay */}
-      <div className="relative w-full">
+      {/* 2. Main Luxury Wedding Invitation - Remounts cleanly on replay with fresh Framer Motion states */}
+      <div key={`content-${contentKey}`} className="relative w-full">
         {/* Subtle ambient atmospheric gradient */}
         <EditorialSmokeLayer opacity={0.32} />
 

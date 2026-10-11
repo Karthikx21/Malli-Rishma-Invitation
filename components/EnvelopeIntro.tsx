@@ -79,8 +79,8 @@ export default function EnvelopeIntro({
     const video = videoRef.current
     if (video) {
       video.currentTime = 0
-      video.muted = false
-      video.volume = 0.85
+      video.muted = true
+      video.volume = 0
 
       const playPromise = video.play()
       if (playPromise !== undefined) {
@@ -89,11 +89,7 @@ export default function EnvelopeIntro({
             setIsPlaying(true)
           })
           .catch(() => {
-            // If browser blocks unmuted play, fallback to muted play
-            if (video) {
-              video.muted = true
-              video.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(true))
-            }
+            setIsPlaying(true)
           })
       } else {
         setIsPlaying(true)
@@ -155,6 +151,7 @@ export default function EnvelopeIntro({
             src="/Envelope_opening_with_card_1080p_20261011200501.mp4"
             poster="/envelope-video-poster.jpg"
             playsInline
+            muted
             preload="auto"
             onTimeUpdate={handleTimeUpdate}
             onEnded={handleVideoEnded}

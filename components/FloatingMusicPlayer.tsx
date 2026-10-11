@@ -51,71 +51,64 @@ export default function FloatingMusicPlayer() {
       })
   }, [])
 
-  // 1. Immediate Autoplay on Mount with Clean One-Shot Interaction Unlock
+  // 1. Synchronized Music Control via 'wedding-play-music' and 'wedding-reset-music'
   useEffect(() => {
     const audio = audioRef.current
-    if (!audio) return
-
-    audio.volume = 0.65
-    audio.muted = false
-
-    // Attempt immediately on mount
-    attemptPlay()
-
-    // Global listener for the FIRST user gesture to unlock browser autoplay policy.
-    let unlocked = false
-    const events = ['click', 'touchstart', 'touchend', 'pointerdown', 'mousedown', 'keydown']
-
-    const removeGestureListeners = () => {
-      events.forEach((evt) => {
-        window.removeEventListener(evt, handleFirstGesture)
-      })
-      window.removeEventListener('wedding-play-music', handleFirstGesture)
+    if (audio) {
+      audio.volume = 0.65
+      audio.muted = false
     }
 
+    const handleWeddingPlayMusic = () => {
+      const currentAudio = audioRef.current
+      if (!currentAudio) return
+
+      userMutedRef.current = false
+      currentAudio.muted = false
+      currentAudio.volume = 0.65
+      currentAudio.currentTime = 0
+
+      currentAudio
+        .play()
+        .then(() => {
+          setIsPlaying(true)
+          setHasInteracted(true)
+          setShowTooltip(false)
+        })
+        .catch(() => {})
+    }
+
+    const handleWeddingResetMusic = () => {
+      const currentAudio = audioRef.current
+      if (!currentAudio) return
+
+      currentAudio.pause()
+      currentAudio.currentTime = 0
+      setIsPlaying(false)
+      pausedBySectionRef.current = false
+    }
+
+    // Generic first-gesture unlock fallback (if user interacts directly with document)
     const handleFirstGesture = (e?: Event) => {
-      // If the user tapped on a media control for another audio element, don't hijack it!
       const target = e?.target
       if (target instanceof Element && target.closest('#songs, [data-audio-control]')) {
         return
       }
-
       setHasInteracted(true)
-      const currentAudio = audioRef.current
-
-      if (
-        currentAudio &&
-        !userMutedRef.current &&
-        !currentAudio.ended &&
-        !isAudioSectionActive() &&
-        !isAnyOtherAudioPlaying(currentAudio)
-      ) {
-        currentAudio.muted = false
-        currentAudio.volume = 0.65
-        currentAudio
-          .play()
-          .then(() => {
-            setIsPlaying(true)
-            unlocked = true
-            removeGestureListeners()
-          })
-          .catch(() => {})
-      } else {
-        unlocked = true
-        removeGestureListeners()
-      }
     }
 
-    events.forEach((evt) => {
-      window.addEventListener(evt, handleFirstGesture, { passive: true })
-    })
-
-    window.addEventListener('wedding-play-music', handleFirstGesture)
+    window.addEventListener('wedding-play-music', handleWeddingPlayMusic)
+    window.addEventListener('wedding-reset-music', handleWeddingResetMusic)
+    window.addEventListener('click', handleFirstGesture, { passive: true })
+    window.addEventListener('touchstart', handleFirstGesture, { passive: true })
 
     return () => {
-      removeGestureListeners()
+      window.removeEventListener('wedding-play-music', handleWeddingPlayMusic)
+      window.removeEventListener('wedding-reset-music', handleWeddingResetMusic)
+      window.removeEventListener('click', handleFirstGesture)
+      window.removeEventListener('touchstart', handleFirstGesture)
     }
-  }, [attemptPlay])
+  }, [])
 
   // 2. Intelligent Auto-Pause & Resume with Section Audio Coordination (Side A, Side B)
   useEffect(() => {
