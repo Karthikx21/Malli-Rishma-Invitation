@@ -172,12 +172,15 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
               : { opacity: 0, y: 14, filter: 'blur(4px)' }
           }
           transition={{ duration: 1.2, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center space-y-1"
+          className="text-center space-y-1.5 sm:space-y-2"
         >
-          <p className="font-display text-[11px] sm:text-xs md:text-sm text-[#FAF7F2] tracking-[0.3em] uppercase font-medium drop-shadow-[0_2px_14px_rgba(0,0,0,0.95)]">
-            18 &amp; 20 NOVEMBER 2026 · COIMBATORE | METTUPALAYAM
+          <p className="font-display text-xs sm:text-sm md:text-base text-[#FAF7F2] tracking-[0.32em] uppercase font-semibold drop-shadow-[0_2px_14px_rgba(0,0,0,0.95)]">
+            18 &amp; 20 NOVEMBER 2026
           </p>
-          <p className="font-serif-title text-xs sm:text-sm md:text-base italic text-[#E6CA85] tracking-[0.06em] drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)]">
+          <p className="font-display text-[10px] sm:text-xs md:text-sm text-[#FAF7F2]/90 tracking-[0.32em] uppercase font-medium drop-shadow-[0_2px_14px_rgba(0,0,0,0.95)]">
+            COIMBATORE | METTUPALAYAM
+          </p>
+          <p className="font-serif-title text-xs sm:text-sm md:text-base italic text-[#E6CA85] tracking-[0.08em] drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] pt-0.5">
             Two Days · Two Cultures · One Celebration of Love
           </p>
         </motion.div>

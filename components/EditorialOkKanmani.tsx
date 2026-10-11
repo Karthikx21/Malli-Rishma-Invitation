@@ -15,15 +15,15 @@ const TRACKS = {
     side: 'SIDE A',
     person: 'RISHMA',
     vibe: 'HER VIBE',
-    title: 'The song that will become the soundtrack for her big day',
-    src: '/audio/her.mp3',
-    fallbackDuration: '0:35',
+    title: 'The song that will become the soundtrack for their big day',
+    src: '/audio/side-a-15s.mp3',
+    fallbackDuration: '0:15',
   },
   malli: {
     side: 'SIDE B',
     person: 'MALLI',
     vibe: 'HIS VIBE',
-    title: 'The song that will become the soundtrack for his big day',
+    title: 'The song that will become the soundtrack for their big day',
     src: '/side%20b%202.mp3',
     fallbackDuration: '0:22',
   },
@@ -34,7 +34,7 @@ export default function EditorialOkKanmani() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [progress, setProgress] = useState(0)
   const [currentTime, setCurrentTime] = useState('0:00')
-  const [duration, setDuration] = useState('0:35')
+  const [duration, setDuration] = useState('0:15')
   const [audioError, setAudioError] = useState(false)
 
   const sectionRef = useRef<HTMLElement | null>(null)
@@ -107,7 +107,7 @@ export default function EditorialOkKanmani() {
                   setIsPlaying(true)
                   setAudioError(false)
                 })
-                .catch(() => {})
+                .catch(() => { })
             }
           }
           window.removeEventListener('scroll', gestureUnlock)
@@ -276,9 +276,9 @@ export default function EditorialOkKanmani() {
         onEnded={handleEnded}
         onError={() => setAudioError(true)}
       >
-        <source src="/audio/her.mp3" type="audio/mpeg" />
-        <source src="/audio/side-b.mp3" type="audio/mpeg" />
-        <source src="/side%20b.mpeg" type="audio/mpeg" />
+        <source src="/audio/side-a-15s.mp3" type="audio/mpeg" />
+        <source src="/audio/side-a.mp3" type="audio/mpeg" />
+        <source src="/side-a-15s.mp3" type="audio/mpeg" />
       </audio>
       <audio
         ref={audioMalliRef}
@@ -335,11 +335,10 @@ export default function EditorialOkKanmani() {
             whileHover={{ scale: 1.05, y: -1 }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-colors duration-300 pb-1 relative cursor-pointer ${
-              activeSide === 'rishma'
+            className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-colors duration-300 pb-1 relative cursor-pointer ${activeSide === 'rishma'
                 ? 'text-[#E6CA85] font-semibold'
                 : 'text-[#FAF6EE]/45 hover:text-[#FAF6EE]/80'
-            }`}
+              }`}
           >
             SIDE A · RISHMA
             {activeSide === 'rishma' && (
@@ -359,11 +358,10 @@ export default function EditorialOkKanmani() {
             whileHover={{ scale: 1.05, y: -1 }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-colors duration-300 pb-1 relative cursor-pointer ${
-              activeSide === 'malli'
+            className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-colors duration-300 pb-1 relative cursor-pointer ${activeSide === 'malli'
                 ? 'text-[#E6CA85] font-semibold'
                 : 'text-[#FAF6EE]/45 hover:text-[#FAF6EE]/80'
-            }`}
+              }`}
           >
             SIDE B · MALLI
             {activeSide === 'malli' && (
@@ -444,9 +442,8 @@ export default function EditorialOkKanmani() {
             >
               {/* Spinning Disc Body with Deep Royal Lavender-Charcoal Grooves */}
               <div
-                className={`w-full h-full rounded-full transition-transform duration-700 ease-out shadow-[0_25px_60px_rgba(0,0,0,0.65),0_0_50px_rgba(141,118,168,0.22)] ring-1 ring-white/10 ${
-                  isPlaying ? 'animate-vinyl-spin' : ''
-                }`}
+                className={`w-full h-full rounded-full transition-transform duration-700 ease-out shadow-[0_25px_60px_rgba(0,0,0,0.65),0_0_50px_rgba(141,118,168,0.22)] ring-1 ring-white/10 ${isPlaying ? 'animate-vinyl-spin' : ''
+                  }`}
                 style={{
                   background: `
                     radial-gradient(circle at center, #2D2338 0%, #251D30 26%, #1F1728 27%, #171120 35%, #251C32 40%, #15101C 48%, #20182B 55%, #130E19 65%, #1C1526 75%, #0F0B14 88%, #0A070E 100%)

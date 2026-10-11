@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import EditorialIntro from '@/components/EditorialIntro'
+import EnvelopeIntro from '@/components/EnvelopeIntro'
 import EditorialHero from '@/components/EditorialHero'
 import EditorialSmokeLayer from '@/components/EditorialSmokeLayer'
 import EditorialMarquee from '@/components/EditorialMarquee'
@@ -75,11 +75,12 @@ export default function Page() {
 
   return (
     <main className="relative min-h-screen bg-[#FAF8FC] text-[#2D2338] overflow-x-hidden selection:bg-[#E6CA85] selection:text-[#2D2338]">
-      {/* 1. Cinematic Full-Bleed Intro Video Overlay */}
+      {/* 1. Luxury Interactive Wax Seal Envelope Intro Overlay */}
       {!introCompleted && (
-        <EditorialIntro
+        <EnvelopeIntro
           key={`intro-${introKey}`}
           onStartTransition={handleStartTransition}
+          onOpen={handleIntroComplete}
           onComplete={handleIntroComplete}
         />
       )}

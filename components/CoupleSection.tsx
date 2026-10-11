@@ -37,28 +37,28 @@ export default function CoupleSection() {
               </span>
             </div>
 
+            {/* Parents Giving Away The Groom */}
+            <div className="pb-4 border-b border-white/10 space-y-1.5">
+              <span className="font-sans text-[9px] uppercase tracking-[0.25em] text-[#B08D57] font-medium block">
+                PARENTS PRESENTING THE GROOM
+              </span>
+              <p className="font-cormorant text-xl text-[#F8F4ED]">
+                MR. RAMESH KUMAR &amp; MRS. JAYASRI <span className="text-xs text-[#BFAEA0] font-sans uppercase tracking-[0.15em]">(LATE)</span>
+              </p>
+              <span className="font-sans text-[9px] uppercase tracking-[0.25em] text-[#B08D57] font-medium block pt-1.5">
+                MATERNAL UNCLE &amp; AUNT
+              </span>
+              <p className="font-cormorant text-xl text-[#F8F4ED]">
+                MR. ARUN KUMAR &amp; MRS. GEETHA ARUN KUMAR
+              </p>
+            </div>
+
             <div>
               <h3 className="font-script text-4xl sm:text-5xl text-[#F8F4ED]">
                 Malli Sumandhar
               </h3>
               <p className="font-cormorant italic text-lg text-[#BFAEA0] mt-1">
                 “The anchor, the calm, and the safe place.”
-              </p>
-            </div>
-
-            {/* Parents Giving Away The Groom */}
-            <div className="pt-4 border-t border-white/10 space-y-1.5">
-              <span className="font-sans text-[9px] uppercase tracking-[0.25em] text-[#B08D57] font-medium block">
-                THE PARENTS PRESENTING THE GROOM
-              </span>
-              <p className="font-cormorant text-xl text-[#F8F4ED]">
-                R.E. RAMESH KUMAR &amp; JAYASRI <span className="text-xs text-[#BFAEA0] font-sans uppercase tracking-[0.15em]">(LATE)</span>
-              </p>
-              <span className="font-sans text-[9px] uppercase tracking-[0.25em] text-[#B08D57] font-medium block pt-1.5">
-                UNCLE &amp; AUNT
-              </span>
-              <p className="font-cormorant text-xl text-[#F8F4ED]">
-                ARUN KUMAR &amp; GEETHA
               </p>
             </div>
 
@@ -91,22 +91,22 @@ export default function CoupleSection() {
               </span>
             </div>
 
+            {/* Parents Giving Away The Bride */}
+            <div className="pb-4 border-b border-white/10 space-y-1.5">
+              <span className="font-sans text-[9px] uppercase tracking-[0.25em] text-[#D95C80] font-medium block">
+                PARENTS GIVING AWAY THE BRIDE
+              </span>
+              <p className="font-cormorant text-xl text-[#F8F4ED]">
+                MR. JOHN THAIPARAMBIL &amp; MRS. CAROLINE JOHN
+              </p>
+            </div>
+
             <div>
               <h3 className="font-script text-4xl sm:text-5xl text-[#F8F4ED]">
                 Rishma John
               </h3>
               <p className="font-cormorant italic text-lg text-[#BFAEA0] mt-1">
                 “The sunshine, the dreamer, and the joy.”
-              </p>
-            </div>
-
-            {/* Parents Giving Away The Bride */}
-            <div className="pt-4 border-t border-white/10 space-y-1.5">
-              <span className="font-sans text-[9px] uppercase tracking-[0.25em] text-[#D95C80] font-medium block">
-                THE PARENTS PRESENTING THE BRIDE
-              </span>
-              <p className="font-cormorant text-xl text-[#F8F4ED]">
-                JOHN THAIPARAMBIL &amp; CAROLINE JOHN
               </p>
             </div>
 

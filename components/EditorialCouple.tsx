@@ -54,7 +54,36 @@ export default function EditorialCouple() {
               className="lg:col-span-4 flex flex-col justify-between space-y-6 order-2 lg:order-1 text-center lg:text-left rounded-2xl bg-[#FAF8FC]/80 border border-[#E5DCF0] p-6 sm:p-7 shadow-xs"
             >
               <div>
-                <div className="border-b border-[#E5DCF0] pb-4">
+                {/* Parents Section First */}
+                <div className="border-b border-[#E5DCF0] pb-4 space-y-3">
+                  <div>
+                    <span className="font-functional text-[9px] sm:text-[10px] text-[#8D76A8] tracking-[0.25em] block font-semibold uppercase">
+                      PARENTS PRESENTING THE GROOM
+                    </span>
+                    <div className="space-y-0.5 font-serif-title text-base sm:text-lg text-[#2D2338] font-normal tracking-wide mt-1">
+                      <p className="leading-snug">MR. RAMESH KUMAR</p>
+                      <p className="text-xs font-functional text-[#8D76A8]/70 tracking-[0.2em] font-light uppercase">&amp;</p>
+                      <p className="leading-snug">
+                        MRS. JAYASRI <span className="text-xs font-functional text-[#8D76A8] tracking-[0.18em] font-semibold">(LATE)</span>
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Maternal Uncle & Aunt */}
+                  <div className="pt-2.5 border-t border-[#E5DCF0]/60">
+                    <span className="font-functional text-[9px] sm:text-[10px] text-[#8D76A8] tracking-[0.25em] block font-semibold uppercase">
+                      MATERNAL UNCLE &amp; AUNT
+                    </span>
+                    <div className="space-y-0.5 font-serif-title text-base sm:text-lg text-[#2D2338] font-normal tracking-wide mt-1">
+                      <p className="leading-snug">MR. ARUN KUMAR</p>
+                      <p className="text-xs font-functional text-[#8D76A8]/70 tracking-[0.2em] font-light uppercase">&amp;</p>
+                      <p className="leading-snug">MRS. GEETHA ARUN KUMAR</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* The Groom Name */}
+                <div className="pt-4 pb-1">
                   <span className="font-functional text-[10px] text-[#8D76A8] tracking-[0.25em] block mb-1 font-semibold uppercase">
                     THE GROOM
                   </span>
@@ -63,36 +92,8 @@ export default function EditorialCouple() {
                   </h3>
                 </div>
 
-                {/* Parents Giving Away The Groom */}
-                <div className="mt-5 space-y-3">
-                  <div>
-                    <span className="font-functional text-[9px] sm:text-[10px] text-[#8D76A8] tracking-[0.25em] block font-semibold uppercase">
-                      THE PARENTS PRESENTING THE GROOM
-                    </span>
-                    <div className="space-y-0.5 font-serif-title text-base sm:text-lg text-[#2D2338] font-normal tracking-wide mt-1">
-                      <p className="leading-snug">R.E. RAMESH KUMAR</p>
-                      <p className="text-xs font-functional text-[#8D76A8]/70 tracking-[0.2em] font-light uppercase">&amp;</p>
-                      <p className="leading-snug">
-                        JAYASRI <span className="text-xs font-functional text-[#8D76A8] tracking-[0.18em] font-semibold">(LATE)</span>
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Uncle & Aunt */}
-                  <div className="pt-2.5 border-t border-[#E5DCF0]/60">
-                    <span className="font-functional text-[9px] sm:text-[10px] text-[#8D76A8] tracking-[0.25em] block font-semibold uppercase">
-                      UNCLE &amp; AUNT
-                    </span>
-                    <div className="space-y-0.5 font-serif-title text-base sm:text-lg text-[#2D2338] font-normal tracking-wide mt-1">
-                      <p className="leading-snug">ARUN KUMAR</p>
-                      <p className="text-xs font-functional text-[#8D76A8]/70 tracking-[0.2em] font-light uppercase">&amp;</p>
-                      <p className="leading-snug">GEETHA</p>
-                    </div>
-                  </div>
-                </div>
-
                 {/* Groom Personality Traits */}
-                <ul className="mt-5 pt-4 border-t border-[#E5DCF0]/80 space-y-2.5 font-functional text-xs sm:text-[13px] text-[#2D2338]/85 tracking-[0.08em] lowercase leading-relaxed text-left max-w-xs mx-auto lg:mx-0">
+                <ul className="mt-4 pt-4 border-t border-[#E5DCF0]/80 space-y-2.5 font-functional text-xs sm:text-[13px] text-[#2D2338]/85 tracking-[0.08em] lowercase leading-relaxed text-left max-w-xs mx-auto lg:mx-0">
                   <motion.li
                     whileHover={{ x: 5 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 25 }}
@@ -179,7 +180,22 @@ export default function EditorialCouple() {
               className="lg:col-span-4 flex flex-col justify-between space-y-6 order-3 text-center lg:text-left rounded-2xl bg-[#FAF8FC]/80 border border-[#E5DCF0] p-6 sm:p-7 shadow-xs"
             >
               <div>
-                <div className="border-b border-[#E5DCF0] pb-4">
+                {/* Parents Section First */}
+                <div className="border-b border-[#E5DCF0] pb-4 space-y-3">
+                  <div>
+                    <span className="font-functional text-[9px] sm:text-[10px] text-[#8D76A8] tracking-[0.25em] block font-semibold uppercase">
+                      PARENTS GIVING AWAY THE BRIDE
+                    </span>
+                    <div className="space-y-0.5 font-serif-title text-base sm:text-lg text-[#2D2338] font-normal tracking-wide mt-1">
+                      <p className="leading-snug">MR. JOHN THAIPARAMBIL</p>
+                      <p className="text-xs font-functional text-[#8D76A8]/70 tracking-[0.2em] font-light uppercase">&amp;</p>
+                      <p className="leading-snug">MRS. CAROLINE JOHN</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* The Bride Name */}
+                <div className="pt-4 pb-1">
                   <span className="font-functional text-[10px] text-[#8D76A8] tracking-[0.25em] block mb-1 font-semibold uppercase">
                     THE BRIDE
                   </span>
@@ -188,20 +204,8 @@ export default function EditorialCouple() {
                   </h3>
                 </div>
 
-                {/* Parents Giving Away The Bride */}
-                <div className="mt-5 space-y-2">
-                  <span className="font-functional text-[9px] sm:text-[10px] text-[#8D76A8] tracking-[0.25em] block font-semibold uppercase">
-                    THE PARENTS PRESENTING THE BRIDE
-                  </span>
-                  <div className="space-y-0.5 font-serif-title text-base sm:text-lg text-[#2D2338] font-normal tracking-wide">
-                    <p className="leading-snug">JOHN THAIPARAMBIL</p>
-                    <p className="text-xs font-functional text-[#8D76A8]/70 tracking-[0.2em] font-light uppercase">&amp;</p>
-                    <p className="leading-snug">CAROLINE JOHN</p>
-                  </div>
-                </div>
-
                 {/* Bride Personality Traits */}
-                <ul className="mt-5 pt-4 border-t border-[#E5DCF0]/80 space-y-2.5 font-functional text-xs sm:text-[13px] text-[#2D2338]/85 tracking-[0.08em] lowercase leading-relaxed text-left max-w-xs mx-auto lg:mx-0">
+                <ul className="mt-4 pt-4 border-t border-[#E5DCF0]/80 space-y-2.5 font-functional text-xs sm:text-[13px] text-[#2D2338]/85 tracking-[0.08em] lowercase leading-relaxed text-left max-w-xs mx-auto lg:mx-0">
                   <motion.li
                     whileHover={{ x: 5 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 25 }}
