@@ -8,38 +8,38 @@ import {
   leaveAudioSection,
 } from '@/lib/audioCoordinator'
 
-type ActiveSide = 'rishma' | 'malli'
+type ActiveSide = 'malli' | 'rishma'
 
 const TRACKS = {
-  rishma: {
-    side: 'SIDE A',
-    person: 'RISHMA',
-    vibe: 'HER VIBE',
-    title: 'The song that will become the soundtrack for their big day',
-    src: '/audio/side-a-15s.mp3',
-    fallbackDuration: '0:15',
-  },
   malli: {
-    side: 'SIDE B',
+    side: 'SIDE A',
     person: 'MALLI',
     vibe: 'HIS VIBE',
     title: 'The song that will become the soundtrack for their big day',
     src: '/side%20b%202.mp3',
     fallbackDuration: '0:22',
   },
+  rishma: {
+    side: 'SIDE B',
+    person: 'RISHMA',
+    vibe: 'HER VIBE',
+    title: 'The song that will become the soundtrack for their big day',
+    src: '/audio/side-a-15s.mp3',
+    fallbackDuration: '0:15',
+  },
 }
 
 export default function EditorialOkKanmani() {
-  const [activeSide, setActiveSide] = useState<ActiveSide>('rishma')
+  const [activeSide, setActiveSide] = useState<ActiveSide>('malli')
   const [isPlaying, setIsPlaying] = useState(false)
   const [progress, setProgress] = useState(0)
   const [currentTime, setCurrentTime] = useState('0:00')
-  const [duration, setDuration] = useState('0:15')
+  const [duration, setDuration] = useState('0:22')
   const [audioError, setAudioError] = useState(false)
 
   const sectionRef = useRef<HTMLElement | null>(null)
-  const audioRishmaRef = useRef<HTMLAudioElement | null>(null)
   const audioMalliRef = useRef<HTMLAudioElement | null>(null)
+  const audioRishmaRef = useRef<HTMLAudioElement | null>(null)
 
   const activeSideRef = useRef<ActiveSide>(activeSide)
   useEffect(() => {
@@ -48,12 +48,11 @@ export default function EditorialOkKanmani() {
 
   // Initialize both audio elements to balanced 65% volume (60-70% range)
   useEffect(() => {
-    if (audioRishmaRef.current) audioRishmaRef.current.volume = 0.65
     if (audioMalliRef.current) audioMalliRef.current.volume = 0.65
+    if (audioRishmaRef.current) audioRishmaRef.current.volume = 0.65
   }, [])
 
   const isInViewRef = useRef(false)
-  const userPausedRef = useRef(false)
 
   const activeTrack = TRACKS[activeSide]
 
@@ -81,13 +80,16 @@ export default function EditorialOkKanmani() {
   const handleEnded = () => {
     setProgress(0)
     setCurrentTime('0:00')
+    setIsPlaying(false)
+    leaveAudioSection('songs')
   }
 
-  // Play active track helper
+  // Play active track helper (strictly user-initiated, zero autoplay)
   const playActiveTrack = useCallback(() => {
-    const audio = activeSideRef.current === 'rishma' ? audioRishmaRef.current : audioMalliRef.current
+    const audio = activeSideRef.current === 'malli' ? audioMalliRef.current : audioRishmaRef.current
     if (!audio) return
 
+    enterAudioSection('songs')
     audio.muted = false
     audio.volume = 0.65
     playExclusive(audio)
@@ -96,51 +98,32 @@ export default function EditorialOkKanmani() {
         setAudioError(false)
       })
       .catch(() => {
-        // Autoplay policy fallback: attach one-shot listener
-        const gestureUnlock = () => {
-          if (isInViewRef.current && !userPausedRef.current) {
-            const target =
-              activeSideRef.current === 'rishma' ? audioRishmaRef.current : audioMalliRef.current
-            if (target) {
-              playExclusive(target)
-                .then(() => {
-                  setIsPlaying(true)
-                  setAudioError(false)
-                })
-                .catch(() => { })
-            }
-          }
-          window.removeEventListener('scroll', gestureUnlock)
-          window.removeEventListener('touchstart', gestureUnlock)
-          window.removeEventListener('click', gestureUnlock)
-        }
-        window.addEventListener('scroll', gestureUnlock, { once: true, passive: true })
-        window.addEventListener('touchstart', gestureUnlock, { once: true, passive: true })
-        window.addEventListener('click', gestureUnlock, { once: true, passive: true })
+        setIsPlaying(false)
       })
   }, [])
 
   // Manual Toggle Play / Pause button
   const togglePlay = () => {
-    const audio = activeSideRef.current === 'rishma' ? audioRishmaRef.current : audioMalliRef.current
+    const audio = activeSideRef.current === 'malli' ? audioMalliRef.current : audioRishmaRef.current
     if (!audio) return
 
     if (isPlaying) {
-      userPausedRef.current = true
       audio.pause()
       setIsPlaying(false)
+      leaveAudioSection('songs')
     } else {
-      userPausedRef.current = false
       playActiveTrack()
     }
   }
 
-  // Switch between Side A and Side B
+  // Switch between Side A (Malli) and Side B (Rishma)
   const switchSide = (side: ActiveSide) => {
     if (side === activeSide) return
 
+    const wasPlaying = isPlaying
+
     // Pause previous audio
-    const prevAudio = activeSide === 'rishma' ? audioRishmaRef.current : audioMalliRef.current
+    const prevAudio = activeSide === 'malli' ? audioMalliRef.current : audioRishmaRef.current
     if (prevAudio) {
       prevAudio.pause()
     }
@@ -149,17 +132,17 @@ export default function EditorialOkKanmani() {
     activeSideRef.current = side
     setProgress(0)
     setCurrentTime('0:00')
-    userPausedRef.current = false // User explicitly selected this side to listen to it
 
-    const nextAudio = side === 'rishma' ? audioRishmaRef.current : audioMalliRef.current
+    const nextAudio = side === 'malli' ? audioMalliRef.current : audioRishmaRef.current
     if (nextAudio && !isNaN(nextAudio.duration) && nextAudio.duration > 0) {
       setDuration(formatTime(nextAudio.duration))
     } else {
       setDuration(TRACKS[side].fallbackDuration)
     }
 
-    // Play next side immediately if section is currently in view
-    if (isInViewRef.current && nextAudio) {
+    // If already playing, seamlessly play next side; if paused, stay paused (zero autoplay)
+    if (wasPlaying && nextAudio) {
+      enterAudioSection('songs')
       nextAudio.muted = false
       nextAudio.volume = 0.65
       playExclusive(nextAudio)
@@ -175,7 +158,7 @@ export default function EditorialOkKanmani() {
     }
   }
 
-  // Section Scroll Coordination (IntersectionObserver)
+  // Section Scroll Coordination (IntersectionObserver) - STRICTLY NO AUTOPLAY
   useEffect(() => {
     const section = sectionRef.current
     if (!section || typeof window === 'undefined') return
@@ -184,21 +167,14 @@ export default function EditorialOkKanmani() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // User scrolled INTO OK Kanmani section
+            // User scrolled INTO OK Kanmani section - NEVER AUTOPLAY
             isInViewRef.current = true
-            enterAudioSection('songs')
-
-            // If user did not manually pause during this viewing, auto-start Side A (or active track)
-            if (!userPausedRef.current) {
-              playActiveTrack()
-            }
           } else {
-            // User scrolled OUT OF OK Kanmani section (down to Countdown/Chapters or up to Couple/Hero)
+            // User scrolled OUT OF OK Kanmani section
             if (isInViewRef.current) {
               isInViewRef.current = false
-              userPausedRef.current = false // Reset manual pause for subsequent visits
 
-              // Stop both Side A and Side B immediately
+              // Stop both Side A and Side B immediately if playing
               if (audioMalliRef.current && !audioMalliRef.current.paused) {
                 audioMalliRef.current.pause()
               }
@@ -207,7 +183,7 @@ export default function EditorialOkKanmani() {
               }
               setIsPlaying(false)
 
-              // Notify coordinator that user left this section -> floating background music resumes!
+              // Resume floating background player
               leaveAudioSection('songs')
             }
           }
@@ -225,7 +201,7 @@ export default function EditorialOkKanmani() {
       observer.disconnect()
       leaveAudioSection('songs')
     }
-  }, [playActiveTrack])
+  }, [])
 
   // Circumference for r = 48.5
   const circumference = 2 * Math.PI * 48.5
@@ -260,27 +236,6 @@ export default function EditorialOkKanmani() {
 
       {/* Hidden Audio Elements */}
       <audio
-        ref={audioRishmaRef}
-        src={TRACKS.rishma.src}
-        preload="auto"
-        loop
-        onPlay={(e) => {
-          e.currentTarget.volume = 0.65
-          if (activeSideRef.current === 'rishma') setIsPlaying(true)
-        }}
-        onPause={() => {
-          if (activeSideRef.current === 'rishma' && !isInViewRef.current) setIsPlaying(false)
-        }}
-        onTimeUpdate={(e) => activeSideRef.current === 'rishma' && handleTimeUpdate(e.currentTarget)}
-        onLoadedMetadata={(e) => activeSideRef.current === 'rishma' && handleLoadedMetadata(e.currentTarget)}
-        onEnded={handleEnded}
-        onError={() => setAudioError(true)}
-      >
-        <source src="/audio/side-a-15s.mp3" type="audio/mpeg" />
-        <source src="/audio/side-a.mp3" type="audio/mpeg" />
-        <source src="/side-a-15s.mp3" type="audio/mpeg" />
-      </audio>
-      <audio
         ref={audioMalliRef}
         src={TRACKS.malli.src}
         preload="auto"
@@ -290,7 +245,7 @@ export default function EditorialOkKanmani() {
           if (activeSideRef.current === 'malli') setIsPlaying(true)
         }}
         onPause={() => {
-          if (activeSideRef.current === 'malli' && !isInViewRef.current) setIsPlaying(false)
+          if (activeSideRef.current === 'malli') setIsPlaying(false)
         }}
         onTimeUpdate={(e) => activeSideRef.current === 'malli' && handleTimeUpdate(e.currentTarget)}
         onLoadedMetadata={(e) => activeSideRef.current === 'malli' && handleLoadedMetadata(e.currentTarget)}
@@ -300,6 +255,27 @@ export default function EditorialOkKanmani() {
         <source src="/side%20b%202.mp3" type="audio/mpeg" />
         <source src="/audio/side-b-2.mp3" type="audio/mpeg" />
         <source src="/audio/him.mp3" type="audio/mpeg" />
+      </audio>
+      <audio
+        ref={audioRishmaRef}
+        src={TRACKS.rishma.src}
+        preload="auto"
+        loop
+        onPlay={(e) => {
+          e.currentTarget.volume = 0.65
+          if (activeSideRef.current === 'rishma') setIsPlaying(true)
+        }}
+        onPause={() => {
+          if (activeSideRef.current === 'rishma') setIsPlaying(false)
+        }}
+        onTimeUpdate={(e) => activeSideRef.current === 'rishma' && handleTimeUpdate(e.currentTarget)}
+        onLoadedMetadata={(e) => activeSideRef.current === 'rishma' && handleLoadedMetadata(e.currentTarget)}
+        onEnded={handleEnded}
+        onError={() => setAudioError(true)}
+      >
+        <source src="/audio/side-a-15s.mp3" type="audio/mpeg" />
+        <source src="/audio/side-a.mp3" type="audio/mpeg" />
+        <source src="/side-a-15s.mp3" type="audio/mpeg" />
       </audio>
 
 
@@ -327,21 +303,21 @@ export default function EditorialOkKanmani() {
           />
         </motion.div>
 
-        {/* Text-Only Toggle: SIDE A · RISHMA / SIDE B · MALLI */}
+        {/* Text-Only Toggle: SIDE A · MALLI / SIDE B · RISHMA */}
         <div className="flex items-center justify-center gap-6 sm:gap-10 mb-12 select-none">
           <motion.button
             type="button"
-            onClick={() => switchSide('rishma')}
+            onClick={() => switchSide('malli')}
             whileHover={{ scale: 1.05, y: -1 }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-colors duration-300 pb-1 relative cursor-pointer ${activeSide === 'rishma'
+            className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-colors duration-300 pb-1 relative cursor-pointer ${activeSide === 'malli'
                 ? 'text-[#E6CA85] font-semibold'
                 : 'text-[#FAF6EE]/45 hover:text-[#FAF6EE]/80'
               }`}
           >
-            SIDE A · RISHMA
-            {activeSide === 'rishma' && (
+            SIDE A · MALLI
+            {activeSide === 'malli' && (
               <motion.span
                 layoutId="vinylToggleActive"
                 className="absolute bottom-0 left-0 right-0 h-px bg-[#E6CA85] shadow-[0_0_10px_rgba(230,202,133,0.6)]"
@@ -354,17 +330,17 @@ export default function EditorialOkKanmani() {
 
           <motion.button
             type="button"
-            onClick={() => switchSide('malli')}
+            onClick={() => switchSide('rishma')}
             whileHover={{ scale: 1.05, y: -1 }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-colors duration-300 pb-1 relative cursor-pointer ${activeSide === 'malli'
+            className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-colors duration-300 pb-1 relative cursor-pointer ${activeSide === 'rishma'
                 ? 'text-[#E6CA85] font-semibold'
                 : 'text-[#FAF6EE]/45 hover:text-[#FAF6EE]/80'
               }`}
           >
-            SIDE B · MALLI
-            {activeSide === 'malli' && (
+            SIDE B · RISHMA
+            {activeSide === 'rishma' && (
               <motion.span
                 layoutId="vinylToggleActive"
                 className="absolute bottom-0 left-0 right-0 h-px bg-[#E6CA85] shadow-[0_0_10px_rgba(230,202,133,0.6)]"
