@@ -135,7 +135,7 @@ export default function EditorialCouple() {
               <div className="flex-1 h-px bg-gradient-to-l from-transparent via-[#8D76A8]/30 to-[#8D76A8]/60" />
             </div>
 
-            {/* Center: The Real Couple Portrait in an Arched Editorial Frame */}
+            {/* Center: The Royal Cathedral Couple Portrait in an Arched Editorial Frame */}
             <motion.div
               initial={{ opacity: 0, scale: 0.92, y: 20, filter: 'blur(8px)' }}
               whileInView={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
@@ -146,26 +146,29 @@ export default function EditorialCouple() {
               <motion.div
                 whileHover={{ scale: 1.025, y: -4 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="relative w-full max-w-[280px] sm:max-w-[320px] cursor-pointer"
+                className="relative w-full max-w-[280px] sm:max-w-[325px] cursor-pointer"
               >
-                {/* Arch-shaped Frame */}
-                <div className="relative aspect-[2/3] w-full rounded-t-[140px] sm:rounded-t-[160px] rounded-b-2xl overflow-hidden shadow-xl border-2 border-[#E6CA85]/70 bg-[#FAF8FC] group">
+                {/* Arch-shaped Frame with Royal Double Gold Hairline and Soft Shadow */}
+                <div className="relative aspect-[2/3] w-full rounded-t-[140px] sm:rounded-t-[162px] rounded-b-2xl overflow-hidden shadow-[0_16px_45px_rgba(45,35,56,0.14)] border-2 border-[#E6CA85] ring-1 ring-[#E6CA85]/40 ring-offset-2 ring-offset-[#FFFFFF] bg-[#FAF8FC] group">
                   <picture>
                     <source srcSet="/editorial/couple-traditional.webp" type="image/webp" />
                     <img
                       src="/editorial/couple-traditional.jpg"
-                      alt="Malli Sumandhar and Rishma John Wedding Portrait"
-                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                      alt="Malli Sumandhar and Rishma John Cathedral Wedding Portrait"
+                      className="w-full h-full object-cover object-center group-hover:scale-104 transition-transform duration-700 ease-out"
                     />
                   </picture>
-                  {/* Subtle soft vignette */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#2D2338]/10 via-transparent to-transparent pointer-events-none" />
+                  {/* Subtle soft filmic vignette */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#2D2338]/15 via-transparent to-transparent pointer-events-none" />
                 </div>
 
-                {/* Gold Tracking Caption */}
-                <div className="text-center mt-3">
-                  <span className="font-functional text-[9px] sm:text-[10px] tracking-[0.35em] text-[#B8893E] font-semibold">
+                {/* Gold Tracking Caption & Calligraphy Flourish */}
+                <div className="text-center mt-3.5 flex flex-col items-center">
+                  <span className="font-functional text-[9px] sm:text-[10px] tracking-[0.38em] text-[#B8893E] font-semibold uppercase">
                     MALLI &amp; RISHMA
+                  </span>
+                  <span className="font-accent text-xl sm:text-2xl text-[#8D76A8] font-normal leading-none mt-1">
+                    Forever Begins Here
                   </span>
                 </div>
               </motion.div>
