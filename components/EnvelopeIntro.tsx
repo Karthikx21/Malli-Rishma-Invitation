@@ -196,9 +196,6 @@ export default function EnvelopeIntro({
                   Malli &amp; Rishma
                 </h1>
 
-                <p className="font-functional text-[8px] sm:text-[9px] tracking-[0.3em] text-[#D8CEE5]/70 mt-1 uppercase">
-                  CHIDAMBARAM · NOVEMBER 2026
-                </p>
               </motion.div>
 
               {/* Exact Physical Wax Seal Touch Target (Located precisely at 60.2% X, 56.0% Y over video's MR wax seal) */}
