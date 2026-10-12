@@ -83,11 +83,10 @@ export default function EditorialCountdown() {
             whileHover={{ scale: 1.03, y: -1 }}
             whileTap={{ scale: 0.97 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-colors duration-300 pb-1 relative cursor-pointer ${
-              targetDate === '18'
+            className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-colors duration-300 pb-1 relative cursor-pointer ${targetDate === '18'
                 ? 'text-[#8D76A8] font-semibold'
                 : 'text-[#2D2338]/40 hover:text-[#2D2338]/80'
-            }`}
+              }`}
           >
             18 NOV · CHRISTIAN NUPTIALS
             {targetDate === '18' && (
@@ -107,11 +106,10 @@ export default function EditorialCountdown() {
             whileHover={{ scale: 1.03, y: -1 }}
             whileTap={{ scale: 0.97 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-colors duration-300 pb-1 relative cursor-pointer ${
-              targetDate === '20'
+            className={`font-functional text-xs sm:text-sm tracking-[0.25em] transition-colors duration-300 pb-1 relative cursor-pointer ${targetDate === '20'
                 ? 'text-[#8D76A8] font-semibold'
                 : 'text-[#2D2338]/40 hover:text-[#2D2338]/80'
-            }`}
+              }`}
           >
             20 NOV · HINDU WEDDING
             {targetDate === '20' && (

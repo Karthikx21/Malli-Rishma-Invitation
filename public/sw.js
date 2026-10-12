@@ -58,6 +58,16 @@ self.addEventListener('fetch', (event) => {
   // Only handle GET requests for same origin or fonts/cdn
   if (request.method !== 'GET') return
 
+  // Bypass Service Worker entirely on localhost / development / HMR
+  if (
+    url.hostname === 'localhost' ||
+    url.hostname === '127.0.0.1' ||
+    url.pathname.includes('/_next/webpack-hmr') ||
+    url.pathname.includes('/__turbopack__')
+  ) {
+    return
+  }
+
   // Do not intercept Range requests (avoids Safari/iOS video seeking issues)
   if (request.headers.get('range')) {
     return

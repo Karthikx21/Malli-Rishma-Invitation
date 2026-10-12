@@ -18,16 +18,6 @@ const nextConfig = {
           },
         ],
       },
-      {
-        // Cache Next.js compiled static bundles
-        source: '/_next/static/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
     ]
   },
 }

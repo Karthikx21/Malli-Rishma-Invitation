@@ -104,9 +104,8 @@ export default function EditorialVenues() {
                 ease: [0.16, 1, 0.3, 1],
                 y: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
               }}
-              className={`flex flex-col justify-between pt-6 border-t border-[#3D2C52]/70 group ${
-                i > 0 ? 'md:border-t-0 md:border-l md:border-[#3D2C52]/70 md:pl-8' : ''
-              }`}
+              className={`flex flex-col justify-between pt-6 border-t border-[#3D2C52]/70 group ${i > 0 ? 'md:border-t-0 md:border-l md:border-[#3D2C52]/70 md:pl-8' : ''
+                }`}
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between font-functional text-[10px] text-[#E6CA85] tracking-[0.25em] font-semibold">

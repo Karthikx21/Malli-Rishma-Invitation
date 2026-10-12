@@ -22,8 +22,27 @@ export default function ResourceCacheProvider() {
   useEffect(() => {
     if (typeof window === 'undefined') return
 
-    // 1. Register Service Worker for Cache-First performance & offline support
-    if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
+    // In development mode: clean up any previously registered service workers or stale caches
+    if (process.env.NODE_ENV !== 'production') {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then((registrations) => {
+          for (const reg of registrations) {
+            reg.unregister()
+          }
+        })
+      }
+      if ('caches' in window) {
+        caches.keys().then((keys) => {
+          for (const key of keys) {
+            caches.delete(key)
+          }
+        })
+      }
+      return
+    }
+
+    // 1. Register Service Worker for Cache-First performance & offline support (production only)
+    if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker
           .register('/sw.js')
@@ -36,7 +55,7 @@ export default function ResourceCacheProvider() {
       })
     }
 
-    // 2. Preload & Cache Key Media Assets via Cache API in background
+    // 2. Preload & Cache Key Media Assets via Cache API in background (production only)
     if ('caches' in window) {
       const cacheTimeout = setTimeout(() => {
         caches.open('malli-rishma-v1').then((cache) => {
@@ -44,8 +63,8 @@ export default function ResourceCacheProvider() {
             try {
               const matched = await cache.match(url)
               if (!matched) {
-                const response = await fetch(url, { mode: 'no-cors' })
-                if (response) {
+                const response = await fetch(url)
+                if (response && response.status === 200) {
                   await cache.put(url, response)
                 }
               }

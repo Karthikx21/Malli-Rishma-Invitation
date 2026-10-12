@@ -66,14 +66,14 @@ export default function EnvelopeIntro({
     if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
       try {
         navigator.vibrate(35)
-      } catch {}
+      } catch { }
     }
 
     // Trigger background wedding music via custom event
     if (typeof window !== 'undefined') {
       try {
         window.dispatchEvent(new CustomEvent('wedding-play-music'))
-      } catch {}
+      } catch { }
     }
 
     const video = videoRef.current
@@ -124,9 +124,8 @@ export default function EnvelopeIntro({
 
   return (
     <div
-      className={`fixed inset-0 z-[100] w-full h-full bg-[#140B1A] flex items-center justify-center overflow-hidden select-none transition-opacity duration-1000 ease-in-out ${
-        isEnding ? 'opacity-0 pointer-events-none' : 'opacity-100'
-      }`}
+      className={`fixed inset-0 z-[100] w-full h-full bg-[#140B1A] flex items-center justify-center overflow-hidden select-none transition-opacity duration-1000 ease-in-out ${isEnding ? 'opacity-0 pointer-events-none' : 'opacity-100'
+        }`}
       role="dialog"
       aria-modal="true"
       aria-label="Wedding invitation envelope intro"
@@ -162,8 +161,8 @@ export default function EnvelopeIntro({
 
           {/* Couture Filmic Vignette & Bottom-Edge Shadow - completely envelopes edges with silk glow */}
           <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_70px_rgba(20,11,26,0.7)]" />
-          <div className="absolute inset-x-0 bottom-0 h-28 pointer-events-none bg-gradient-to-t from-[#140B1A]/85 via-[#140B1A]/30 to-transparent" />
-          <div className="absolute inset-x-0 top-0 h-24 pointer-events-none bg-gradient-to-b from-[#140B1A]/70 via-[#140B1A]/20 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-32 pointer-events-none bg-gradient-to-t from-[#140B1A]/90 via-[#140B1A]/40 to-transparent" />
+          <div className="absolute inset-x-0 top-0 h-32 pointer-events-none bg-gradient-to-b from-[#140B1A]/85 via-[#140B1A]/35 to-transparent" />
         </div>
 
         {/* 4. Bespoke Royal "Touch to Open" Interaction (Visible only prior to unsealing) */}
@@ -184,15 +183,15 @@ export default function EnvelopeIntro({
                 transition={{ duration: 0.9, delay: 0.15 }}
                 className="text-center pt-6 sm:pt-10 flex flex-col items-center"
               >
-                <div className="flex items-center gap-2 mb-1.5 opacity-85">
-                  <span className="w-6 h-[1px] bg-gradient-to-r from-transparent to-[#E6CA85]" />
-                  <span className="font-functional text-[8.5px] sm:text-[9.5px] tracking-[0.4em] text-[#E6CA85] uppercase">
+                <div className="flex items-center gap-2.5 sm:gap-3 mb-1.5 opacity-100">
+                  <span className="w-8 sm:w-12 h-[1px] bg-gradient-to-r from-transparent via-[#E6CA85] to-[#E6CA85]" />
+                  <span className="font-functional text-[9.5px] sm:text-[11px] font-bold tracking-[0.42em] text-[#E6CA85] uppercase drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
                     THE WEDDING OF
                   </span>
-                  <span className="w-6 h-[1px] bg-gradient-to-l from-transparent to-[#E6CA85]" />
+                  <span className="w-8 sm:w-12 h-[1px] bg-gradient-to-l from-transparent via-[#E6CA85] to-[#E6CA85]" />
                 </div>
 
-                <h1 className="font-serif-title text-2xl sm:text-3xl text-[#FAF8FC] font-light tracking-wide drop-shadow-[0_2px_14px_rgba(0,0,0,0.95)]">
+                <h1 className="font-serif-title text-3xl sm:text-4xl text-[#FFFFFF] font-bold tracking-wide drop-shadow-[0_3px_18px_rgba(0,0,0,0.95)] [text-shadow:_0_2px_14px_rgba(0,0,0,0.9),_0_0_24px_rgba(20,11,26,0.8)]">
                   Malli &amp; Rishma
                 </h1>
 
@@ -261,9 +260,9 @@ export default function EnvelopeIntro({
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.9, delay: 0.25 }}
-                  className="pb-6 sm:pb-9 text-center pointer-events-none"
+                  className="pb-7 sm:pb-10 text-center pointer-events-none px-4"
                 >
-                  <p className="font-serif-title italic text-xs sm:text-[13px] text-[#FAF8FC]/80 tracking-wider drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
+                  <p className="font-serif-title italic text-sm sm:text-base text-[#FAF8FC] font-semibold tracking-wider drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] [text-shadow:_0_2px_14px_rgba(0,0,0,0.9)]">
                     {lead}
                   </p>
                 </motion.div>
