@@ -221,7 +221,7 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
           </p>
         </motion.div>
 
-        {/* Animated Royal "Scroll to Explore" Cue (Guaranteed visible in aisle space on all devices) */}
+        {/* Animated Royal Scroll Symbol Cue (Pure Open Symbol & Animation - No Button Box) */}
         <motion.div
           initial={{ opacity: 0, y: 14 }}
           animate={
@@ -230,33 +230,54 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
               : { opacity: 0, y: 14 }
           }
           transition={{ duration: 1.2, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-5 sm:mt-7 flex flex-col items-center"
+          className="mt-4 sm:mt-6 flex flex-col items-center"
         >
-          <motion.button
+          <button
             type="button"
             onClick={handleScrollDown}
             aria-label="Scroll down to explore invitation"
-            className="group flex flex-col items-center gap-1.5 cursor-pointer select-none focus:outline-none transition-transform active:scale-95 px-5 py-2.5 rounded-full bg-[#181324]/75 backdrop-blur-md border border-[#E6CA85]/60 hover:border-[#E6CA85] shadow-[0_4px_24px_rgba(0,0,0,0.85),0_0_18px_rgba(230,202,133,0.3)] hover:shadow-[0_4px_28px_rgba(0,0,0,0.9),0_0_24px_rgba(230,202,133,0.55)] transition-all"
+            className="group flex flex-col items-center gap-1.5 cursor-pointer select-none bg-transparent border-0 p-0 focus:outline-none transition-transform active:scale-90"
           >
-            <div className="flex items-center gap-2.5">
-              <span className="font-functional text-[9px] sm:text-[10px] tracking-[0.38em] text-[#E6CA85] uppercase font-bold group-hover:text-[#FFF8E7] transition-colors">
-                Scroll to Explore
-              </span>
+            {/* Elegant Luxury Mouse Scroll Capsule */}
+            <div className="w-[18px] h-[30px] sm:w-[20px] sm:h-[34px] rounded-full border-[1.5px] border-[#E6CA85]/80 group-hover:border-[#FFF8E7] flex justify-center pt-1.5 drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)] transition-colors">
+              <motion.div
+                animate={{
+                  y: [0, 9, 0],
+                  opacity: [1, 0.2, 1],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+                className="w-1 h-2 rounded-full bg-[#E6CA85] group-hover:bg-[#FFF8E7] shadow-[0_0_8px_rgba(230,202,133,0.9)] transition-colors"
+              />
+            </div>
 
-              {/* Animated downward bouncing chevron */}
-              <motion.svg
-                animate={{ y: [0, 4, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-                className="w-3.5 h-3.5 text-[#E6CA85] group-hover:text-[#FFF8E7]"
+            {/* Synchronized Downward Pulsing Chevron */}
+            <motion.div
+              animate={{
+                y: [0, 4, 0],
+                opacity: [0.45, 1, 0.45],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+              className="text-[#E6CA85] group-hover:text-[#FFF8E7] transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]"
+            >
+              <svg
+                className="w-3.5 h-3.5 sm:w-4 sm:h-4"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                strokeWidth="2.6"
+                strokeWidth="2.5"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-              </motion.svg>
-            </div>
-          </motion.button>
+              </svg>
+            </motion.div>
+          </button>
         </motion.div>
       </div>
 
