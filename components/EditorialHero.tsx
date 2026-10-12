@@ -34,10 +34,19 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
     }
   }
 
+  const handleScrollDown = () => {
+    const target = document.getElementById('marquee') || document.getElementById('couple')
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    } else {
+      window.scrollBy({ top: window.innerHeight * 0.9, behavior: 'smooth' })
+    }
+  }
+
   return (
     <section
       id="hero"
-      className="relative min-h-[100svh] w-full flex flex-col justify-between items-center px-4 sm:px-8 py-6 sm:py-9 overflow-hidden bg-[#181324]"
+      className="relative min-h-[100svh] w-full flex flex-col justify-between items-center px-4 sm:px-8 pt-4 pb-3 sm:pt-7 sm:pb-5 overflow-hidden bg-[#181324]"
       aria-label="Wedding Invitation Hero"
     >
       {/* 1. Full-Bleed HERO Video Background (Zero Background Image) */}
@@ -194,7 +203,7 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
               : { opacity: 0, y: 14, filter: 'blur(4px)' }
           }
           transition={{ duration: 1.2, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-6 sm:mt-7 text-center max-w-lg mx-auto px-4"
+          className="mt-4 sm:mt-6 text-center max-w-lg mx-auto px-4"
         >
           {/* Whisper-thin Champagne Gold Hairline */}
           <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent via-[#E6CA85]/50 to-transparent mx-auto mb-3" />
@@ -211,6 +220,44 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
             LORD JESUS CHRIST
           </p>
         </motion.div>
+
+        {/* Animated Royal "Scroll to Explore" Cue (Guaranteed visible in aisle space on all devices) */}
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          animate={
+            isRevealed
+              ? { opacity: 1, y: 0 }
+              : { opacity: 0, y: 14 }
+          }
+          transition={{ duration: 1.2, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-5 sm:mt-7 flex flex-col items-center"
+        >
+          <motion.button
+            type="button"
+            onClick={handleScrollDown}
+            aria-label="Scroll down to explore invitation"
+            className="group flex flex-col items-center gap-1.5 cursor-pointer select-none focus:outline-none transition-transform active:scale-95 px-5 py-2.5 rounded-full bg-[#181324]/75 backdrop-blur-md border border-[#E6CA85]/60 hover:border-[#E6CA85] shadow-[0_4px_24px_rgba(0,0,0,0.85),0_0_18px_rgba(230,202,133,0.3)] hover:shadow-[0_4px_28px_rgba(0,0,0,0.9),0_0_24px_rgba(230,202,133,0.55)] transition-all"
+          >
+            <div className="flex items-center gap-2.5">
+              <span className="font-functional text-[9px] sm:text-[10px] tracking-[0.38em] text-[#E6CA85] uppercase font-bold group-hover:text-[#FFF8E7] transition-colors">
+                Scroll to Explore
+              </span>
+
+              {/* Animated downward bouncing chevron */}
+              <motion.svg
+                animate={{ y: [0, 4, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                className="w-3.5 h-3.5 text-[#E6CA85] group-hover:text-[#FFF8E7]"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2.6"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </motion.svg>
+            </div>
+          </motion.button>
+        </motion.div>
       </div>
 
       {/* 4. Bottom Editorial Eyebrow */}
@@ -221,8 +268,8 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
             ? { opacity: 1, y: 0 }
             : { opacity: 0, y: 12 }
         }
-        transition={{ duration: 1.2, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 w-full max-w-4xl mx-auto border-t border-[#E6CA85]/25 pt-3.5 px-4 flex items-center justify-center font-functional text-[9px] sm:text-[10px] text-[#FAF7F2]/75 text-center tracking-[0.25em] leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]"
+        transition={{ duration: 1.2, delay: 0.85, ease: [0.16, 1, 0.3, 1] }}
+        className="relative z-10 w-full max-w-4xl mx-auto border-t border-[#E6CA85]/25 pt-2 pb-1 px-4 flex items-center justify-center font-functional text-[8px] sm:text-[9.5px] text-[#FAF7F2]/75 text-center tracking-[0.2em] leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]"
       >
         <span>COIMBATORE &amp; METTUPALAYAM · CHRISTIAN NUPTIALS &amp; MUHURTHAM FOLLOWED BY RECEPTION</span>
       </motion.footer>

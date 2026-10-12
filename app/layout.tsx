@@ -7,7 +7,6 @@ import {
   Montserrat,
   Noto_Serif_Tamil,
 } from 'next/font/google'
-import Script from 'next/script'
 import ResourceCacheProvider from '@/components/ResourceCacheProvider'
 import './globals.css'
 
@@ -122,13 +121,6 @@ export default function RootLayout({
       className={`${cormorant.variable} ${cinzel.variable} ${greatVibes.variable} ${montserrat.variable} ${notoTamil.variable}`}
     >
       <body className="antialiased bg-[#FAF8FC] text-[#2D2338] selection:bg-[#E6CA85] selection:text-[#2D2338]">
-        <Script
-          id="scroll-restoration"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `try{if('scrollRestoration' in history){history.scrollRestoration='manual';}window.scrollTo(0,0);}catch(e){}`,
-          }}
-        />
         <ResourceCacheProvider />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
