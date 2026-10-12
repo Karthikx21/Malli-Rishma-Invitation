@@ -7,6 +7,7 @@ import {
   Montserrat,
   Noto_Serif_Tamil,
 } from 'next/font/google'
+import ResourceCacheProvider from '@/components/ResourceCacheProvider'
 import './globals.css'
 
 const cormorant = Cormorant_Garamond({
@@ -127,6 +128,7 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased bg-[#FAF8FC] text-[#2D2338] selection:bg-[#E6CA85] selection:text-[#2D2338]">
+        <ResourceCacheProvider />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
