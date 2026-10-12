@@ -15,8 +15,8 @@ export default function VenueCards() {
     {
       name: 'Jenneys Residency',
       tamilName: 'ஜென்னிஸ் ரெசிடென்சி',
-      occasion: '18 Nov · Christian Nuptials & Gala Dinner',
-      time: '6:00 PM – 10:00 PM (Ring Exchange: 6:30 PM Sharp)',
+      occasion: '18 Nov · Christian Nuptials (Followed by Dinner)',
+      time: '6:00 PM – 10:00 PM (Ring Exchange: 6:30 PM Sharp · Followed by Dinner)',
       address: '2/2, Avinashi Road, Civil Aerodrome Post, Peelamedu, Coimbatore',
       landmark: 'Near Coimbatore International Airport',
       mapUrl: 'https://maps.google.com/?q=Jenneys+Residency+Coimbatore',
@@ -35,8 +35,8 @@ export default function VenueCards() {
     {
       name: 'Shri Lakshmi Hall',
       tamilName: 'ஸ்ரீ லக்ஷ்மி மஹால்',
-      occasion: '20 Nov · Grand Reception',
-      time: '11:00 AM – 2:00 PM',
+      occasion: '20 Nov · Grand Reception (Followed by Lunch)',
+      time: '11:00 AM – 2:00 PM (Followed by Lunch)',
       address: 'Mettupalayam – Annur Road, Coimbatore District',
       landmark: 'Grand Reception Hall',
       mapUrl: 'https://maps.google.com/?q=Shri+Lakshmi+Hall+Mettupalayam',

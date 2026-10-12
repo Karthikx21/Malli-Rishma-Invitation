@@ -10,7 +10,8 @@ export default function EditorialVenues() {
       name: 'Jenneys Residency',
       address: 'Avinashi Road, Coimbatore, Tamil Nadu',
       time: '6 PM to 10 PM',
-      highlightTime: 'Ring Exchange: 6:30 PM Sharp',
+      highlightLabel: 'RING EXCHANGE:',
+      highlightTime: '6:30 PM Sharp · Followed by Dinner',
       mapsUrl:
         'https://www.google.com/maps/search/?api=1&query=Jenneys+Residency+Avinashi+Road+Coimbatore',
     },
@@ -20,6 +21,7 @@ export default function EditorialVenues() {
       name: 'Arulmigu Kalyana Subramaniya Swamy Temple',
       address: 'Kumarankundru, Mettupalayam, Coimbatore District, Tamil Nadu',
       time: '6 AM to 7 AM',
+      highlightTime: '',
       mapsUrl:
         'https://www.google.com/maps/search/?api=1&query=Arulmigu+Kalyana+Subramaniya+Swamy+Temple+Kumarankundru+Mettupalayam',
     },
@@ -29,6 +31,7 @@ export default function EditorialVenues() {
       name: 'Shri Lakshmi Hall',
       address: 'Mettupalayam – Annur Road, Coimbatore, Tamil Nadu',
       time: '11 AM to 2 PM',
+      highlightTime: 'RECEPTION FOLLOWED BY LUNCH',
       mapsUrl:
         'https://www.google.com/maps/search/?api=1&query=Shri+Lakshmi+Hall+Annur+Road+Mettupalayam',
     },
@@ -121,7 +124,13 @@ export default function EditorialVenues() {
                   </p>
                   {'highlightTime' in v && v.highlightTime && (
                     <p className="font-functional text-[11px] text-[#FAF6EE]/90 tracking-[0.1em] font-semibold">
-                      <span className="text-[#E6CA85]">RING EXCHANGE:</span> 6:30 PM SHARP
+                      {'highlightLabel' in v && v.highlightLabel ? (
+                        <>
+                          <span className="text-[#E6CA85]">{v.highlightLabel}</span> {v.highlightTime}
+                        </>
+                      ) : (
+                        <span className="text-[#E6CA85]">{v.highlightTime}</span>
+                      )}
                     </p>
                   )}
                 </div>

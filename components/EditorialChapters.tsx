@@ -101,6 +101,9 @@ export default function EditorialChapters() {
             <h3 className="font-serif-title text-3xl sm:text-5xl md:text-6xl text-[#FAF6EE] font-light tracking-tight leading-tight pt-2">
               Christian Nuptials Ceremony
             </h3>
+            <p className="font-functional text-xs sm:text-sm tracking-[0.25em] uppercase text-[#E6CA85] font-medium pt-1">
+              FOLLOWED BY DINNER
+            </p>
           </div>
 
           {/* Time & Venue: Separated by Delicate Gold Hairlines (Plain Editorial - No Boxes) */}
@@ -154,7 +157,7 @@ export default function EditorialChapters() {
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               className="font-serif-title italic text-base sm:text-lg md:text-xl text-[#FAF6EE] leading-relaxed pt-4 border-t border-[#C5A059]/20"
             >
-              &ldquo;Our forever begins with the Ring Exchange promptly at 6:30 PM. We want our favorite people right in front of us as we say yes for a lifetime.&rdquo;
+              &ldquo;Our forever begins with the Ring Exchange promptly at 6:30 PM, followed by dinner and celebration. We want our favorite people right in front of us as we say yes for a lifetime.&rdquo;
             </motion.p>
 
             {/* Action Links: Text Links with Left-to-Right Drawing Gold Underline */}
@@ -305,10 +308,10 @@ export default function EditorialChapters() {
               >
                 <div className="flex items-baseline justify-between">
                   <span className="font-display text-xs sm:text-sm tracking-[0.25em] uppercase text-[#E6CA85] font-semibold">
-                    RECEPTION
+                    RECEPTION FOLLOWED BY LUNCH
                   </span>
                   <span className="font-tamil text-xs sm:text-sm text-[#E6CA85]/80 font-medium">
-                    வரவேற்பு
+                    வரவேற்பு &amp; விருந்து
                   </span>
                 </div>
                 <p className="text-[#C5A059] text-[10px] sm:text-xs tracking-[0.25em] font-semibold">

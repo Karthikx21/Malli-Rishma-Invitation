@@ -80,9 +80,9 @@ export default function WeddingSchedule() {
     },
     {
       time: '11:00 AM – 02:00 PM',
-      title: 'Grand Reception',
+      title: 'Grand Reception (Followed by Lunch)',
       location: 'Shri Lakshmi Hall, Mettupalayam',
-      desc: 'Welcoming the newlyweds on the ceremonial stage at Shri Lakshmi Hall.',
+      desc: 'Welcoming the newlyweds on the ceremonial stage at Shri Lakshmi Hall, followed by celebratory lunch.',
     },
   ]
 
@@ -142,7 +142,7 @@ export default function WeddingSchedule() {
                 Jenneys Residency, Avinashi Road, Peelamedu, Coimbatore
               </p>
               <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-[#BFAEA0] mt-1">
-                WEDNESDAY, 18 NOVEMBER 2026 · 6:00 PM TO 10:00 PM IST
+                WEDNESDAY, 18 NOVEMBER 2026 · 6:00 PM TO 10:00 PM IST · FOLLOWED BY DINNER
               </p>
             </div>
 
@@ -212,10 +212,10 @@ export default function WeddingSchedule() {
                 Sacred Muhurtham &amp; Reception
               </h3>
               <p className="font-tamil text-lg text-[#F5E5C0] mt-1">
-                முகூர்த்தம் · வரவேற்பு
+                முகூர்த்தம் · வரவேற்பு · மதிய விருந்து
               </p>
               <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-[#BFAEA0] mt-1">
-                FRIDAY, 20 NOVEMBER 2026 · COIMBATORE DISTRICT
+                FRIDAY, 20 NOVEMBER 2026 · RECEPTION FOLLOWED BY LUNCH
               </p>
             </div>
 
