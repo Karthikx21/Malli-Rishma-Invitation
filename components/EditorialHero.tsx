@@ -34,14 +34,6 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
     }
   }
 
-  const handleScrollDown = () => {
-    const target = document.getElementById('marquee') || document.getElementById('couple')
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    } else {
-      window.scrollBy({ top: window.innerHeight * 0.9, behavior: 'smooth' })
-    }
-  }
 
   return (
     <section
@@ -71,17 +63,17 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
           </video>
         )}
 
-        {/* Soft Lavender Mist & Ambient Lilac Color Grading */}
-        <div className="absolute inset-0 bg-[#B8A9C9]/10 mix-blend-color pointer-events-none" />
+        {/* Balanced Base Scrim for Rich Contrast without Murkiness or Whitish Haze */}
+        <div className="absolute inset-0 bg-[#0E0716]/22 pointer-events-none" />
 
-        {/* Subtle Top Vignette for Header Contrast */}
-        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#181324]/60 via-[#181324]/25 to-transparent pointer-events-none" />
+        {/* Seamless Edge-Only Vignette: Keeps Floral Arch & Aisle Luminous with No Halo Rings */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_30%,rgba(14,7,22,0.20)_70%,rgba(14,7,22,0.45)_100%)] pointer-events-none" />
 
-        {/* Balanced Bottom Gradient for Text Legibility while keeping the wedding aisle luminous */}
-        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#181324]/80 via-[#181324]/40 to-transparent pointer-events-none" />
+        {/* Gentle Top Vignette for Header Contrast */}
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#0E0716]/65 via-[#0E0716]/20 to-transparent pointer-events-none" />
 
-        {/* Gentle Radial Scrim for Clean Contrast Behind Names */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(24,19,36,0.15)_0%,rgba(24,19,36,0.45)_100%)] pointer-events-none" />
+        {/* Deep Smooth Bottom Gradient to Tone Down Bright White Aisle and Ground Typography */}
+        <div className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-[#0E0716]/85 via-[#0E0716]/45 to-transparent pointer-events-none" />
 
         {/* Subtle 35mm Film Grain Texture */}
         <div
@@ -221,64 +213,6 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
           </p>
         </motion.div>
 
-        {/* Animated Royal Scroll Symbol Cue (Pure Open Symbol & Animation - No Button Box) */}
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          animate={
-            isRevealed
-              ? { opacity: 1, y: 0 }
-              : { opacity: 0, y: 14 }
-          }
-          transition={{ duration: 1.2, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-4 sm:mt-6 flex flex-col items-center"
-        >
-          <button
-            type="button"
-            onClick={handleScrollDown}
-            aria-label="Scroll down to explore invitation"
-            className="group flex flex-col items-center gap-1.5 cursor-pointer select-none bg-transparent border-0 p-0 focus:outline-none transition-transform active:scale-90"
-          >
-            {/* Elegant Luxury Mouse Scroll Capsule */}
-            <div className="w-[18px] h-[30px] sm:w-[20px] sm:h-[34px] rounded-full border-[1.5px] border-[#E6CA85]/80 group-hover:border-[#FFF8E7] flex justify-center pt-1.5 drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)] transition-colors">
-              <motion.div
-                animate={{
-                  y: [0, 9, 0],
-                  opacity: [1, 0.2, 1],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
-                className="w-1 h-2 rounded-full bg-[#E6CA85] group-hover:bg-[#FFF8E7] shadow-[0_0_8px_rgba(230,202,133,0.9)] transition-colors"
-              />
-            </div>
-
-            {/* Synchronized Downward Pulsing Chevron */}
-            <motion.div
-              animate={{
-                y: [0, 4, 0],
-                opacity: [0.45, 1, 0.45],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-              className="text-[#E6CA85] group-hover:text-[#FFF8E7] transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]"
-            >
-              <svg
-                className="w-3.5 h-3.5 sm:w-4 sm:h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2.5"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-              </svg>
-            </motion.div>
-          </button>
-        </motion.div>
       </div>
 
       {/* 4. Bottom Editorial Eyebrow */}
@@ -292,7 +226,7 @@ export default function EditorialHero({ isRevealed = true }: EditorialHeroProps)
         transition={{ duration: 1.2, delay: 0.85, ease: [0.16, 1, 0.3, 1] }}
         className="relative z-10 w-full max-w-4xl mx-auto border-t border-[#E6CA85]/25 pt-2 pb-1 px-4 flex items-center justify-center font-functional text-[8px] sm:text-[9.5px] text-[#FAF7F2]/75 text-center tracking-[0.2em] leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]"
       >
-        <span>COIMBATORE &amp; METTUPALAYAM · CHRISTIAN NUPTIALS &amp; MUHURTHAM FOLLOWED BY RECEPTION</span>
+        <span>COIMBATORE &amp; METTUPALAYAM · CHRISTIAN NUPTIALS &amp; MUHURTHAM · RECEPTION &amp; LUNCH</span>
       </motion.footer>
     </section>
   )

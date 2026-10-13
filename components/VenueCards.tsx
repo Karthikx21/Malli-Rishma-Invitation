@@ -35,8 +35,8 @@ export default function VenueCards() {
     {
       name: 'Shri Lakshmi Hall',
       tamilName: 'ஸ்ரீ லக்ஷ்மி மஹால்',
-      occasion: '20 Nov · Grand Reception (Followed by Lunch)',
-      time: '11:00 AM – 2:00 PM (Followed by Lunch)',
+      occasion: '20 Nov · Grand Reception & Lunch',
+      time: '11:00 AM – 2:00 PM (Reception & Lunch)',
       address: 'Mettupalayam – Annur Road, Coimbatore District',
       landmark: 'Grand Reception Hall',
       mapUrl: 'https://maps.google.com/?q=Shri+Lakshmi+Hall+Mettupalayam',

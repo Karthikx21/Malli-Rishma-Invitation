@@ -104,22 +104,20 @@ export default function WeddingSchedule() {
         <div className="relative inline-flex items-center p-1 rounded-full bg-black/60 border border-white/10 backdrop-blur-md">
           <button
             onClick={() => setActiveDay('day1')}
-            className={`px-5 sm:px-6 py-2 rounded-full font-sans text-[11px] sm:text-xs tracking-[0.22em] uppercase transition-all duration-300 cursor-pointer ${
-              activeDay === 'day1'
+            className={`px-5 sm:px-6 py-2 rounded-full font-sans text-[11px] sm:text-xs tracking-[0.22em] uppercase transition-all duration-300 cursor-pointer ${activeDay === 'day1'
                 ? 'bg-gradient-to-r from-[#B08D57] via-[#C99E63] to-[#D95C80] text-[#0C0207] font-semibold shadow-[0_0_20px_rgba(176,141,87,0.4)]'
                 : 'text-[#BFAEA0] hover:text-[#F8F4ED]'
-            }`}
+              }`}
           >
             18 NOVEMBER
           </button>
 
           <button
             onClick={() => setActiveDay('day2')}
-            className={`px-5 sm:px-6 py-2 rounded-full font-sans text-[11px] sm:text-xs tracking-[0.22em] uppercase transition-all duration-300 cursor-pointer ${
-              activeDay === 'day2'
+            className={`px-5 sm:px-6 py-2 rounded-full font-sans text-[11px] sm:text-xs tracking-[0.22em] uppercase transition-all duration-300 cursor-pointer ${activeDay === 'day2'
                 ? 'bg-gradient-to-r from-[#B08D57] via-[#C99E63] to-[#D95C80] text-[#0C0207] font-semibold shadow-[0_0_20px_rgba(176,141,87,0.4)]'
                 : 'text-[#BFAEA0] hover:text-[#F8F4ED]'
-            }`}
+              }`}
           >
             20 NOVEMBER
           </button>

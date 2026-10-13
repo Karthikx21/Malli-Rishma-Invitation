@@ -27,11 +27,11 @@ export default function EditorialVenues() {
     },
     {
       day: '20 Nov 2026',
-      title: 'Reception',
+      title: 'Reception & Lunch',
       name: 'Shri Lakshmi Hall',
       address: 'Mettupalayam – Annur Road, Coimbatore, Tamil Nadu',
       time: '11 AM to 2 PM',
-      highlightTime: 'RECEPTION FOLLOWED BY LUNCH',
+      highlightTime: 'RECEPTION & LUNCH',
       mapsUrl:
         'https://www.google.com/maps/search/?api=1&query=Shri+Lakshmi+Hall+Annur+Road+Mettupalayam',
     },

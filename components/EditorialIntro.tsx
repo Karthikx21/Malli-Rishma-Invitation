@@ -104,7 +104,7 @@ export default function EditorialIntro({ onStartTransition, onComplete }: Editor
       {/* Pure Fullscreen Video with zero button overlays */}
       <video
         ref={videoRef}
-        src="https://res.cloudinary.com/drvvekzzm/video/upload/v1791453046/Wedding_invitation_opening_film_1080p_20261008151626_nrg1qy.mp4"
+        src="/intro final.mp4"
         poster="/intro-poster.jpg"
         className="w-full h-full object-cover object-center"
         autoPlay
@@ -118,10 +118,8 @@ export default function EditorialIntro({ onStartTransition, onComplete }: Editor
         onEnded={triggerTransition}
         onError={triggerTransition}
       >
-        <source
-          src="https://res.cloudinary.com/drvvekzzm/video/upload/v1791453046/Wedding_invitation_opening_film_1080p_20261008151626_nrg1qy.mp4"
-          type="video/mp4"
-        />
+        <source src="/intro final.mp4" type="video/mp4" />
+        <source src="/intro%20final.mp4" type="video/mp4" />
         <source src="/intro.mp4" type="video/mp4" />
       </video>
     </div>

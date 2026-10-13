@@ -98,21 +98,22 @@ export default function EnvelopeIntro({
       setIsPlaying(true)
     }
 
-    // Safety fallback: if video doesn't end naturally in 9s, finish intro
+    // Safety fallback: if video doesn't end naturally in 13s, finish intro
     fallbackTimerRef.current = setTimeout(() => {
       completeIntro()
-    }, 9000)
+    }, 13000)
   }, [isPlaying, isEnding, completeIntro])
 
-  // Track video progress to begin transition right as card is fully visible
+  // Track video progress to begin transition right as card has been read
   const handleTimeUpdate = () => {
     const video = videoRef.current
     if (!video) return
 
-    // Near the end (at 7.0s of 8.0s video), begin dissolving into Hero underneath
-    if (video.currentTime >= 7.0 && !hasTriggeredTransitionRef.current) {
+    // At 10.5s (after the card 'MALLI + RISHMA' has been visible and readable for 3.5 seconds),
+    // begin the luxurious cross-dissolve into the Hero page
+    if (video.currentTime >= 10.5 && !hasTriggeredTransitionRef.current) {
       hasTriggeredTransitionRef.current = true
-      onStartTransition?.()
+      completeIntro()
     }
   }
 
@@ -133,7 +134,7 @@ export default function EnvelopeIntro({
       {/* 1. Ambient Blurred Backdrop - Matches candlelit lavender silk glow */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
         <img
-          src="/envelope-video-poster.jpg"
+          src="/envelope-video-poster.jpg?v=4"
           alt=""
           className="w-full h-full object-cover blur-3xl scale-110 opacity-35"
         />
@@ -147,8 +148,8 @@ export default function EnvelopeIntro({
         <div className="relative w-full h-full overflow-hidden">
           <video
             ref={videoRef}
-            src="/Envelope_opening_with_card_1080p_20261011200501.mp4"
-            poster="/envelope-video-poster.jpg"
+            src="/intro-final.mp4?v=4"
+            poster="/envelope-video-poster.jpg?v=4"
             playsInline
             muted
             preload="auto"
@@ -156,7 +157,10 @@ export default function EnvelopeIntro({
             onEnded={handleVideoEnded}
             className="w-full h-full object-cover pointer-events-none scale-[1.02] transform-gpu"
           >
-            <source src="/Envelope_opening_with_card_1080p_20261011200501.mp4" type="video/mp4" />
+            <source src="/intro-final.mp4?v=4" type="video/mp4" />
+            <source src="/intro final.mp4?v=4" type="video/mp4" />
+            <source src="/intro%20final.mp4?v=4" type="video/mp4" />
+            <source src="/intro.mp4?v=4" type="video/mp4" />
           </video>
 
           {/* Couture Filmic Vignette & Bottom-Edge Shadow - completely envelopes edges with silk glow */}
@@ -197,9 +201,9 @@ export default function EnvelopeIntro({
 
               </motion.div>
 
-              {/* Exact Physical Wax Seal Touch Target (Located precisely at 60.2% X, 56.0% Y over video's MR wax seal) */}
+              {/* Exact Physical Wax Seal Touch Target (Located precisely at 60.0% X, 55.5% Y over video's MR wax seal) */}
               <div
-                className="absolute left-[60.2%] top-[56.0%] -translate-x-1/2 -translate-y-1/2 cursor-pointer group"
+                className="absolute left-[60.0%] top-[55.5%] -translate-x-1/2 -translate-y-1/2 cursor-pointer group"
                 onClick={handleOpenSeal}
                 role="button"
                 tabIndex={0}

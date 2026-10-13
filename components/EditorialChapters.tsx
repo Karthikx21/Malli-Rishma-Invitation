@@ -253,13 +253,13 @@ export default function EditorialChapters() {
                   NOVEMBER 2026
                 </span>
                 <span className="font-functional text-[10px] tracking-[0.25em] text-[#FAF6EE]/60 mt-1">
-                  FRIDAY · MUHURTHAM &amp; RECEPTION
+                  FRIDAY · MUHURTHAM · RECEPTION &amp; LUNCH
                 </span>
               </div>
             </div>
 
             <h3 className="font-serif-title text-3xl sm:text-5xl md:text-6xl text-[#FAF6EE] font-light tracking-tight leading-tight pt-2">
-              Muhurtham &amp; Reception
+              Muhurtham, Reception &amp; Lunch
             </h3>
           </div>
 
@@ -272,11 +272,11 @@ export default function EditorialChapters() {
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                 className="space-y-2"
               >
-                <div className="flex items-baseline justify-between">
-                  <span className="font-display text-xs sm:text-sm tracking-[0.25em] uppercase text-[#E6CA85] font-semibold">
+                <div className="flex items-center justify-between gap-3">
+                  <span className="font-display text-[11px] sm:text-sm tracking-[0.14em] sm:tracking-[0.25em] uppercase text-[#E6CA85] font-semibold whitespace-nowrap">
                     MUHURTHAM
                   </span>
-                  <span className="font-tamil text-xs sm:text-sm text-[#E6CA85]/80 font-medium">
+                  <span className="font-tamil text-xs sm:text-sm text-[#E6CA85]/80 font-medium whitespace-nowrap text-right">
                     முகூர்த்தம்
                   </span>
                 </div>
@@ -300,17 +300,17 @@ export default function EditorialChapters() {
                 </div>
               </motion.div>
 
-              {/* Col 2: RECEPTION */}
+              {/* Col 2: RECEPTION & LUNCH */}
               <motion.div
                 whileHover={{ y: -3 }}
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                 className="space-y-2 border-t md:border-t-0 md:border-l border-[#C5A059]/30 pt-6 md:pt-0 md:pl-10"
               >
-                <div className="flex items-baseline justify-between">
-                  <span className="font-display text-xs sm:text-sm tracking-[0.25em] uppercase text-[#E6CA85] font-semibold">
-                    RECEPTION FOLLOWED BY LUNCH
+                <div className="flex items-center justify-between gap-3">
+                  <span className="font-display text-[11px] sm:text-sm tracking-[0.14em] sm:tracking-[0.25em] uppercase text-[#E6CA85] font-semibold whitespace-nowrap">
+                    RECEPTION &amp; LUNCH
                   </span>
-                  <span className="font-tamil text-xs sm:text-sm text-[#E6CA85]/80 font-medium">
+                  <span className="font-tamil text-xs sm:text-sm text-[#E6CA85]/80 font-medium whitespace-nowrap text-right">
                     வரவேற்பு &amp; விருந்து
                   </span>
                 </div>

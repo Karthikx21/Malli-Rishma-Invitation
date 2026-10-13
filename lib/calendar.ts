@@ -25,9 +25,9 @@ export const WEDDING_CALENDAR_EVENTS = {
     endDateLocal: '20261118T220000',
   },
   hinduWeddingFull: {
-    title: 'Malli & Rishma · Wedding & Reception (Followed by Lunch)',
+    title: 'Malli & Rishma · Wedding, Reception & Lunch',
     description:
-      'Wedding Celebrations of Malli Sumandhar & Rishma John.\n\nDate: Friday, 20 November 2026\n• Muhurtham: 6:00 AM – 7:00 AM at Arulmigu Kalyana Subramaniya Swamy Temple, Kumarankundru, Mettupalayam\n• Reception: 11:00 AM – 2:00 PM at Shri Lakshmi Hall, Mettupalayam (Followed by Lunch)\n\n#RishmaFoundHerPavazhaMalli',
+      'Wedding Celebrations of Malli Sumandhar & Rishma John.\n\nDate: Friday, 20 November 2026\n• Muhurtham: 6:00 AM – 7:00 AM at Arulmigu Kalyana Subramaniya Swamy Temple, Kumarankundru, Mettupalayam\n• Reception & Lunch: 11:00 AM – 2:00 PM at Shri Lakshmi Hall, Mettupalayam\n\n#RishmaFoundHerPavazhaMalli',
     location: 'Arulmigu Kalyana Subramaniya Swamy Temple, Kumarankundru & Shri Lakshmi Hall, Mettupalayam, Coimbatore',
     startDateUtc: '20261120T003000Z', // 6:00 AM IST
     endDateUtc: '20261120T083000Z', // 2:00 PM IST
@@ -45,9 +45,9 @@ export const WEDDING_CALENDAR_EVENTS = {
     endDateLocal: '20261120T070000',
   },
   hinduReception: {
-    title: 'Malli & Rishma · Wedding Reception (Followed by Lunch)',
+    title: 'Malli & Rishma · Wedding Reception & Lunch',
     description:
-      'Wedding Reception for Malli Sumandhar & Rishma John at Shri Lakshmi Hall, Mettupalayam (Followed by Lunch).\nTime: 11:00 AM to 2:00 PM IST.\n\n#RishmaFoundHerPavazhaMalli',
+      'Wedding Reception & Lunch for Malli Sumandhar & Rishma John at Shri Lakshmi Hall, Mettupalayam.\nTime: 11:00 AM to 2:00 PM IST.\n\n#RishmaFoundHerPavazhaMalli',
     location: 'Shri Lakshmi Hall, Mettupalayam – Annur Road, Coimbatore, Tamil Nadu',
     startDateUtc: '20261120T053000Z',
     endDateUtc: '20261120T083000Z',

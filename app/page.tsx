@@ -52,6 +52,64 @@ export default function Page() {
     }
   }, [introCompleted])
 
+  // 3. Gentle auto-scroll peek after 5 seconds on the Home page
+  useEffect(() => {
+    if (!introCompleted) return
+
+    let userInteracted = false
+    let timer: NodeJS.Timeout | null = null
+
+    const cancelTimer = () => {
+      userInteracted = true
+      if (timer) {
+        clearTimeout(timer)
+        timer = null
+      }
+      cleanupListeners()
+    }
+
+    const onUserInteraction = () => {
+      cancelTimer()
+    }
+
+    const onScroll = () => {
+      if (window.scrollY > 40) {
+        cancelTimer()
+      }
+    }
+
+    const cleanupListeners = () => {
+      window.removeEventListener('wheel', onUserInteraction)
+      window.removeEventListener('touchstart', onUserInteraction)
+      window.removeEventListener('pointerdown', onUserInteraction)
+      window.removeEventListener('keydown', onUserInteraction)
+      window.removeEventListener('scroll', onScroll)
+    }
+
+    window.addEventListener('wheel', onUserInteraction, { passive: true })
+    window.addEventListener('touchstart', onUserInteraction, { passive: true })
+    window.addEventListener('pointerdown', onUserInteraction, { passive: true })
+    window.addEventListener('keydown', onUserInteraction, { passive: true })
+    window.addEventListener('scroll', onScroll, { passive: true })
+
+    // Auto-scroll down a little bit after 5 seconds on the home page
+    timer = setTimeout(() => {
+      if (!userInteracted && window.scrollY < 40) {
+        const scrollDistance = Math.max(300, Math.min(Math.round(window.innerHeight * 0.45), 450))
+        window.scrollBy({
+          top: scrollDistance,
+          behavior: 'smooth',
+        })
+      }
+      cleanupListeners()
+    }, 5000)
+
+    return () => {
+      if (timer) clearTimeout(timer)
+      cleanupListeners()
+    }
+  }, [introCompleted, introKey])
+
   // Fires the exact instant the intro begins dissolving into the wedding invitation
   const handleStartTransition = useCallback(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior })
